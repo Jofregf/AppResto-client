@@ -1,12 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const ERROR = 'ERROR';
-export const GET_RESTAURANTS = 'GET_RESTAURANTS';
-export const GET_RESTAURANT_DETAILS = 'RESTAURANT_DETAILS';
-export const GET_RESTAURANT_BY_MENU_NAME = 'GET_RESTAURANT_BY_MENU_NAME'
+export const ERROR = "ERROR";
+export const GET_RESTAURANTS = "GET_RESTAURANTS";
+export const GET_RESTAURANT_DETAILS = "RESTAURANT_DETAILS";
+export const GET_RESTAURANT_BY_MENU_NAME = "GET_RESTAURANT_BY_MENU_NAME";
+export const GET_RESTAURANT_BY_AVERAGE_RATING =  "GET_RESTAURANT_BY_AVERAGE_RATING";
 
 
-export const baseUrl = 'http://localhost:8080';
+export const baseUrl = "http://localhost:8080";
 
 export const getRestaurants = () => async (dispatch) => {
     await axios.get(`${baseUrl}/api/restaurants`).then (
@@ -23,7 +24,7 @@ export const getRestaurants = () => async (dispatch) => {
             });
         },
     ).catch(error => {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
     });
 };
 
@@ -42,7 +43,7 @@ export const getRestaurantDetails = (id) => async (dispatch) => {
             });
         },
     ).catch(error => {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
     });
 };
 
@@ -62,7 +63,27 @@ export const getRestaurantByMenuName = (menuName) => async (dispatch) => {
             });
         },
     ).catch(error => {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
+    });
+};
+
+export const getRestaurantByAverageRating = (rating) => async (dispatch) => {
+    await axios.get(`${baseUrl}/api/restaurants/rating`, 
+    {headers: {rating: rating}}).then(
+        (response) => {
+            dispatch ({
+                type: GET_RESTAURANT_BY_AVERAGE_RATING,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch ({
+                type: ERROR,
+                payload: error.error,
+            });
+        },
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
     });
 };
 

@@ -1,9 +1,9 @@
-import {GET_MENUS_BY_RESTAURANT_ID, ERROR} from '../actions/menuActions';
+import {GET_MENUS_BY_RESTAURANT_ID, ERROR} from "../actions/menuActions";
 
 const initialState = {
     menus : [],
     menu : [],
-    status: ''
+    status: ""
 };
 
 export default function menuReducers (state = initialState, action) {

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import {baseUrl} from './restaurantActions';
+import axios from "axios";
+import {baseUrl} from "./restaurantActions";
 
-export const ERROR = 'ERROR';
-export const GET_REVIEWS_BY_RESTAURANT_ID = 'GET_REVIEWS_BY_RESTAURANT_ID';
-export const CLEAR_REVIEWS = 'CLEAR_REVIEWS';
+export const ERROR = "ERROR";
+export const GET_REVIEWS_BY_RESTAURANT_ID = "GET_REVIEWS_BY_RESTAURANT_ID";
+export const CLEAR_REVIEWS = "CLEAR_REVIEWS";
 
 export const getReviewsByRestaurantId = (id) => async (dispatch) => {
     
@@ -21,12 +21,12 @@ export const getReviewsByRestaurantId = (id) => async (dispatch) => {
             });
         },
     ).catch(error => {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
     });
 };
 
 export const clearReviews = () => ({
-    type: 'CLEAR_REVIEWS',
+    type: "CLEAR_REVIEWS",
 });
 
 

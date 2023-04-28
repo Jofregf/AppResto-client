@@ -1,7 +1,7 @@
-import { useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {useParams, Link} from 'react-router-dom';
-import {getMenusByRestaurantId} from '../../redux/actions/menuActions'
+import { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {useParams, Link} from "react-router-dom";
+import {getMenusByRestaurantId} from "../../redux/actions/menuActions"
 
 function Menus(){
 
@@ -19,7 +19,7 @@ function Menus(){
         : [state.menus.menus]
     })
 
-    console.log(id, 'id')
+    console.log(id, "id")
     console.log(menusState)
 
     if (!menusState) {

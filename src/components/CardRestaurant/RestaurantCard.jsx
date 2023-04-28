@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link} from "react-router-dom"
 
 function RestaurantCard({id, name, image, address, phone, email, rating}) {
 

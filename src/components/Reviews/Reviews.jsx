@@ -1,7 +1,7 @@
-import { useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {useParams} from 'react-router-dom';
-import {getReviewsByRestaurantId, clearReviews} from '../../redux/actions/reviewActions';
+import { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {useParams} from "react-router-dom";
+import {getReviewsByRestaurantId, clearReviews} from "../../redux/actions/reviewActions";
 
 function Review(){
 
@@ -20,7 +20,7 @@ function Review(){
         ? state.reviews.reviews
         : [state.reviews.reviews]
     });
-    console.log(id, 'id')
+    console.log(id, "id")
     console.log(reviewsState)
 
     if (!reviewsState) {

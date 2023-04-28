@@ -1,11 +1,15 @@
-import {ERROR, GET_RESTAURANTS, GET_RESTAURANT_DETAILS, GET_RESTAURANT_BY_MENU_NAME} from '../actions/restaurantActions';
+import {ERROR, GET_RESTAURANTS, 
+        GET_RESTAURANT_DETAILS, 
+        GET_RESTAURANT_BY_MENU_NAME, 
+        GET_RESTAURANT_BY_AVERAGE_RATING,
+    } from "../actions/restaurantActions";
 
 const initialState = {
     restaurants : [],
     restaurant: [],
     restaurantDetails: [],
     filteredRestaurants: [],
-    status: ''
+    status: ""
 };
 
 export default function restaurantReducers(state = initialState, action) {
@@ -21,6 +25,9 @@ export default function restaurantReducers(state = initialState, action) {
         case GET_RESTAURANT_BY_MENU_NAME:
             return {...state, filteredRestaurants: action.payload};
 
+        case GET_RESTAURANT_BY_AVERAGE_RATING:
+            return{...state, filteredRestaurants: action.payload};
+            
         case ERROR:
             return {...state, status: action.payload};
 

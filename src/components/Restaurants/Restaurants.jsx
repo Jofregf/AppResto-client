@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {getRestaurants} from '../../redux/actions/restaurantActions'
-import RestaurantCard from '../CardRestaurant/RestaurantCard'
-import SearchBar from '../SearchBar/SearchBar'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {getRestaurants} from "../../redux/actions/restaurantActions"
+import RestaurantCard from "../CardRestaurant/RestaurantCard"
+import SearchBar from "../SearchBar/SearchBar"
 
 function Restaurants(){
 
@@ -35,10 +35,10 @@ function Restaurants(){
         return <div>Loading...</div>;
     }
 
-return (
+    return (
         <div>
             <SearchBar/>
-            {status === 'error' && <div>Ha ocurrido un error...</div>}
+            {status === "error" && <div>Ha ocurrido un error...</div>}
             {restaurants && restaurants.length > 0 ? (
                 restaurants.map((resto) => (
                     resto.enabled === true ? (

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import {Link, useParams} from 'react-router-dom'
-import {getRestaurantDetails} from '../../redux/actions/restaurantActions'
-import Review from '../Reviews/Reviews'
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import {Link, useParams} from "react-router-dom"
+import {getRestaurantDetails} from "../../redux/actions/restaurantActions"
+import Review from "../Reviews/Reviews"
 
 
 

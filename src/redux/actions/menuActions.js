@@ -1,8 +1,8 @@
-import axios from 'axios';
-import {baseUrl} from './restaurantActions';
+import axios from "axios";
+import {baseUrl} from "./restaurantActions";
 
-export const GET_MENUS_BY_RESTAURANT_ID = 'GET_MENUS_BY_RESTAURANT_ID';
-export const ERROR = 'ERROR';
+export const GET_MENUS_BY_RESTAURANT_ID = "GET_MENUS_BY_RESTAURANT_ID";
+export const ERROR = "ERROR";
 
 export const getMenusByRestaurantId = (id) => async (dispatch) => {
     await axios.get(`${baseUrl}/api/menus/restaurant/${id}`).then(
@@ -19,6 +19,6 @@ export const getMenusByRestaurantId = (id) => async (dispatch) => {
             });
         },
     ).catch(error => {
-        console.error('Error en la solicitud:', error);
+        console.error("Error en la solicitud:", error);
     });
 }
