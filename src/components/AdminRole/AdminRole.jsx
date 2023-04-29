@@ -22,8 +22,8 @@ function AdminRole(){
     const statusState = useSelector((state) => state.users.status);
 
     let cookie = new Cookies();
-    const tokenUser = cookie.get('user')?.accessToken;
-
+    const tokenUser = cookie.get("user")?.accessToken;
+    
     const findUser = users && users.length > 0 && (
         users[0].find((user) => user.userName === usernameOrUserEmail || user.userEmail === usernameOrUserEmail));
 
@@ -74,9 +74,9 @@ function AdminRole(){
                 <button type="submit">Cambiar rol</button>
                 <div>
                     {users && users.length > 0 && (
-                        users[0].map((user) => {
+                        users[0].map((user, indice) => {
                             return (
-                            <div key={user.userId}>
+                                <div key={indice}>
                                 <p>Nombre de usuario: {user.userName}</p>
                                 <p>Nombre: {user.firstName}</p>
                                 <p>Apellido: {user.lastName}</p>

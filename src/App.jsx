@@ -5,7 +5,7 @@ import RestoDetails from "../src/components/restoDetails/restoDetails";
 import Menus from "../src/components/Menus/Menus";
 import Register from "../src/components/Register/Register";
 import Login from "../src/components/Login/Login";
-import AdminRole from "../src/components/AdminRole/AdminRole";
+import AdminHome from "../src/components/AdminHome/AdminHome";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
                     <Route path="/menus/restaurant/:id" element={<Menus/>}/>
                     <Route path="/auth/register" element={<Register/>}/>
                     <Route path="/auth/login" element={<Login/>}/>
-                    <Route path="/prueba" element={<AdminRole/>}/>
+                    <Route path="/admin" element={<AdminHome/>}/>
                 </Routes>
             </div>
             
