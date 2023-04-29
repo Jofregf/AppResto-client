@@ -18,7 +18,7 @@ const formSchema = Yup.object().shape({
             "username-or-email",
             "El valor ingresado no es válido",
             (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || /^[a-zA-Z0-9_.-]+$/.test(value)
-          ),
+        ),
     password: Yup.string()
         .required("Este campo es requerido")
 })
@@ -28,17 +28,14 @@ const formOptions = { resolver: yupResolver(formSchema) };
 function Login() {
 
     let cookie = new Cookies();
-
-    const user = cookie.get("user")?.user;
-    console.log(user);
-
+    const user = cookie.get("user")?.accessToken
+    console.log(user)
     const nav = useNavigate();
 
     const {register, formState: {errors}, handleSubmit } = useForm(formOptions);
 
-    const status = useSelector((state) => state.users.status);
-    console.log(status)
-
+    const statusState = useSelector((state) => state.users.status);
+    
     const dispatch = useDispatch();
 
     const [msg, setMsg] = useState("");
@@ -48,12 +45,12 @@ function Login() {
     };
     
     useEffect(() => {
-        if(status?.msg === "successful login") {
+        if(statusState?.msg === "successful login") {
             nav("/restaurants");
-        } else if(status?.msg === "Bad credentials") {
-            setMsg(status);
+        } else if(statusState?.msg === "Bad credentials") {
+            setMsg(statusState);
         }
-    }, [status, nav])
+    }, [statusState, nav])
 
     useEffect(() => {
         const timer = setTimeout(() => {

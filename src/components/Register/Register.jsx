@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {useState} from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
-import { createUser } from "../../redux/actions/userActions";
+import { createUser, userLogin } from "../../redux/actions/userActions";
+import { Modal, Button } from "react-bootstrap";
 
 const formSchema = Yup.object().shape({
     userName: Yup.string()
@@ -51,20 +53,34 @@ const formSchema = Yup.object().shape({
 const formOptions = { resolver: yupResolver(formSchema) };
 
 function Register() {
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-        reset,
-    } = useForm(formOptions);
+    const [modal, setModal] = useState("");
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const modalDelete = (data) => {
+        setModal(data);
+        handleShow();
+    }
+
+    const handleModal = () => {
+        navigate("/restaurants")
+    }
+
+    const {register, formState: { errors }, handleSubmit, reset} = useForm(formOptions);
 
     function MessageConfirm(data) {
         dispatch(createUser({ ...data }));
-        alert("Usuario creado exitosamente");
-        reset();
-        navigate("/restaurants");
+        setTimeout(() => {
+            dispatch(userLogin({usernameOrEmail: data.usernameOrEmail, password: data.password}))
+        }, 1000);
+        setTimeout(() => {
+            modalDelete("Gracias!!")
+        }, 1100)
     }
 
     const onSubmit = (data) => {
@@ -143,6 +159,22 @@ function Register() {
                     />    
                 </div>
             </form>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard="false"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Registro exitoso!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {modal}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleModal}>Continuar</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

@@ -5,6 +5,8 @@ import Cookies from "universal-cookie";
 export const CREATE_USER = "CREATE_USER";
 export const ERROR = "ERROR";
 export const USER_LOGIN = "USER_LOGIN";
+export const UPDATE_ROLE = "UPDATE_ROLE";
+export const GET_USERS = "GET_USERS";
 
 export const createUser = ({userName, firstName, lastName, userPhone, userEmail, userPassword}) => async (dispatch) => {
     await axios.post(`${baseUrl}/api/auth/register`, {userName, firstName, lastName, userPhone, userEmail, userPassword}).then(
@@ -29,12 +31,11 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
     const cookies = new Cookies();
     axios.post(`${baseUrl}/api/auth/login`, {usernameOrEmail, password}).then(
         (response) => {
-            cookies.set("user", response.data, {path: "/restaurants", expires: new Date(Date.now() + (3600*100*24))});
+            cookies.set("user", response.data, {path: "/", expires: new Date(Date.now() + (3600*100*24))});
             dispatch({
                 type: USER_LOGIN,
                 payload: response.data
             })
-            console.log(response.data)
         },
         (error) => {
             dispatch({
@@ -45,4 +46,43 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
     ).catch(error => {
         console.error("Error en la solicitud:", error);
     });
+}
+
+export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatch) => {
+    
+    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}/role`, {role}, {headers: {"Authorization": "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: UPDATE_ROLE,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => 
+        {console.error("Error en la solicitud", error);
+    });
+}
+
+export const getUsers = ({token}) => async (dispatch) => {
+    await axios.get(`${baseUrl}/api/admin/users`, {headers: {'Authorization': "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: GET_USERS,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => {
+        console.error("Error en la solicitud", error)
+    })
 }

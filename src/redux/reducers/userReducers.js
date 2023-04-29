@@ -1,4 +1,9 @@
-import {CREATE_USER, ERROR, USER_LOGIN} from "../actions/userActions";
+import {CREATE_USER, 
+        ERROR, 
+        USER_LOGIN, 
+        UPDATE_ROLE,
+        GET_USERS,
+    } from "../actions/userActions";
 
 const initialState = {
     users: [],
@@ -16,7 +21,13 @@ function userReducer(state = initialState, action) {
             return {...state, status: action.payload};
 
         case USER_LOGIN:
-            return {...state, status: action.payload, user: action.payload || null, token: action.payload?.tokenSession || null}
+            return {...state, status: action.payload, user: action.payload || null, token: action.payload || null};
+
+        case UPDATE_ROLE:
+            return {...state, status: action.payload};    
+        
+        case GET_USERS:
+            return {...state, users: action.payload}
 
         default:
             return{...state}
