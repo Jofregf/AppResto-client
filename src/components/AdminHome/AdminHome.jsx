@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import AdminRole from "../AdminRole/AdminRole";
 import Cookies from "universal-cookie";
+import AdminRole from "../AdminRole/AdminRole";
+import AdminBan from "../AdminBan/AdminBan";
+import GetUserByUserNameOrEmail from "../AdminGetUser/AdminGetUser"
 
 function AdminHome() {
 
@@ -31,12 +33,17 @@ function AdminHome() {
         (tokenRole === "ROLE_ADMIN")?
         <div>
             <div>
-                <button onClick={() => handleView("users")}><p>Usuarios</p></button>
-                <button  onClick={() => navigate("/restaurants")}><p>Volver al Home</p></button>
+                <button onClick={() => handleView("role")}><p>Modificar roles</p></button>
+                <button onClick={() => handleView("banear")}><p>Banear/Desbanear</p></button>
+                <button onClick={() => handleView("usuarios")}><p>Usuarios</p></button>
+                <button  onClick={() => navigate("/restaurants")}><p>Home</p></button>
+                <button onClick={() => window.location.reload()}><p>Panel Admin</p></button>
             </div>
             <div>
                 {
-                state === "users" ? <AdminRole />
+                state === "role" ? <AdminRole />
+                : state === "banear" ? <AdminBan/>
+                : state === "usuarios" ? <GetUserByUserNameOrEmail/>
                 : null    
             }
             </div>

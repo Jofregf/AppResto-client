@@ -7,6 +7,8 @@ export const ERROR = "ERROR";
 export const USER_LOGIN = "USER_LOGIN";
 export const UPDATE_ROLE = "UPDATE_ROLE";
 export const GET_USERS = "GET_USERS";
+export const BAN_USER = "BAN_USER";
+export const GET_USER_BY_USERNAME_OR_EMAIL = "GET_USER_BY_USERNAME_OR_EMA"
 
 export const createUser = ({userName, firstName, lastName, userPhone, userEmail, userPassword}) => async (dispatch) => {
     await axios.post(`${baseUrl}/api/auth/register`, {userName, firstName, lastName, userPhone, userEmail, userPassword}).then(
@@ -48,26 +50,6 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
     });
 }
 
-export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatch) => {
-    
-    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}/role`, {role}, {headers: {"Authorization": "Bearer " + token}}).then(
-        (response) => {
-            dispatch({
-                type: UPDATE_ROLE,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            })
-        }
-    ).catch(error => 
-        {console.error("Error en la solicitud", error);
-    });
-}
-
 export const getUsers = ({token}) => async (dispatch) => {
     await axios.get(`${baseUrl}/api/admin/users`, {headers: {'Authorization': "Bearer " + token}}).then(
         (response) => {
@@ -85,4 +67,64 @@ export const getUsers = ({token}) => async (dispatch) => {
     ).catch(error => {
         console.error("Error en la solicitud", error)
     })
+}
+
+export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatch) => {
+    
+    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}/role`, {role}, {headers: {"Authorization": "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: UPDATE_ROLE,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
+    });
+}
+
+export const unbanBanUser = ({usernameOrUserEmail, enabled, token}) => async (dispatch) => {
+
+    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}`, {enabled}, {headers: {"Authorization" : "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: BAN_USER,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
+    });
+}
+
+export const getUserByUsernameOrEmail = ({usernameOrEmail, token}) => async (dispatch) => {
+    
+    await axios.get(`${baseUrl}/api/admin/users/search/${usernameOrEmail}`, {headers: {"Authorization": "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: GET_USER_BY_USERNAME_OR_EMAIL,
+                payload: response.data,
+            })
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
+    });
 }

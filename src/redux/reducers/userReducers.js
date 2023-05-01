@@ -3,6 +3,8 @@ import {CREATE_USER,
         USER_LOGIN, 
         UPDATE_ROLE,
         GET_USERS,
+        BAN_USER,
+        GET_USER_BY_USERNAME_OR_EMAIL,
     } from "../actions/userActions";
 
 const initialState = {
@@ -27,10 +29,16 @@ function userReducer(state = initialState, action) {
             return {...state, status: action.payload};    
         
         case GET_USERS:
-            return {...state, users: action.payload}
+            return {...state, users: action.payload};
+
+        case BAN_USER:
+            return {...state, status: action.payload};
+
+        case GET_USER_BY_USERNAME_OR_EMAIL:
+            return {...state, user: action.payload};
 
         default:
-            return{...state}
+            return{...state};
     }
 }
 

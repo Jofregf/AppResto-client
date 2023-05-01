@@ -6,6 +6,8 @@ import Menus from "../src/components/Menus/Menus";
 import Register from "../src/components/Register/Register";
 import Login from "../src/components/Login/Login";
 import AdminHome from "../src/components/AdminHome/AdminHome";
+import UserCard from "../src/components/CardUser/UserCard"
+import AdminGetUsers from "../src/components/AdminGetUser/AdminGetUser"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
                     <Route path="/auth/register" element={<Register/>}/>
                     <Route path="/auth/login" element={<Login/>}/>
                     <Route path="/admin" element={<AdminHome/>}/>
+                    <Route path="/admin/user/:userName" element={<UserCard />}/>
+                    <Route path="/admin/users" element={<AdminGetUsers />}/>
                 </Routes>
             </div>
             

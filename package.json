@@ -21,7 +21,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.43.9",
     "react-redux": "8.0.5",
-    "react-router-dom": "6.10.0",
+    "react-router-dom": "^6.11.0",
     "redux-thunk": "2.4.2",
     "universal-cookie": "4.0.4",
     "yup": "1.1.1"
