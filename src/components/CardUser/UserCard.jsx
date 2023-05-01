@@ -1,4 +1,5 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from "react-router-dom";
+
 
 
 function UserCard() {
@@ -10,8 +11,7 @@ function UserCard() {
     if (!state) {
       return <div>Loading...</div>;
     }
-   
-    console.log(state)
+    
     return (
             <div>
 
@@ -31,9 +31,7 @@ function UserCard() {
                         ):null
                     }
                     </p>
-                    <Link to="/admin/users">
-                        <button>Lista Usuarios</button>
-                    </Link>
+                    
                     <Link to="/admin">
                         <button>Panel Admin</button>
                     </Link>

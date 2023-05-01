@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getUsers, getUserByUsernameOrEmail} from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
 import { useNavigate} from 'react-router-dom';
+/* eslint-disable */
 
 function GetUserByUserNameOrEmail () {
 
