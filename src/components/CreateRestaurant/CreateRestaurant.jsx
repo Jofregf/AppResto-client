@@ -85,7 +85,6 @@ function CreateRestaurant(){
     let cookie = new Cookies();
     const tokenUser = cookie.get("user")?.accessToken;
     const tokenRole = cookie.get("user").role
-    console.log(tokenRole)
 
     const [numImageFields, setNumImageFields] = useState(1);
     const [imageUrls, setImageUrls] = useState([""]);

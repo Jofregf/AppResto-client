@@ -39,12 +39,20 @@ function RestoDetails() {
                         <p>{detail.restaurantEmail}</p>
                         <p>{detail.openingHoursRestaurant}</p>
                         <p>{detail.closingHoursRestaurant}</p>
-                        <img 
-                            src={`${detail.restaurantImages}`}
-                            alt = {detail.restaurantName}
-                            height = {300}
-                            width = {300}
-                        />
+                        {detail.restaurantImages && detail.restaurantImages.length > 0 ? (
+                            detail.restaurantImages.map((img, i) => (
+                                <div key={i}>
+                                    <img
+                                        src={img}
+                                        alt={`Imagen ${i+1}`}
+                                        height = {300}
+                                        width = {300}
+                                    />
+                                </div>
+                            ))
+                        ) : (
+                            <div>No hay imagenes disponibles</div>
+                        )}
                     </div>
                 ))
             ) : (

@@ -20,8 +20,6 @@ function Review(){
         ? state.reviews.reviews
         : [state.reviews.reviews]
     });
-    console.log(id, "id")
-    console.log(reviewsState)
 
     if (!reviewsState) {
         return <div>Loading...</div>;
