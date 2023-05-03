@@ -6,7 +6,8 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Cookies from "universal-cookie";
 import { createRestaurant } from "../../redux/actions/restaurantActions";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 
 const formSchema = Yup.object().shape({
@@ -185,17 +186,16 @@ function CreateRestaurant(){
                                     }}
                                     />
                                     {index === numImageFields - 1 && (
-                                    <button type="button" onClick={handleAddField}>Agregar imagen</button>
+                                    <button type="button" onClick={handleAddField}><FaPlus /></button>
                                     )}
                                     {index !== 0 && (
-                                    <button type="button" onClick={() => handleRemoveField(index)}>Eliminar imagen</button>
+                                    <button type="button" onClick={() => handleRemoveField(index)}><FaMinus /></button>
                                     )}
                                     {errors.restaurantImages?.[index] && (
                                     <span>{errors.restaurantImages[index].message}</span>
                                     )}
                                 </div>
                                 ))}
-                                                                
                                 <div className="input-small">
                                     <div className="labelAndInput-small">
                                         <label className="input-label">*Capacidad: </label>
@@ -252,7 +252,7 @@ function CreateRestaurant(){
                         {modal}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={handleModal}>Continuar</Button>
+                        <button onClick={handleModal}>Continuar</button>
                     </Modal.Footer>
                 </Modal>
             </div>
