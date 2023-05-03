@@ -2,6 +2,7 @@ import {ERROR, GET_RESTAURANTS,
         GET_RESTAURANT_DETAILS, 
         GET_RESTAURANT_BY_MENU_NAME, 
         GET_RESTAURANT_BY_AVERAGE_RATING,
+        CREATE_RESTAURANT,
     } from "../actions/restaurantActions";
 
 const initialState = {
@@ -27,6 +28,9 @@ export default function restaurantReducers(state = initialState, action) {
 
         case GET_RESTAURANT_BY_AVERAGE_RATING:
             return{...state, filteredRestaurants: action.payload};
+
+        case CREATE_RESTAURANT:
+            return {...state, status: action.payload}
             
         case ERROR:
             return {...state, status: action.payload};

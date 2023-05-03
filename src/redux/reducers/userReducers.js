@@ -3,13 +3,16 @@ import {CREATE_USER,
         USER_LOGIN, 
         UPDATE_ROLE,
         GET_USERS,
+        GET_USER_BY_ID,
         BAN_USER,
         GET_USER_BY_USERNAME_OR_EMAIL,
+        EDIT_USER,
+
     } from "../actions/userActions";
 
 const initialState = {
     users: [],
-    user : {},
+    user : [],
     status : "",
     token : ""
 }
@@ -34,8 +37,15 @@ function userReducer(state = initialState, action) {
         case BAN_USER:
             return {...state, status: action.payload};
 
+        case GET_USER_BY_ID:
+            return {...state, user: action.payload};
+
         case GET_USER_BY_USERNAME_OR_EMAIL:
             return {...state, user: action.payload};
+
+        case EDIT_USER:
+            console.log(state, "REDUCER EDIT")
+            return {...state, status: action.payload};
 
         default:
             return{...state};

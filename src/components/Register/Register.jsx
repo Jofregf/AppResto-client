@@ -73,7 +73,7 @@ function Register() {
 
     const {register, formState: { errors }, handleSubmit, reset} = useForm(formOptions);
 
-    function MessageConfirm(data) {
+    function messageConfirm(data) {
         dispatch(createUser({ ...data }));
         setTimeout(() => {
             dispatch(userLogin({usernameOrEmail: data.usernameOrEmail, password: data.password}))
@@ -84,7 +84,7 @@ function Register() {
     }
 
     const onSubmit = (data) => {
-        MessageConfirm(data);
+        messageConfirm(data);
         reset();
     };
 
@@ -93,7 +93,7 @@ function Register() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div> Registrarme</div>
                 <p>(* campos requeridos)</p>
-                <label>*User name</label>
+                <label>*Nombre de usuario</label>
                 <input 
                     type="text" 
                     name="userName" 

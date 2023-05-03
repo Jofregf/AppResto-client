@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {useEffect, useState} from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -29,7 +31,7 @@ function Login() {
 
     let cookie = new Cookies();
     const user = cookie.get("user")?.accessToken
-    console.log(user)
+    
     const nav = useNavigate();
 
     const {register, formState: {errors}, handleSubmit } = useForm(formOptions);

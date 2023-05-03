@@ -10,6 +10,7 @@ function AdminRole(){
     const [usernameOrUserEmail, setUsernameOrUserEmail] = useState("");
     const [role, setRole] = useState("");
     const [refresh, setRefresh] = useState(true);
+    
     const usersState = useSelector((state) => {
         return {
             users: Array.isArray(state.users.users)
@@ -45,7 +46,6 @@ function AdminRole(){
     const handleSubmit= (event) => {
         event.preventDefault();
         if(role !== "") {
-            console.log(role)
             if (findUser) {
                 dispatch(updateRole({usernameOrUserEmail: usernameOrUserEmail, role: role, token: tokenUser}));
                 modalDelete("El cambio de rol se ha producido con éxito")

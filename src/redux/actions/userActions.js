@@ -7,8 +7,10 @@ export const ERROR = "ERROR";
 export const USER_LOGIN = "USER_LOGIN";
 export const UPDATE_ROLE = "UPDATE_ROLE";
 export const GET_USERS = "GET_USERS";
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
 export const BAN_USER = "BAN_USER";
 export const GET_USER_BY_USERNAME_OR_EMAIL = "GET_USER_BY_USERNAME_OR_EMA"
+export const EDIT_USER = "EDIT_USER";
 
 export const createUser = ({userName, firstName, lastName, userPhone, userEmail, userPassword}) => async (dispatch) => {
     await axios.post(`${baseUrl}/api/auth/register`, {userName, firstName, lastName, userPhone, userEmail, userPassword}).then(
@@ -16,18 +18,18 @@ export const createUser = ({userName, firstName, lastName, userPhone, userEmail,
             dispatch({
                 type: CREATE_USER,
                 payload: response.data
-            })
+            });
         },
         (error) => {
             dispatch({
                 type: ERROR,
                 payload: error.error
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud:", error);
     });
-}
+};
 
 export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
     const cookies = new Cookies();
@@ -37,21 +39,21 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
             dispatch({
                 type: USER_LOGIN,
                 payload: response.data
-            })
+            });
         },
         (error) => {
             dispatch({
                 type: ERROR,
                 payload: "Usuario/email o contraseña incorrectos", error
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud:", error);
     });
-}
+};
 
 export const getUsers = ({token}) => async (dispatch) => {
-    await axios.get(`${baseUrl}/api/admin/users`, {headers: {'Authorization': "Bearer " + token}}).then(
+    await axios.get(`${baseUrl}/api/admin/users`, {headers: {"Authorization": "Bearer " + token}}).then(
         (response) => {
             dispatch({
                 type: GET_USERS,
@@ -62,10 +64,30 @@ export const getUsers = ({token}) => async (dispatch) => {
             dispatch({
                 type: ERROR,
                 payload: error.error,
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud", error)
+    });
+};
+
+export const getUserById = ({token}) => async (dispatch) => {
+    
+    await axios.get(`${baseUrl}/api/users`, {headers: {"Authorization": "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: GET_USER_BY_ID,
+                payload: response.data,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            });
+        },
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
     })
 }
 
@@ -82,12 +104,12 @@ export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatc
             dispatch({
                 type: ERROR,
                 payload: error.error,
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud", error);
     });
-}
+};
 
 export const unbanBanUser = ({usernameOrUserEmail, enabled, token}) => async (dispatch) => {
 
@@ -102,12 +124,12 @@ export const unbanBanUser = ({usernameOrUserEmail, enabled, token}) => async (di
             dispatch({
                 type: ERROR,
                 payload: error.error,
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud", error);
     });
-}
+};
 
 export const getUserByUsernameOrEmail = ({usernameOrEmail, token}) => async (dispatch) => {
     
@@ -116,15 +138,37 @@ export const getUserByUsernameOrEmail = ({usernameOrEmail, token}) => async (dis
             dispatch({
                 type: GET_USER_BY_USERNAME_OR_EMAIL,
                 payload: response.data,
-            })
+            });
         },
         (error) => {
             dispatch({
                 type: ERROR,
                 payload: error.error,
-            })
-        }
+            });
+        },
     ).catch(error => {
         console.error("Error en la solicitud", error);
     });
-}
+};
+
+export const editUser = ({userName, firstName, lastName, userPhone, userEmail, token}) => async (dispatch) => {
+    // console.log(userName);
+    // console.log(token)
+    await axios.put(`${baseUrl}/api/users`,{userName, firstName, lastName, userPhone, userEmail} , {headers: {"Authorization": "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: EDIT_USER,
+                payload: response.data,
+            });
+            console.log(response.data, "edituserACTION")
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error,
+            });
+        },
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
+    });
+};

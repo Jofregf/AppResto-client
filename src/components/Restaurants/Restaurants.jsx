@@ -20,11 +20,11 @@ function Restaurants(){
             status: state.restaurants.status
         }
     });
-    console.log(restaurantState)
+
     const restaurants = restaurantState.filteredRestaurants.length > 0
         ? restaurantState.filteredRestaurants
         : restaurantState.restaurants[0]?.contents || [];
-    console.log(restaurants)
+
     const status = restaurantState.status;
     
     useEffect(() => {
