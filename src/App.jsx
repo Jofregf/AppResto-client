@@ -11,7 +11,8 @@ import AdminGetUsers from "../src/components/AdminGetUser/AdminGetUser"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditUser from "../src/components/EditUser/EditUser";
 import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestaurant";
-
+import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
+import RestoHome from "../src/components/RestoHome/RestoHome";
 function App() {
   
   
@@ -28,8 +29,10 @@ function App() {
                     <Route path="/admin" element={<AdminHome/>}/>
                     <Route path="/admin/user/:userName" element={<UserCard />}/>
                     <Route path="/admin/users" element={<AdminGetUsers />}/>
+                    <Route path="/resto" element={<RestoHome />}/>
                     <Route path="/prueba" element={<EditUser />}/>
                     <Route path="/crear" element={<CreateRestaurant/>}/>
+                    <Route path="/editar" element={<EditRestaurant/>}/>
                 </Routes>
             </div>
             
