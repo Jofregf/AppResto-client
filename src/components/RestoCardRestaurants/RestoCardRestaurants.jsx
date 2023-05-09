@@ -1,24 +1,50 @@
 import { BsPencilSquare } from "react-icons/bs";
-import { Link } from "react-router-dom"
+import {AiFillDelete} from "react-icons/ai";
+import { Link , useNavigate} from "react-router-dom"
 import { deleteRestaurant } from "../../redux/actions/restaurantActions";
 import { useDispatch } from 'react-redux';
+import {useState} from "react";
 import Cookies from "universal-cookie";
+import { Modal } from 'react-bootstrap';
+
 
 function RestoCardRestaurants({name, address, phone, email, description, capacity, open, close, image, id,  activeDrawer,restaurante, receiveRestaurant}){
 
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
+    const navigate = useNavigate();
     const handleEdit = (event) => {
         event.preventDefault();
         receiveRestaurant(restaurante)
     }
 
-    const handleDelete = (event) => {
-      event.preventDefault();
-      dispatch(deleteRestaurant({token: tokenUser, id:restaurante.restaurantId}))
+    const [modal, setModal] = useState("")
+    const [show, setShow] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const modalDelete = (value) => {
+        setModal(value)
+        handleShow()
     }
-      return (
+
+    const handleDelete = (event) => {
+        
+      event.preventDefault();
+      setModalTitle("Confirmar eliminación");
+      handleShow();
+      
+  }
+
+  const handleConfirmDelete = () => {
+        handleClose();
+        dispatch(deleteRestaurant({token: tokenUser, id:restaurante.restaurantId}));
+  }
+
+    return (
         <div className="card-admin-container-slim">
           <div className="card-admin-container-slim-1">
             <Link to={`/restaurants/${id}`} style={{ text_decoration: 'none' }}>
@@ -48,8 +74,29 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
                   <BsPencilSquare size={25}/>
                 </button>
               </div>
+              <div className="buttons-admin-container-slim">
+                <button className="button-card-admin-slim" onClick={(e) => {handleDelete(e)}}>
+                  <AiFillDelete size={25}/>
+                </button>
+              </div>
             </div>
           </div>
+        
+          <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+            <Modal.Header closeButton>
+                <Modal.Title>{modalTitle}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body> {modal} </Modal.Body>
+            <Modal.Footer>
+                <button onClick={handleClose} >Cancelar</button>
+                <button onClick={handleConfirmDelete} >Eliminar</button>
+            </Modal.Footer>
+            </Modal>
         </div>
     )
 }

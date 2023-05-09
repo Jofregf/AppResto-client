@@ -163,8 +163,9 @@ export const editRestaurant = ({data, id, token}) => async (dispatch) => {
 };
 
 export const deleteRestaurant = ({id, token}) => async (dispatch) => {
-
-    await axios.delete(`${baseUrl}/api/restaurants/${id}`, {header: {"Authorization" : "Bearer " + token}}).then(
+    console.log(id)
+    console.log(token)
+    await axios.delete(`${baseUrl}/api/restaurants/${id}`, {headers: {"Authorization" : "Bearer " + token}}).then(
         (response) => {
             dispatch({
                 type: DELETE_RESTAURANT,

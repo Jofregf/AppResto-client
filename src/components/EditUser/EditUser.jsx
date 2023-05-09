@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 import {useState, useEffect }  from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { editUser, getUserById} from "../../redux/actions/userActions";
 
 function validate(input){
@@ -32,7 +32,7 @@ function EditUser  () {
     const userEdit = useSelector(state => state.users.user)
     console.log('reducer', userEdit)
     const user = cookie.get('user')
-    const nav = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const[errors, setErrors] = useState({});
     const[input, setInput] = useState({
@@ -43,7 +43,6 @@ function EditUser  () {
         userPhone: userEdit.user?.userPhone,
     })
     const tokenUser = cookie.get("user")?.accessToken
-    console.log('editarusuario', tokenUser)
 
     useEffect(() => {
         dispatch(getUserById({ token:tokenUser}))
@@ -72,7 +71,7 @@ function EditUser  () {
     }
 
     const handlemodal=(data)=>{
-        nav('/restaurants')
+        navigate('/restaurants')
     }
 
     function onSubmit(e) {
@@ -193,7 +192,7 @@ function EditUser  () {
                 {modal}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handlemodal} >Continuar</Button>
+                <button onClick={handlemodal} >Continuar</button>
             </Modal.Footer>
             </Modal>
 

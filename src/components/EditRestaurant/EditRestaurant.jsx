@@ -284,4 +284,3 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
 }
 
 export default EditRestaurant;
-//{https://i.postimg.cc/fbJj9M6c/IMG-20221213-144422362.jpg,https://i.postimg.cc/CM4tnxkn/252-1.jpg,https://i.postimg.cc/YqqP6Bzn/labrador-3-Farben-768x512.jpg}
