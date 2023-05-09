@@ -8,6 +8,7 @@ export const GET_RESTAURANT_BY_AVERAGE_RATING =  "GET_RESTAURANT_BY_AVERAGE_RATI
 export const CREATE_RESTAURANT = "CREATE_RESTAURANT";
 export const GET_RESTAURANT_BY_USER = "GET_RESTAURANT_BY_USER";
 export const EDIT_RESTAURANT = "EDIT_RESTAURANT";
+export const DELETE_RESTAURANT = "DELETE_RESTAURANT"
 
 
 export const baseUrl = "http://localhost:8080";
@@ -142,6 +143,7 @@ export const getRestoByUser = ({token}) => async (dispatch) => {
 };
 
 export const editRestaurant = ({data, id, token}) => async (dispatch) => {
+    
     await axios.put(`${baseUrl}/api/restaurants/${id}`, data, {headers: {"Authorization" : "Bearer " + token}}).then(
         (response) => {
             dispatch ({
@@ -159,3 +161,23 @@ export const editRestaurant = ({data, id, token}) => async (dispatch) => {
             console.error("Error en la solicitud", error);
         });
 };
+
+export const deleteRestaurant = ({id, token}) => async (dispatch) => {
+
+    await axios.delete(`${baseUrl}/api/restaurants/${id}`, {header: {"Authorization" : "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: DELETE_RESTAURANT,
+                payload: response.data
+            })
+        },
+        (error) => {
+            dispatch ({
+                type: ERROR,
+                payload: error.error,
+            });
+        },
+        ).catch(error => {
+            console.error("Error en la solicitud", error);
+        });
+}

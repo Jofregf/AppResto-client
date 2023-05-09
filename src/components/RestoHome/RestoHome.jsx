@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import { AdminEdit } from '../AdminEdit/AdminEdit';
 // import AdminGetProducts from '../AdminGetProducts/AdminGetProducts';
 // import AdminGetProductsDisabled from '../AdminGetProductDisabled/AdminGetProductDisabled';
@@ -15,7 +15,7 @@ import RestoGetRestaurants from '../RestoGetRestaurants/RestoGetRestaurants';
 
 function RestoHome(){
     
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [drawerActive, setDraweActive] = useState(false);
     const [state, setState] = useState("")
 

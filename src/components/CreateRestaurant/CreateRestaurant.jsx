@@ -51,10 +51,10 @@ const formSchema = Yup.object().shape({
         .min(8, "Mínimo 8 carácteres"),
     openingHoursRestaurant: Yup.string()
         .required("Este campo es requerido")
-        .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm"),
+        .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm:ss"),
     closingHoursRestaurant: Yup.string()
         .required("Este campo es requerido")
-        .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm"),
+        .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm:ss"),
 });
 
 

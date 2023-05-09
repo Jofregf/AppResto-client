@@ -1,29 +1,33 @@
-import { useState } from 'react'
-import { BsPencilSquare } from 'react-icons/bs';
-import { VscEye } from 'react-icons/vsc';
-import { VscEyeClosed } from 'react-icons/vsc';
-// import { useDispatch } from 'react-redux';
-// import { editProduct } from '../../redux/actions/productActions';
-import {editRestaurant} from "../../redux/actions/restaurantActions";
+import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom"
+import { deleteRestaurant } from "../../redux/actions/restaurantActions";
+import { useDispatch } from 'react-redux';
+import Cookies from "universal-cookie";
 
 function RestoCardRestaurants({name, address, phone, email, description, capacity, open, close, image, id,  activeDrawer,restaurante, receiveRestaurant}){
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    let cookie = new Cookies();
+    let tokenUser = cookie.get("user")?.accessToken;
     const handleEdit = (event) => {
-      console.log("aprieto boton")
         event.preventDefault();
         receiveRestaurant(restaurante)
-        id
-      }
+    }
 
-      // console.log(restaurante, "restaurante en restocard")
-
+    const handleDelete = (event) => {
+      event.preventDefault();
+      dispatch(deleteRestaurant({token: tokenUser, id:restaurante.restaurantId}))
+    }
       return (
         <div className="card-admin-container-slim">
           <div className="card-admin-container-slim-1">
             <Link to={`/restaurants/${id}`} style={{ text_decoration: 'none' }}>
-              <img className="card-admin-product-img" src={ image } alt="imagen rota"></img>
+              <img className="card-admin-product-img" 
+              src={ image } 
+              alt="imagen rota"
+              width={300}
+              height={300}
+              ></img>
             </Link>
           </div>
           <div className="card-admin-container-slim-2">

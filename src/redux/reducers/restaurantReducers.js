@@ -4,6 +4,7 @@ import {ERROR, GET_RESTAURANTS,
         GET_RESTAURANT_BY_AVERAGE_RATING,
         CREATE_RESTAURANT,
         GET_RESTAURANT_BY_USER,
+        DELETE_RESTAURANT,
     } from "../actions/restaurantActions";
 
 const initialState = {
@@ -35,6 +36,9 @@ export default function restaurantReducers(state = initialState, action) {
             
         case GET_RESTAURANT_BY_USER:
             return {...state, restaurant: action.payload};
+
+        case DELETE_RESTAURANT:
+            return {...state, status: action.payload}
 
         case ERROR:
             return {...state, status: action.payload};

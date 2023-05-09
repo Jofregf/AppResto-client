@@ -1,10 +1,12 @@
 import {getRestoByUser, editRestaurant} from "../../redux/actions/restaurantActions";
-import { useEffect } from "react"
+import { useEffect, useState, useCallback} from "react"
 import { useDispatch } from "react-redux"
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Cookies from "universal-cookie";
+import { FaPlus, FaMinus } from 'react-icons/fa';
+
 
 
 const formSchema = Yup.object().shape({
@@ -60,7 +62,7 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
 
-    const preloadedValues = {
+    const [preloadedValues, setPreloadedValues] = useState({
         restaurantName: restaurante?.restaurantName,
         restaurantAddress: restaurante?.restaurantAddress,
         restaurantPhone: restaurante?.restaurantPhone,
@@ -70,19 +72,72 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
         restaurantCapacity: restaurante?.restaurantCapacity,
         openingHoursRestaurant: restaurante?.openingHoursRestaurant,
         closingHoursRestaurant: restaurante?.closingHoursRestaurant
-    }
+    });
+    
+    const [numImageFields, setNumImageFields] = useState(preloadedValues.restaurantImages.length);
+    const [imageUrls, setImageUrls] = useState(preloadedValues.restaurantImages);
 
+    const handleAddField = () => {
+        setNumImageFields(numImageFields + 1);
+        setImageUrls([...imageUrls, ""]);
+    };
+
+    const handleRemoveField = (index) => {
+        setNumImageFields(numImageFields - 1);
+        const newImageUrls = [...imageUrls];
+        newImageUrls.splice(index, 1);
+        setImageUrls(newImageUrls);
+        setPreloadedValues({
+            ...preloadedValues,
+            restaurantImages: newImageUrls,
+            numImages: newImageUrls.length
+        });
+    };
+    
     const formOptions = { resolver: yupResolver(formSchema), defaultValues: preloadedValues };
     const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
     
     useEffect(()=>{
         dispatch(getRestoByUser({token: tokenUser}))
     },[dispatch, tokenUser])
+
+    useEffect(() => {
+        setPreloadedValues({
+            restaurantName: restaurante?.restaurantName,
+            restaurantAddress: restaurante?.restaurantAddress,
+            restaurantPhone: restaurante?.restaurantPhone,
+            restaurantEmail: restaurante?.restaurantEmail,
+            restaurantDescription: restaurante?.restaurantDescription,
+            restaurantImages: imageUrls,
+            restaurantCapacity: restaurante?.restaurantCapacity,
+            openingHoursRestaurant: restaurante?.openingHoursRestaurant,
+            closingHoursRestaurant: restaurante?.closingHoursRestaurant
+        });
+    }, [restaurante, imageUrls]);
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmitCallback = useCallback(
+        (data) => {
+            dispatch(editRestaurant({token: tokenUser, id:restaurante.restaurantId, data}));
+        },
+        [dispatch, restaurante, tokenUser]
+    );
+
+    useEffect(() => {
+        if (isSubmitting) {
+            handleSubmitCallback && handleSubmitCallback(preloadedValues);
+            setIsSubmitting(false);
+        }
+    }, [preloadedValues, handleSubmitCallback, isSubmitting]);
     
     const onSubmit = (data) => {
-        dispatch(editRestaurant({data, token: tokenUser, id:restaurante.restaurantId}));        
-        handleHome();
-        activeDrawer();
+        handleSubmitCallback && handleSubmitCallback(data);
+        setIsSubmitting(true);
+        setTimeout(() => {
+            handleHome();
+            activeDrawer();
+        }, 500)
     };
 
     return (
@@ -145,23 +200,34 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
                             />
                             {<div className="form-register-errors">{errors.restaurantDescription?.message}</div>}
                         </div>
-                        <div className="input-small">
-                            <div className="labelAndInput-small">
-                                <label className="input-label">*Imágenes: </label>
-                                {preloadedValues.restaurantImages.map((image, index) => (
-                                <div  key={`restaurantImages[${index}]`}>
+                        <div >
+                    <div >
+                        <label >*Imágenes: </label>
+                        {imageUrls && imageUrls.map((image, index) => (
+                            <div key={`restaurantImages[${index}]`}>
                                 <input
-                                    className="input-register"
+                                    
                                     type="text"
                                     name={`restaurantImages[${index}]`}
-                                    defaultValue={image}
                                     {...register(`restaurantImages[${index}]`)}
+                                    value={image}
+                                    onChange={(e) => {
+                                        const newImageUrls = [...imageUrls];
+                                        newImageUrls[index] = e.target.value;
+                                        setImageUrls(newImageUrls);
+                                    }}
                                 />
-                                </div>
-                                ))}
-                                {<div className="form-register-errors">{errors.restaurantImages?.message}</div>}
+                                {index !== 0 && (
+                                    <button type="button" onClick={() => handleRemoveField(index)}><FaMinus /></button>
+                                )}
+                                {errors.restaurantImages?.[index] && (
+                                    <span>{errors.restaurantImages[index].message}</span>
+                                )}
                             </div>
-                        </div>
+                        ))}
+                        <button type="button" onClick={handleAddField}><FaPlus /></button>
+                    </div>
+                    </div>
                         <div className="input-small">
                             <div className="labelAndInput-small">
                                 <label className="input-label">*Capacidad: </label>
@@ -218,3 +284,4 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
 }
 
 export default EditRestaurant;
+//{https://i.postimg.cc/fbJj9M6c/IMG-20221213-144422362.jpg,https://i.postimg.cc/CM4tnxkn/252-1.jpg,https://i.postimg.cc/YqqP6Bzn/labrador-3-Farben-768x512.jpg}
