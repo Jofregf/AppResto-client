@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import AdminRole from "../AdminRole/AdminRole";
 import AdminBan from "../AdminBan/AdminBan";
-import GetUserByUserNameOrEmail from "../AdminGetUser/AdminGetUser"
+import GetUserByUserNameOrEmail from "../AdminGetUser/AdminGetUser";
+import AdminGetResto from "../AdminGetResto/AdminGetResto";
+import AdminGetBanResto from "../AdminGetBanResto/AdminGetBanResto";
 
 function AdminHome() {
 
@@ -12,8 +14,9 @@ function AdminHome() {
     const [drawActive, setDrawActive] = useState(false);
     const [state, setState] = useState("");
     const [user, setUser] = useState(null);
+    const [restaurantSend, setRestaurantSend] = useState(null)
 
-    const activeDraw = () => {
+    const activeDrawer = () => {
         setDrawActive(!drawActive)
     }
 
@@ -25,6 +28,11 @@ function AdminHome() {
         setState("");
     }
 
+    const receiveRestaurant = (resto) => {
+        setRestaurantSend(resto)
+        setState("enabled?")
+    }
+
     const handleView = (select) => {
         setState(select);
     }
@@ -33,7 +41,9 @@ function AdminHome() {
         (tokenRole === "ROLE_ADMIN")?
         <div>
             <div>
+                <button className="link-home" onClick={() => handleHome("")}><p>Restaurantes</p></button>
                 <button onClick={() => handleView("role")}><p>Modificar roles</p></button>
+                <button onClick={() => handleView("desactivados")}><p>Desactivados</p></button>
                 <button onClick={() => handleView("banear")}><p>Banear/Desbanear</p></button>
                 <button onClick={() => handleView("usuarios")}><p>Usuarios</p></button>
                 <button  onClick={() => navigate("/restaurants")}><p>Home</p></button>
@@ -42,8 +52,10 @@ function AdminHome() {
             <div>
                 {
                 state === "role" ? <AdminRole />
+                :state === "" ? <AdminGetResto receiveRestaurant={receiveRestaurant} activeDrawer={activeDrawer} />
                 : state === "banear" ? <AdminBan/>
                 : state === "usuarios" ? <GetUserByUserNameOrEmail/>
+                : state === "desactivados" ? <AdminGetBanResto />
                 : null    
             }
             </div>

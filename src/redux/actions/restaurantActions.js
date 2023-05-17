@@ -8,7 +8,9 @@ export const GET_RESTAURANT_BY_AVERAGE_RATING =  "GET_RESTAURANT_BY_AVERAGE_RATI
 export const CREATE_RESTAURANT = "CREATE_RESTAURANT";
 export const GET_RESTAURANT_BY_USER = "GET_RESTAURANT_BY_USER";
 export const EDIT_RESTAURANT = "EDIT_RESTAURANT";
-export const DELETE_RESTAURANT = "DELETE_RESTAURANT"
+export const DELETE_RESTAURANT = "DELETE_RESTAURANT";
+export const EDIT_ENABLED_RESTAURANT = "EDIT_ENABLED_RESTAURANT";
+
 
 
 export const baseUrl = "http://localhost:8080";
@@ -163,8 +165,7 @@ export const editRestaurant = ({data, id, token}) => async (dispatch) => {
 };
 
 export const deleteRestaurant = ({id, token}) => async (dispatch) => {
-    console.log(id)
-    console.log(token)
+  
     await axios.delete(`${baseUrl}/api/restaurants/${id}`, {headers: {"Authorization" : "Bearer " + token}}).then(
         (response) => {
             dispatch({
@@ -181,4 +182,27 @@ export const deleteRestaurant = ({id, token}) => async (dispatch) => {
         ).catch(error => {
             console.error("Error en la solicitud", error);
         });
+}
+
+export const editEnabledResto = ({id, enabled, token}) => async (dispatch) => {
+    console.log(id, "ID ACTION")
+    console.log(enabled, "ENABLED ACTION")
+    console.log(token, "TOKEN ACTION")
+    const restaurantDTO = { enabled };
+    await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, restaurantDTO, {headers: {"Authorization" : "Bearer " + token}}).then(
+        (response) => {
+            dispatch({
+                type: EDIT_ENABLED_RESTAURANT,
+                payload: response.data,
+            })
+        },
+        (error) => {
+            dispatch({
+                type:ERROR,
+                payload: error.error,
+            })
+        }
+    ).catch(error => {
+        console.error("Error en la solicitud", error);
+    });
 }

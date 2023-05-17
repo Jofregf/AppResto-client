@@ -13,6 +13,7 @@ import EditUser from "../src/components/EditUser/EditUser";
 import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestaurant";
 import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
 import RestoHome from "../src/components/RestoHome/RestoHome";
+import AdminCardResto from "../src/components/AdminRestoCard/AdminRestoCard"
 function App() {
   
   
@@ -30,9 +31,8 @@ function App() {
                     <Route path="/admin/user/:userName" element={<UserCard />}/>
                     <Route path="/admin/users" element={<AdminGetUsers />}/>
                     <Route path="/resto" element={<RestoHome />}/>
-                    <Route path="/prueba" element={<EditUser />}/>
                     <Route path="/crear" element={<CreateRestaurant/>}/>
-                    <Route path="/editar" element={<EditRestaurant/>}/>
+                    <Route path="/editar" element={<AdminCardResto/>}/>
                 </Routes>
             </div>
             

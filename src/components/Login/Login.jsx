@@ -88,11 +88,10 @@ function Login() {
                     {<div className="form-register-errors">{errors.password?.message}</div>}
                 </div>
                 <p>{msg}</p>
-                <button>
-                    <input
-                        type="submit"
-                        value="Ingresar"
-                    />
+                <button 
+                    type="submit"
+                    value="Ingresar">
+                        Ingresar    
                 </button>
                 <button onClick={handleRegister}>
                     Registrarse

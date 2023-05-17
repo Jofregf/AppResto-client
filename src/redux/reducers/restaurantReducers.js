@@ -38,7 +38,7 @@ export default function restaurantReducers(state = initialState, action) {
             return {...state, restaurant: action.payload};
 
         case DELETE_RESTAURANT:
-            return {...state, status: action.payload}
+            return {...state, status: action.payload};
 
         case ERROR:
             return {...state, status: action.payload};
