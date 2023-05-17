@@ -48,7 +48,7 @@ function Login() {
     
     useEffect(() => {
         if(statusState?.msg === "successful login") {
-            nav("/restaurants");
+            nav("/restaurantes");
         } else if(statusState?.msg === "Bad credentials") {
             setMsg(statusState);
         }

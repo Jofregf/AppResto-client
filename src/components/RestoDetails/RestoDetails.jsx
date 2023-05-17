@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Link, useParams} from "react-router-dom"
 import {getRestaurantDetails} from "../../redux/actions/restaurantActions"
 import Review from "../Reviews/Reviews"
+import Cookie from "universal-cookie"
 
 
 
@@ -26,6 +27,11 @@ function RestoDetails() {
     if (!detailsState) {
         return <div>Loading...</div>;
     }
+
+    const cookie = new Cookie();
+    const cookieRole = cookie.get("user").role;
+    
+
 
     return (
         <div>
@@ -61,12 +67,21 @@ function RestoDetails() {
                 </div>
             )}
             <Review id={id}/>
-            <Link to={`/menus/restaurant/${id}`}>Ver Menús</Link>
-            <div>
-                <Link to="/restaurants">
-                <button>Inicio</button>
-                </Link>
-            </div>
+            <Link to={`/menus/restaurantes/${id}`}>Ver Menús</Link>
+            {cookieRole === "ROLE_RESTO" ? (
+                <div>
+                    <Link to="/resto">
+                        <button>RESTO PANEL</button>
+                    </Link>
+                </div>
+            ) : (
+                <div>
+                    <Link to="/restaurantes">
+                        <button>Inicio</button>
+                    </Link>
+                </div>
+            )}
+            
             </div>    
     );
 }

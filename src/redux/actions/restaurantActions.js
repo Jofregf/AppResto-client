@@ -96,17 +96,17 @@ export const getRestaurantByAverageRating = (rating) => async (dispatch) => {
 export const createRestaurant = ({restaurantName, restaurantAddress, restaurantPhone, restaurantEmail, restaurantDescription, openingHoursRestaurant, closingHoursRestaurant , restaurantImages, restaurantCapacity, token}) => async (dispatch) => {    
     const images = Array.isArray(restaurantImages) ? restaurantImages : [restaurantImages];
     await axios.post(`${baseUrl}/api/restaurants`, {
-        restaurantName, 
-        restaurantAddress, 
-        restaurantPhone, 
-        restaurantEmail, 
-        restaurantDescription, 
-        openingHoursRestaurant, 
-        closingHoursRestaurant , 
-        restaurantImages: images, 
-        restaurantCapacity
-    }, 
-    {headers: {"Authorization": "Bearer " + token}}).then(
+            restaurantName, 
+            restaurantAddress, 
+            restaurantPhone, 
+            restaurantEmail, 
+            restaurantDescription, 
+            openingHoursRestaurant, 
+            closingHoursRestaurant , 
+            restaurantImages: images, 
+            restaurantCapacity
+        }, 
+        {headers: {"Authorization": "Bearer " + token}}).then(
         (response) => {
             dispatch({
                 type: CREATE_RESTAURANT,

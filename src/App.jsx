@@ -14,6 +14,7 @@ import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestauran
 import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
 import RestoHome from "../src/components/RestoHome/RestoHome";
 import AdminCardResto from "../src/components/AdminRestoCard/AdminRestoCard"
+import CreateMenu from "./components/RestoCreateMenu/CreateMenu";
 function App() {
   
   
@@ -22,9 +23,9 @@ function App() {
         <BrowserRouter>
             <div>
                 <Routes>
-                    <Route path="/restaurants" element={<Restaurants/>}/>
-                    <Route path="/restaurants/:id" element={<RestoDetails/>}/>
-                    <Route path="/menus/restaurant/:id" element={<Menus/>}/>
+                    <Route path="/restaurantes" element={<Restaurants/>}/>
+                    <Route path="/restaurantes/:id" element={<RestoDetails/>}/>
+                    <Route path="/menus/restaurantes/:id" element={<Menus/>}/>
                     <Route path="/auth/register" element={<Register/>}/>
                     <Route path="/auth/login" element={<Login/>}/>
                     <Route path="/admin" element={<AdminHome/>}/>
@@ -33,6 +34,8 @@ function App() {
                     <Route path="/resto" element={<RestoHome />}/>
                     <Route path="/crear" element={<CreateRestaurant/>}/>
                     <Route path="/editar" element={<AdminCardResto/>}/>
+                    <Route path="/crear-menu/:id" element={<CreateMenu/>}/>
+
                 </Routes>
             </div>
             

@@ -67,6 +67,7 @@ function CreateRestaurant(){
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+    
     const [modal, setModal] = useState("");
     const [show, setShow] = useState(false);
 

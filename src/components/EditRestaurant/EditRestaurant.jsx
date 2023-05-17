@@ -270,11 +270,17 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
                     </div>
                                         
                     <div className="form-submit">
-                        <input
+                        <button
                             type="submit"
                             value="EDITAR RESTAURANTE"
-                            
-                        />
+                        >
+                            Editar Restaurante
+                        </button>
+                    </div>
+                    <div>
+                        <button href="/resto">
+                            Cancelar
+                        </button>
                     </div>
                 </div>
             </div>

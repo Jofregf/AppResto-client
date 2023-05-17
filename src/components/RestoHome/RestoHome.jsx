@@ -48,8 +48,9 @@ function RestoHome(){
             <div>
             <div>
                 <button onClick={() => handleHome("")}><p>Restaurantes</p></button>
-                <button onClick={() => handleView("mi cuenta")}><p>Mi cuenta</p></button>
-                <button className="link-home" onClick={() => handleView("crear")}><p>Crear Restaurante</p></button>
+                {/* <button onClick={() => handleView("mi cuenta")}><p>Mi cuenta</p></button> */}
+                <button onClick={() => handleView("crear")}><p>Crear Restaurante</p></button>
+
             </div>
             <div>
                 {

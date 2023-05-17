@@ -4,7 +4,7 @@ function RestaurantCard({id, name, image, address, phone, email, rating}) {
 
     return (
             <div >
-                <Link to={`/restaurants/${id}`}>
+                <Link to={`/restaurantes/${id}`}>
                     <h3> {name} </h3>
                     <img
                         src={`${image}`}

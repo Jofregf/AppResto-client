@@ -46,7 +46,7 @@ function Menus(){
                 <div>No hay menú</div>
             )}
             <div>
-                <Link to="/restaurants">
+                <Link to="/restaurantes">
                 <button>Inicio</button>
                 </Link>
             </div>

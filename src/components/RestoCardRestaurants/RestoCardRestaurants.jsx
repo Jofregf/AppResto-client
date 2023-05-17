@@ -13,7 +13,7 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
-    const navigate = useNavigate();
+
     const handleEdit = (event) => {
         event.preventDefault();
         receiveRestaurant(restaurante)
@@ -47,7 +47,7 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
     return (
         <div className="card-admin-container-slim">
           <div className="card-admin-container-slim-1">
-            <Link to={`/restaurants/${id}`} style={{ text_decoration: 'none' }}>
+            <Link to={`/restaurantes/${id}`} style={{ text_decoration: 'none' }}>
               <img className="card-admin-product-img" 
               src={ image } 
               alt="imagen rota"
@@ -81,7 +81,13 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
               </div>
             </div>
           </div>
-        
+          <div className="buttons-admin-container-slim">
+              <Link to={`/crear-menu/${id}`} style={{ textDecoration: 'none' }}>
+                <button className="button-card-admin-slim">
+                  Crear menú
+                </button>
+              </Link>
+          </div>
           <Modal
                 show={show}
                 onHide={handleClose}
