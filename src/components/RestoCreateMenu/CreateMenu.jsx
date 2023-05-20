@@ -24,7 +24,7 @@ const formSchema = Yup.object().shape({
 });
 
 
-function CreateMenu(activeDrawer, handleHome, restaurante){
+function CreateMenu(){
     const formOptions = { resolver: yupResolver(formSchema) };
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm(formOptions);
