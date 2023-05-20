@@ -8,7 +8,7 @@ import Cookies from "universal-cookie";
 import { Modal } from 'react-bootstrap';
 
 
-function RestoCardRestaurants({name, address, phone, email, description, capacity, open, close, image, id,  activeDrawer,restaurante, receiveRestaurant}){
+function RestoCardRestaurants({name, address, phone, email, description, capacity, open, close, image, id, restaurante, receiveRestaurant}){
 
     const dispatch = useDispatch();
     let cookie = new Cookies();
