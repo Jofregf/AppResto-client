@@ -109,7 +109,7 @@ function CreateMenu(activeDrawer, handleHome, restaurante){
                             >Crear</button>
                         </div>
                         <div>
-                            <Link to={`/resto/`} style={{ textDecoration: 'none' }}>
+                            <Link to={`/resto`} style={{ textDecoration: 'none' }}>
                                 <button className="button-card-admin-slim">
                                 Cancelar
                                 </button>
