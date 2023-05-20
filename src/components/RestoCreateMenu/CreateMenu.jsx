@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cookies from "universal-cookie";
@@ -19,6 +19,7 @@ const formSchema = Yup.object().shape({
         .min(10, "Mínimo 10 carácteres"),
     menuImage: Yup.string()
         .required("Este campo es requerido")
+        .max(255, "Máximo 255 carácteres")
         .matches(RegExp(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)/), "Ingresar formato URL"),
 });
 
@@ -106,6 +107,13 @@ function CreateMenu(activeDrawer, handleHome, restaurante){
                                 value="CREAR MENÚ"
                                 
                             >Crear</button>
+                        </div>
+                        <div>
+                            <Link to={`/resto/`} style={{ textDecoration: 'none' }}>
+                                <button className="button-card-admin-slim">
+                                Cancelar
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import { BsPencilSquare } from "react-icons/bs";
 import {AiFillDelete} from "react-icons/ai";
-import { Link , useNavigate} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { deleteRestaurant } from "../../redux/actions/restaurantActions";
 import { useDispatch } from 'react-redux';
 import {useState} from "react";
@@ -80,13 +80,6 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
                 </button>
               </div>
             </div>
-          </div>
-          <div className="buttons-admin-container-slim">
-              <Link to={`/crear-menu/${id}`} style={{ textDecoration: 'none' }}>
-                <button className="button-card-admin-slim">
-                  Crear menú
-                </button>
-              </Link>
           </div>
           <Modal
                 show={show}
