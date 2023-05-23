@@ -14,7 +14,8 @@ import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestauran
 import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
 import RestoHome from "../src/components/RestoHome/RestoHome";
 import AdminCardResto from "../src/components/AdminRestoCard/AdminRestoCard"
-import CreateMenu from "./components/RestoCreateMenu/CreateMenu";
+import CreateMenu from "../src/components/RestoCreateMenu/CreateMenu";
+import EditMenu from "../src/components/EditMenu/EditMenu";
 function App() {
   
   
@@ -29,13 +30,13 @@ function App() {
                     <Route path="/auth/register" element={<Register/>}/>
                     <Route path="/auth/login" element={<Login/>}/>
                     <Route path="/admin" element={<AdminHome/>}/>
-                    <Route path="/admin/user/:userName" element={<UserCard />}/>
-                    <Route path="/admin/users" element={<AdminGetUsers />}/>
-                    <Route path="/resto" element={<RestoHome />}/>
+                    <Route path="/admin/user/:userName" element={<UserCard/>}/>
+                    <Route path="/admin/users" element={<AdminGetUsers/>}/>
+                    <Route path="/resto" element={<RestoHome/>}/>
                     <Route path="/crear" element={<CreateRestaurant/>}/>
                     <Route path="/editar" element={<AdminCardResto/>}/>
                     <Route path="/crear-menu/:id" element={<CreateMenu/>}/>
-
+                    <Route path="/menu/:idMenu/restaurant/:id" element={<EditMenu/>}/>
                 </Routes>
             </div>
             

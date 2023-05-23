@@ -34,7 +34,7 @@ function CreateMenu(){
     const navigate = useNavigate();
 
     const {id} = useParams();
-    console.log(id, "CreateMenu")
+    
     const [modal, setModal] = useState("");
     const [show, setShow] = useState(false);
 
@@ -42,7 +42,7 @@ function CreateMenu(){
     const handleShow = () => setShow(true);
 
     const handleModal = () => {
-        navigate("/resto")
+        navigate(`/menus/restaurantes/${id}`)
     }
 
     const modalDelete = (data) => {

@@ -22,7 +22,7 @@
     "react-hook-form": "7.43.9",
     "react-icons": "4.8.0",
     "react-redux": "8.0.5",
-    "react-router-dom": "^6.11.0",
+    "react-router-dom": "^6.11.2",
     "redux-thunk": "2.4.2",
     "universal-cookie": "4.0.4",
     "yup": "1.1.1"

@@ -32,11 +32,9 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
     }
 
     const handleDelete = (event) => {
-        
       event.preventDefault();
       setModalTitle("Confirmar eliminación");
       handleShow();
-      
   }
 
   const handleConfirmDelete = () => {

@@ -1,4 +1,4 @@
-import {GET_MENUS_BY_RESTAURANT_ID, ERROR, CREATE_MENU} from "../actions/menuActions";
+import {GET_MENUS_BY_RESTAURANT_ID, ERROR, CREATE_MENU, DELETE_MENU} from "../actions/menuActions";
 
 const initialState = {
     menus : [],
@@ -17,6 +17,9 @@ export default function menuReducers (state = initialState, action) {
             return {...state, status: action.payload};
 
         case CREATE_MENU:
+            return {...state, status: action.payload};
+
+        case DELETE_MENU:
             return {...state, status: action.payload};
 
         default:
