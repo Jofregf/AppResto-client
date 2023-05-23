@@ -165,7 +165,7 @@ export const editRestaurant = ({data, id, token}) => async (dispatch) => {
 };
 
 export const deleteRestaurant = ({id, token}) => async (dispatch) => {
-  
+
     await axios.delete(`${baseUrl}/api/restaurants/${id}`, {headers: {"Authorization" : "Bearer " + token}}).then(
         (response) => {
             dispatch({
@@ -185,9 +185,7 @@ export const deleteRestaurant = ({id, token}) => async (dispatch) => {
 }
 
 export const editEnabledResto = ({id, enabled, token}) => async (dispatch) => {
-    console.log(id, "ID ACTION")
-    console.log(enabled, "ENABLED ACTION")
-    console.log(token, "TOKEN ACTION")
+    
     const restaurantDTO = { enabled };
     await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, restaurantDTO, {headers: {"Authorization" : "Bearer " + token}}).then(
         (response) => {

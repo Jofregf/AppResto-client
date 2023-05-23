@@ -34,10 +34,11 @@ function EditMenu() {
     const menu = menuData.filter( men => men.menuId === idMenu)
     
     const [preloadedValues, setPreloadedValues] = useState({
-      menuName: menu[0]?.menuName || "",
-      menuDescription: menu[0]?.menuDescription || "",
-      menuImage: menu[0]?.menuImage || "",
+        menuName: menu[0]?.menuName || "",
+        menuDescription: menu[0]?.menuDescription || "",
+        menuImage: menu[0]?.menuImage || "",
     });
+
     const [formData, setFormData] = useState({});
     const formOptions = { resolver: yupResolver(formSchema), defaultValues: preloadedValues };
     const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
@@ -59,9 +60,9 @@ function EditMenu() {
     };
 
     const handleCancel = () => {
-      navigate("/resto");
+        navigate("/resto");
     }
-  
+
     return (
         <div>
             <div className="container-register-form">
@@ -101,12 +102,12 @@ function EditMenu() {
                                         defaultValue={preloadedValues.menuImage}
                                         {...register('menuImage')}
                                     />
-                                  {<div className="form-register-errors">{errors.menuImage?.message}</div>}
+                                    {<div className="form-register-errors">{errors.menuImage?.message}</div>}
                                 </div>
                             </div>
                             <div className="form-submit">
                                 <button type="submit" value="EDITAR MENU">
-                                  Editar Menú
+                                    Editar Menú
                                 </button>
                             </div>
                         </div>
@@ -115,7 +116,7 @@ function EditMenu() {
             <div>
                     <button onClick={handleCancel}>Cancelar</button>
             </div>
-          </div>
+            </div>
         </div>
     );
 }

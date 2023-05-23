@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import RestoCardRestaurants from "../RestoCardRestaurants/RestoCardRestaurants";
 import {getRestoByUser} from "../../redux/actions/restaurantActions";
-// import Cookies from "universal-cookie";
 
 function RestoGetRestaurants({activeDrawer, receiveRestaurant, tokenUser}){
 

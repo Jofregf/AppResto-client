@@ -3,7 +3,7 @@ import {AiFillDelete} from "react-icons/ai";
 import { Link, useParams} from "react-router-dom"
 import { deleteMenu, getMenusByRestaurantId} from "../../redux/actions/menuActions";
 import { useDispatch } from 'react-redux';
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import Cookies from "universal-cookie";
 import { Modal } from 'react-bootstrap';
 
@@ -12,9 +12,8 @@ function MenuCard({idMenu, name, image, description, menu}){
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
+    const cookieRole = cookie.get("user").role;
     const { id } = useParams();
-    const [forceUpdate, setForceUpdate] = useState(false);
-    const [menuData, setMenuData] = useState([]);
 
     const [state, setState] = useState("");
     
@@ -25,11 +24,8 @@ function MenuCard({idMenu, name, image, description, menu}){
         setState("menu")
     }
 
-    const handleEdit = (event) => {
-        // event.preventDefault();
-        // console.log(menu)
+    const handleEdit = () => {
         receiveMenuData(menu)
-        
     }
 
     const [modal, setModal] = useState("")
@@ -69,11 +65,14 @@ function MenuCard({idMenu, name, image, description, menu}){
                     >
                 </img>
             </div>
+            
             <div className="card-admin-container-slim-2">
                 <div className="card-admin-information">
                     <p className="card-admin-slim-name">{ name }</p>
                     <p className="price-slim-card-price">{ description }</p>
                 </div>
+            </div>
+            {cookieRole === "ROLE_RESTO" ? (
                 <div className="card-admin-container-slim-3">
                     <div className="buttons-admin-container-slim">
                         <Link to={`/menu/${idMenu}/restaurant/${id}`}>
@@ -90,7 +89,7 @@ function MenuCard({idMenu, name, image, description, menu}){
                         </button>
                     </div>
                 </div>
-            </div>
+            ):(null)}
             <Modal
                 show={show}
                 onHide={handleClose}
