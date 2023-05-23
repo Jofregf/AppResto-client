@@ -49,7 +49,7 @@ function EditMenu() {
             dispatch(editMenu({token: tokenUser, idMenu:idMenu, idResto:id, data}));
             setTimeout(() => {
                 navigate(`/menus/restaurantes/${id}`);
-            }, 5000);
+            }, 1000);
         },[dispatch, idMenu, id, tokenUser, navigate]
     );
     
