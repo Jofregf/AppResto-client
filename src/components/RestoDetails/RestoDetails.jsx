@@ -29,7 +29,7 @@ function RestoDetails() {
     }
 
     const cookie = new Cookie();
-    const cookieRole = cookie.get("user").role;
+    const cookieRole = cookie.get("user")?.role;
     
 
 
@@ -70,7 +70,7 @@ function RestoDetails() {
             <Link to={`/menus/restaurantes/${id}`}>
                 <button>Ver menú</button>
             </Link>
-            {cookieRole === "ROLE_RESTO" ? (
+            { cookieRole  === "ROLE_RESTO" ? (
                 <div>
                     <Link to="/resto">
                         <button>RESTO PANEL</button>

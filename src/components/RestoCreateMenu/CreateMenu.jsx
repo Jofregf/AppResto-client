@@ -52,7 +52,7 @@ function CreateMenu(){
 
     let cookie = new Cookies();
     const tokenUser = cookie.get("user")?.accessToken;
-    const tokenRole = cookie.get("user").role
+    const cookieRole = cookie.get("user")?.role
 
     const onSubmit = (data) => {
         dispatch(createMenu({ ...data, token: tokenUser, id: id}));
@@ -62,7 +62,7 @@ function CreateMenu(){
     }
 
     return (
-        (tokenRole === "ROLE_RESTO")?
+        (cookieRole === "ROLE_RESTO")?
         <div className="container-register-form-admin">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="container-index">

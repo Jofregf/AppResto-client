@@ -12,7 +12,7 @@ function MenuCard({idMenu, name, image, description, menu}){
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
-    const cookieRole = cookie.get("user").role;
+    const cookieRole = cookie.get("user")?.role;
     const { id } = useParams();
 
     const [state, setState] = useState("");

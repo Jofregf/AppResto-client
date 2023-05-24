@@ -10,7 +10,7 @@ function Menus(){
     const { id } = useParams();
     const dispatch = useDispatch();
     const cookie = new Cookie();
-    const cookieRole = cookie.get("user").role;
+    const cookieRole = cookie.get("user")?.role;
     const [search, setSearch] = useState('');
 
     useEffect(() => {

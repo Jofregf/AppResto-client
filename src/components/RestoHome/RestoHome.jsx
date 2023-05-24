@@ -23,7 +23,7 @@ function RestoHome(){
 
     let cookie = new Cookies();
     const tokenUser = cookie.get("user")?.accessToken;
-    const tokenRole =  cookie.get("user")?.role;
+    const cookieRole =  cookie.get("user")?.role;
 
     const activeDrawer = () => {
         setDraweActive(!drawerActive)
@@ -44,7 +44,7 @@ function RestoHome(){
     
 
     return (
-        (tokenRole === "ROLE_RESTO")?
+        (cookieRole === "ROLE_RESTO")?
             <div>
             <div>
                 <button onClick={() => handleHome("")}><p>Restaurantes</p></button>
