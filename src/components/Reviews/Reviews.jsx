@@ -2,7 +2,7 @@ import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom";
 import {getReviewsByRestaurantId, clearReviews} from "../../redux/actions/reviewActions";
-import {AiFillStar} from "react-icons/ai"
+import {AiFillStar, AiOutlineStar} from "react-icons/ai"
 
 function Review(){
 
@@ -32,7 +32,7 @@ function Review(){
             if (i <= rating) {
                 stars.push(<span className="star" key={i}><AiFillStar size={25}/></span>);
             } else {
-                stars.push(<span className="star" key={i}>☆</span>);
+                stars.push(<span className="star" key={i}><AiOutlineStar size={25}/></span>);
             }
         }
         return <div>{stars}</div>;
