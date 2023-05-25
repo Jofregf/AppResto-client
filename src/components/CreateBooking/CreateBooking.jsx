@@ -1,30 +1,28 @@
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link} from "react-router-dom";
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import Cookies from "universal-cookie";
-import { createMenu } from "../../redux/actions/menuActions";
+import { createBooking } from "../../redux/actions/bookingActions";
 import { Modal } from "react-bootstrap";
 
+
 const formSchema = Yup.object().shape({
-    menuName: Yup.string()
+    bookingDate: Yup.date().required('Ingresa una fecha válida'),
+    bookingTime: Yup.string()
         .required("Este campo es requerido")
-        .max(50, "Máximo 50 carácteres")
-        .min(3, "Mínimo 3 carácteres"),
-    menuDescription: Yup.string()
+        .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm"),
+    bookingPartySize: Yup.number()
         .required("Este campo es requerido")
-        .max(50, "Máximo 50 carácteres")
-        .min(10, "Mínimo 10 carácteres"),
-    menuImage: Yup.string()
-        .required("Este campo es requerido")
-        .max(255, "Máximo 255 carácteres")
-        .matches(RegExp(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)/), "Ingresar formato URL"),
+        .max(30, "Máximo 30 personas")
+        .min(2, "Mínimo 2 personas"),
 });
 
 
-function CreateMenu(){
+function CreateBooking(){
+
     const formOptions = { resolver: yupResolver(formSchema) };
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm(formOptions);
@@ -52,61 +50,60 @@ function CreateMenu(){
 
     let cookie = new Cookies();
     const tokenUser = cookie.get("user")?.accessToken;
-    const cookieRole = cookie.get("user")?.role
 
     const onSubmit = (data) => {
-        dispatch(createMenu({ ...data, token: tokenUser, id: id}));
+        dispatch(createBooking({ ...data, token: tokenUser, id: id}));
         setTimeout(() => {
-            modalDelete("Menú Creado")
+            modalDelete("Reserva realizada")
         }, 1100)
     }
 
     return (
-        (cookieRole === "ROLE_RESTO")?
+        
             <div className="container-register-form-admin">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="container-index">
                         <div className="form-container">
-                            <div className="title">Crear Menú</div>
+                            <div className="title">Reserva</div>
                             <p className="register-subtitle">(* campos requeridos)</p>
                             <div className="form-group-one">
                                 <div className="labelAndInput">
-                                    <label className="input-label">*Nombre: </label>
+                                    <label className="input-label">*Fecha: </label>
                                     <input
                                         className="input-register"
-                                        type="text"
-                                        name="menuName"
-                                        {...register("menuName")}
+                                        type="date"
+                                        name="bookingDate"
+                                        {...register("bookingDate")}
                                     />
-                                    {<div className="form-register-errors">{errors.menuName?.message}</div>}
+                                    {<div className="form-register-errors">{errors.bookingDate?.message}</div>}
                                 </div>
                                 <div className="labelAndInput">
-                                    <label className="input-label">*Descripción: </label>
+                                    <label className="input-label">*Hora: </label>
                                     <input
                                         className="input-register"
                                         type="text"
-                                        name="menuDescription"
-                                        {...register("menuDescription")}
+                                        name="bookingTime"
+                                        {...register("bookingTime")}
                                         />
-                                    {<div className="form-register-errors">{errors.menuDescription?.message}</div>}
+                                    {<div className="form-register-errors">{errors.bookingTime?.message}</div>}
                                 </div>
                                 <div className="labelAndInput">
-                                    <label className="input-label">*URL de imagen: </label>
+                                    <label className="input-label">*Número de personas: </label>
                                     <input
                                         className="input-register"
-                                        type="text"
-                                        name="menuImage"
-                                        {...register('menuImage')}
+                                        type="number"
+                                        name="bookingPartySize"
+                                        {...register('bookingPartySize')}
                                     />
-                                    {<div className="form-register-errors">{errors.menuImage?.message}</div>}
+                                    {<div className="form-register-errors">{errors.bookingPartySize?.message}</div>}
                                 </div>
                             </div>
                             <div className="form-submit">
                                 <button
                                     type="submit"
-                                    value="CREAR MENÚ"
+                                    value="RESERVAR"
                                     
-                                >Crear</button>
+                                >RESERVAR</button>
                             </div>
                             <div>
                                 <Link to={`/resto`} style={{ textDecoration: 'none' }}>
@@ -125,7 +122,7 @@ function CreateMenu(){
                     keyboard="false"
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Menú Creado!</Modal.Title>
+                        <Modal.Title>Reserva Realizada!</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {modal}
@@ -135,9 +132,7 @@ function CreateMenu(){
                     </Modal.Footer>
                 </Modal>
             </div>
-        : "usuario sin permiso"
-        
     )
 }
 
-export default CreateMenu;
+export default CreateBooking;

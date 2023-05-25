@@ -4,6 +4,7 @@ import restaurantReducers from "../reducers/restaurantReducers";
 import reviewReducers from "../reducers/reviewReducers";
 import menuReducers from "../reducers/menuReducers";
 import userReducers from "../reducers/userReducers"
+import bookingReducers from "../reducers/bookingReducers";
 
 export const makeStore = () => {
     const store = configureStore({
@@ -12,6 +13,7 @@ export const makeStore = () => {
             reviews: reviewReducers,
             menus: menuReducers,
             users: userReducers,
+            bookings: bookingReducers
         },
         middleware: [thunk],
     });

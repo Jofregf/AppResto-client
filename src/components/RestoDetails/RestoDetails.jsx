@@ -83,6 +83,9 @@ function RestoDetails() {
                     </Link>
                 </div>
             )}
+            <Link to={`/restaurantes/${id}/reserva`}>
+                <button>Reservar</button>
+            </Link>
             
             </div>    
     );

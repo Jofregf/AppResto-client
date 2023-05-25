@@ -16,6 +16,8 @@ import RestoHome from "../src/components/RestoHome/RestoHome";
 import AdminCardResto from "../src/components/AdminRestoCard/AdminRestoCard"
 import CreateMenu from "../src/components/RestoCreateMenu/CreateMenu";
 import EditMenu from "../src/components/EditMenu/EditMenu";
+import CreateBooking from "./components/CreateBooking/CreateBooking";
+
 function App() {
   
   
@@ -37,6 +39,7 @@ function App() {
                     <Route path="/editar" element={<AdminCardResto/>}/>
                     <Route path="/crear-menu/:id" element={<CreateMenu/>}/>
                     <Route path="/menu/:idMenu/restaurant/:id" element={<EditMenu/>}/>
+                    <Route path="/restaurantes/:id/reserva" element={<CreateBooking/>}/>
                 </Routes>
             </div>
             

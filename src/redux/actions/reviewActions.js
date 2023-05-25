@@ -29,7 +29,3 @@ export const clearReviews = () => ({
     type: "CLEAR_REVIEWS",
 });
 
-
-
-// TODO: @PostMapping("/login") loguearse http://localhost:8080/api/auth/login
-// TODO: @PostMapping("/register") crear usuario http://localhost:8080/api/auth/register

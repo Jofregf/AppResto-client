@@ -56,3 +56,5 @@ function Review(){
 }
 
 export default Review;
+
+// Los reviews deberían aparecer para hacer en los bookings de cada usuario, que luego de ir al resto hagan la review!!!!
