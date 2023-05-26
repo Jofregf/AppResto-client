@@ -13,7 +13,18 @@ export const GET_USER_BY_USERNAME_OR_EMAIL = "GET_USER_BY_USERNAME_OR_EMA"
 export const EDIT_USER = "EDIT_USER";
 
 export const createUser = ({userName, firstName, lastName, userPhone, userEmail, userPassword}) => async (dispatch) => {
-    await axios.post(`${baseUrl}/api/auth/register`, {userName, firstName, lastName, userPhone, userEmail, userPassword}).then(
+
+    await axios.post(`${baseUrl}/api/auth/register`, 
+        {   
+            userName, 
+            firstName, 
+            lastName, 
+            userPhone, 
+            userEmail, 
+            userPassword
+        }
+    )
+    .then(
         (response) => {
             dispatch({
                 type: CREATE_USER,
@@ -26,14 +37,18 @@ export const createUser = ({userName, firstName, lastName, userPhone, userEmail,
                 payload: error.error
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };
 
 export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
+
     const cookies = new Cookies();
-    axios.post(`${baseUrl}/api/auth/login`, {usernameOrEmail, password}).then(
+    axios.post(`${baseUrl}/api/auth/login`, 
+        {usernameOrEmail, password})
+    .then(
         (response) => {
             cookies.set("user", response.data, {path: "/", expires: new Date(Date.now() + (3600*100*24))});
             dispatch({
@@ -47,13 +62,17 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
                 payload: "Usuario/email o contraseña incorrectos", error
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };
 
 export const getUsers = ({token}) => async (dispatch) => {
-    await axios.get(`${baseUrl}/api/admin/users`, {headers: {"Authorization": "Bearer " + token}}).then(
+
+    await axios.get(`${baseUrl}/api/admin/users`, 
+        {headers: {"Authorization": "Bearer " + token}})
+    .then(
         (response) => {
             dispatch({
                 type: GET_USERS,
@@ -66,14 +85,17 @@ export const getUsers = ({token}) => async (dispatch) => {
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error)
     });
 };
 
 export const getUserById = ({token}) => async (dispatch) => {
     
-    await axios.get(`${baseUrl}/api/users`, {headers: {"Authorization": "Bearer " + token}}).then(
+    await axios.get(`${baseUrl}/api/users`, 
+        {headers: {"Authorization": "Bearer " + token}})
+    .then(
         (response) => {
             dispatch({
                 type: GET_USER_BY_ID,
@@ -86,14 +108,19 @@ export const getUserById = ({token}) => async (dispatch) => {
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     })
 }
 
 export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatch) => {
     
-    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}/role`, {role}, {headers: {"Authorization": "Bearer " + token}}).then(
+    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}/role`, 
+        {role}, 
+        {headers: {"Authorization": "Bearer " + token}}
+    )
+    .then(
         (response) => {
             dispatch({
                 type: UPDATE_ROLE,
@@ -106,14 +133,19 @@ export const updateRole = ({usernameOrUserEmail, role, token}) => async (dispatc
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };
 
 export const unbanBanUser = ({usernameOrUserEmail, enabled, token}) => async (dispatch) => {
 
-    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}`, {enabled}, {headers: {"Authorization" : "Bearer " + token}}).then(
+    await axios.put(`${baseUrl}/api/admin/users/${usernameOrUserEmail}`, 
+        {enabled}, 
+        {headers: {"Authorization" : "Bearer " + token}}
+    )
+    .then(
         (response) => {
             dispatch({
                 type: BAN_USER,
@@ -126,14 +158,17 @@ export const unbanBanUser = ({usernameOrUserEmail, enabled, token}) => async (di
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };
 
 export const getUserByUsernameOrEmail = ({usernameOrEmail, token}) => async (dispatch) => {
     
-    await axios.get(`${baseUrl}/api/admin/users/search/${usernameOrEmail}`, {headers: {"Authorization": "Bearer " + token}}).then(
+    await axios.get(`${baseUrl}/api/admin/users/search/${usernameOrEmail}`, 
+        {headers: {"Authorization": "Bearer " + token}})
+    .then(
         (response) => {
             dispatch({
                 type: GET_USER_BY_USERNAME_OR_EMAIL,
@@ -146,15 +181,25 @@ export const getUserByUsernameOrEmail = ({usernameOrEmail, token}) => async (dis
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };
 
 export const editUser = ({userName, firstName, lastName, userPhone, userEmail, token}) => async (dispatch) => {
-    // console.log(userName);
-    // console.log(token)
-    await axios.put(`${baseUrl}/api/users`,{userName, firstName, lastName, userPhone, userEmail} , {headers: {"Authorization": "Bearer " + token}}).then(
+    
+    await axios.put(`${baseUrl}/api/users`,
+        {
+            userName, 
+            firstName, 
+            lastName, 
+            userPhone, 
+            userEmail
+        }, 
+        {headers: {"Authorization": "Bearer " + token}}
+    )
+    .then(
         (response) => {
             dispatch({
                 type: EDIT_USER,
@@ -168,7 +213,8 @@ export const editUser = ({userName, firstName, lastName, userPhone, userEmail, t
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };

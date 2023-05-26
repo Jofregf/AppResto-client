@@ -7,7 +7,8 @@ export const CLEAR_REVIEWS = "CLEAR_REVIEWS";
 
 export const getReviewsByRestaurantId = (id) => async (dispatch) => {
     
-    await axios.get(`${baseUrl}/api/restaurants/${id}/reviews`).then(
+    await axios.get(`${baseUrl}/api/restaurants/${id}/reviews`)
+    .then(
         (response) => {
             dispatch({
                 type: GET_REVIEWS_BY_RESTAURANT_ID,
@@ -20,7 +21,8 @@ export const getReviewsByRestaurantId = (id) => async (dispatch) => {
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };

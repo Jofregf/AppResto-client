@@ -16,7 +16,9 @@ export const EDIT_ENABLED_RESTAURANT = "EDIT_ENABLED_RESTAURANT";
 export const baseUrl = "http://localhost:8080";
 
 export const getRestaurants = () => async (dispatch) => {
-    await axios.get(`${baseUrl}/api/restaurants`).then (
+
+    await axios.get(`${baseUrl}/api/restaurants`)
+    .then (
         (response) => {
             dispatch({
                 type: GET_RESTAURANTS,
@@ -28,14 +30,17 @@ export const getRestaurants = () => async (dispatch) => {
                 type: ERROR,
                 payload: error.error,
             });
-        },
-    ).catch(error => {
+        }
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };
 
 export const getRestaurantDetails = (id) => async (dispatch) => {
-    await axios.get(`${baseUrl}/api/restaurants/${id}`).then(
+
+    await axios.get(`${baseUrl}/api/restaurants/${id}`)
+    .then(
         (response) => {
             dispatch({
                 type: GET_RESTAURANT_DETAILS,
@@ -47,15 +52,18 @@ export const getRestaurantDetails = (id) => async (dispatch) => {
                 type: ERROR,
                 payload: error.error,
             });
-        },
-    ).catch(error => {
+        }
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };
 
 export const getRestaurantByMenuName = (menuName) => async (dispatch) => {
+
     await axios.get(`${baseUrl}/api/search/menus/restaurants`,
-    { headers: {menuName : menuName}}).then(
+        {headers: {menuName : menuName}})
+    .then(
         (response) => {
             dispatch({
                 type: GET_RESTAURANT_BY_MENU_NAME,
@@ -67,15 +75,18 @@ export const getRestaurantByMenuName = (menuName) => async (dispatch) => {
                 type: ERROR,
                 payload: error.error,
             });
-        },
-    ).catch(error => {
+        }
+    )
+    .catch(error => {
         console.error("Error en la solicitud:", error);
     });
 };
 
 export const getRestaurantByAverageRating = (rating) => async (dispatch) => {
+
     await axios.get(`${baseUrl}/api/restaurants/rating`, 
-    {headers: {rating: rating}}).then(
+        {headers: {rating: rating}})
+    .then(
         (response) => {
             dispatch ({
                 type: GET_RESTAURANT_BY_AVERAGE_RATING,
@@ -87,15 +98,19 @@ export const getRestaurantByAverageRating = (rating) => async (dispatch) => {
                 type: ERROR,
                 payload: error.error,
             });
-        },
-    ).catch(error => {
+        }
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };
 
-export const createRestaurant = ({restaurantName, restaurantAddress, restaurantPhone, restaurantEmail, restaurantDescription, openingHoursRestaurant, closingHoursRestaurant , restaurantImages, restaurantCapacity, token}) => async (dispatch) => {    
+export const createRestaurant = ({restaurantName, restaurantAddress, restaurantPhone, restaurantEmail, restaurantDescription, openingHoursRestaurant, closingHoursRestaurant , restaurantImages, restaurantCapacity, token}) => async (dispatch) => {
+
     const images = Array.isArray(restaurantImages) ? restaurantImages : [restaurantImages];
-    await axios.post(`${baseUrl}/api/restaurants`, {
+
+    await axios.post(`${baseUrl}/api/restaurants`, 
+        {
             restaurantName, 
             restaurantAddress, 
             restaurantPhone, 
@@ -106,7 +121,9 @@ export const createRestaurant = ({restaurantName, restaurantAddress, restaurantP
             restaurantImages: images, 
             restaurantCapacity
         }, 
-        {headers: {"Authorization": "Bearer " + token}}).then(
+        {headers: {"Authorization": "Bearer " + token}}
+    )
+    .then(
         (response) => {
             dispatch({
                 type: CREATE_RESTAURANT,
@@ -119,14 +136,17 @@ export const createRestaurant = ({restaurantName, restaurantAddress, restaurantP
                 payload: error.error,
             });
         },
-    ).catch(error => {
-        console.error("Error en la solicitud", error);
+    )
+    .catch(error => {
+    console.error("Error en la solicitud", error);
     });
 };
 
 export const getRestoByUser = ({token}) => async (dispatch) => {
     
-    await axios.get(`${baseUrl}/api/restaurants/list`, {headers: {"Authorization": "Bearer " + token}}).then(
+    await axios.get(`${baseUrl}/api/restaurants/list`, 
+        {headers: {"Authorization": "Bearer " + token}})
+    .then(
         (response) => {
             dispatch ({
                 type: GET_RESTAURANT_BY_USER,
@@ -139,14 +159,19 @@ export const getRestoByUser = ({token}) => async (dispatch) => {
                 payload: error.error,
             });
         },
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 };
 
 export const editRestaurant = ({data, id, token}) => async (dispatch) => {
     
-    await axios.put(`${baseUrl}/api/restaurants/${id}`, data, {headers: {"Authorization" : "Bearer " + token}}).then(
+    await axios.put(`${baseUrl}/api/restaurants/${id}`, 
+        data, 
+        {headers: {"Authorization" : "Bearer " + token}}
+    )
+    .then(
         (response) => {
             dispatch ({
                 type: EDIT_RESTAURANT,
@@ -159,14 +184,17 @@ export const editRestaurant = ({data, id, token}) => async (dispatch) => {
                 payload: error.error,
             });
         },
-        ).catch(error => {
-            console.error("Error en la solicitud", error);
-        });
+    )
+    .catch(error => {
+        console.error("Error en la solicitud", error);
+    });
 };
 
 export const deleteRestaurant = ({id, token}) => async (dispatch) => {
 
-    await axios.delete(`${baseUrl}/api/restaurants/${id}`, {headers: {"Authorization" : "Bearer " + token}}).then(
+    await axios.delete(`${baseUrl}/api/restaurants/${id}`, 
+        {headers: {"Authorization" : "Bearer " + token}})
+    .then(
         (response) => {
             dispatch({
                 type: DELETE_RESTAURANT,
@@ -179,16 +207,20 @@ export const deleteRestaurant = ({id, token}) => async (dispatch) => {
                 payload: error.error,
             });
         },
-        ).catch(error => {
-            console.error("Error en la solicitud", error);
-        });
+    )
+    .catch(error => {
+        console.error("Error en la solicitud", error);
+    });
 }
 
 export const editEnabledResto = ({id, enabled, token}) => async (dispatch) => {
     
     const restaurantDTO = { enabled };
-    await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, restaurantDTO, {headers: {"Authorization" : "Bearer " + token}}).then(
-        (response) => {
+        await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, 
+        restaurantDTO, 
+        {headers: {"Authorization" : "Bearer " + token}}
+    )
+    .then((response) => {
             dispatch({
                 type: EDIT_ENABLED_RESTAURANT,
                 payload: response.data,
@@ -200,7 +232,8 @@ export const editEnabledResto = ({id, enabled, token}) => async (dispatch) => {
                 payload: error.error,
             })
         }
-    ).catch(error => {
+    )
+    .catch(error => {
         console.error("Error en la solicitud", error);
     });
 }
