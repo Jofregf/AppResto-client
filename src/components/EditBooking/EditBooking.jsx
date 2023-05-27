@@ -1,13 +1,11 @@
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useState, useCallback} from "react"
+import { useDispatch, useSelector } from "react-redux"
+import {useParams, useNavigate} from "react-router-dom"
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams, Link} from "react-router-dom";
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import {updateBookingUser} from "../../redux/actions/bookingActions";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import Cookies from "universal-cookie";
-import { createBooking } from "../../redux/actions/bookingActions";
-import { Modal } from "react-bootstrap";
-
 
 const formSchema = Yup.object().shape({
     bookingDate: Yup.date().required('Ingresa una fecha válida'),
@@ -20,52 +18,52 @@ const formSchema = Yup.object().shape({
         .min(2, "Mínimo 2 personas"),
 });
 
-
-function CreateBooking(){
-
-    const formOptions = { resolver: yupResolver(formSchema) };
-
-    const { register, formState: { errors }, handleSubmit, reset } = useForm(formOptions);
+function EditBooking(){
 
     const dispatch = useDispatch();
-
-    const navigate = useNavigate();
-
-    const {id} = useParams();
-    
-    const [modal, setModal] = useState("");
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const handleModal = () => {
-        navigate(`/restaurantes/${id}`)
-    }
-
-    const modalDelete = (data) => {
-        setModal(data);
-        handleShow();
-    }
-
     let cookie = new Cookies();
-    const tokenUser = cookie.get("user")?.accessToken;
+    let tokenUser = cookie.get("user")?.accessToken;
+    const bookingsData = useSelector((state) => state.bookings.bookings);
+    const navigate = useNavigate();
+    const {id} = useParams();
+    const booking = bookingsData.filter( book => book.bookingId === id)
 
+    const [preloadedValues, setPreloadedValues] = useState({
+        bookingDate: booking[0]?.bookingDate || "",
+        bookingTime: booking[0]?.bookingTime || "",
+        bookingPartySize: booking[0]?.bookingPartySize || "",
+    });
+
+    const formOptions = { resolver: yupResolver(formSchema), defaultValues: preloadedValues };
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
+    
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmitCallback = useCallback(
+        (data) => {
+            dispatch(updateBookingUser({token: tokenUser, idBooking:id, data}));
+            setTimeout(() => {
+                navigate(`/reservas`);
+            }, 1000);
+        },[dispatch, id, tokenUser, navigate]
+    );
+    
     const onSubmit = (data) => {
-        dispatch(createBooking({ ...data, token: tokenUser, id: id}));
-        setTimeout(() => {
-            modalDelete("Reserva realizada")
-        }, 1100)
+        handleSubmitCallback && handleSubmitCallback(data);
+        setIsSubmitting(true);
+    };
+
+    const handleCancel = () => {
+        navigate("/reservas");
     }
 
     return (
-        
-            <div className="container-register-form-admin">
+        <div>
+            <div className="container-register-form">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="container-index">
                         <div className="form-container">
-                            <div className="title">Reserva</div>
-                            <p className="register-subtitle">(* campos requeridos)</p>
+                            <div className="title">Editar reserva</div>
                             <div className="form-group-one">
                                 <div className="labelAndInput">
                                     <label className="input-label">*Fecha: </label>
@@ -73,6 +71,7 @@ function CreateBooking(){
                                         className="input-register"
                                         type="date"
                                         name="bookingDate"
+                                        defaultValue={preloadedValues.bookingDate}
                                         {...register("bookingDate")}
                                     />
                                     {<div className="form-register-errors">{errors.bookingDate?.message}</div>}
@@ -83,8 +82,9 @@ function CreateBooking(){
                                         className="input-register"
                                         type="text"
                                         name="bookingTime"
+                                        defaultValue={preloadedValues.bookingTime}
                                         {...register("bookingTime")}
-                                        />
+                                    />
                                     {<div className="form-register-errors">{errors.bookingTime?.message}</div>}
                                 </div>
                                 <div className="labelAndInput">
@@ -93,46 +93,26 @@ function CreateBooking(){
                                         className="input-register"
                                         type="number"
                                         name="bookingPartySize"
+                                        defaultValue={preloadedValues.bookingPartySize}
                                         {...register('bookingPartySize')}
                                     />
                                     {<div className="form-register-errors">{errors.bookingPartySize?.message}</div>}
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button
-                                    type="submit"
-                                    value="RESERVAR"
-                                    
-                                >RESERVAR</button>
-                            </div>
-                            <div>
-                                <Link to={`/resto`} style={{ textDecoration: 'none' }}>
-                                    <button className="button-card-admin-slim">
-                                    Cancelar
-                                    </button>
-                                </Link>
+                                <button type="submit" value="EDITAR RESERVA">
+                                    Editar Reserva
+                                </button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <Modal
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard="false"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Reserva Realizada!</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {modal}
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <button onClick={handleModal}>Continuar</button>
-                    </Modal.Footer>
-                </Modal>
+            <div>
+                    <button onClick={handleCancel}>Cancelar</button>
             </div>
-    )
+            </div>
+        </div>
+    );
 }
 
-export default CreateBooking;
+export default EditBooking;

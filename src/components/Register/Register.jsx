@@ -68,7 +68,7 @@ function Register() {
     }
 
     const handleModal = () => {
-        navigate("/restaurants")
+        navigate("/restaurantes")
     }
 
     const {register, formState: { errors }, handleSubmit, reset} = useForm(formOptions);

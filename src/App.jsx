@@ -18,6 +18,8 @@ import CreateMenu from "../src/components/RestoCreateMenu/CreateMenu";
 import EditMenu from "../src/components/EditMenu/EditMenu";
 import CreateBooking from "./components/CreateBooking/CreateBooking";
 import GetBookingUser from "./components/BookingUser/GetBookingsUser";
+import EditBooking from "./components/EditBooking/EditBooking";
+import GetBookingInactive from "./components/BookingInactive/GetBookingInactive";
 
 function App() {
   
@@ -41,7 +43,9 @@ function App() {
                     <Route path="/crear-menu/:id" element={<CreateMenu/>}/>
                     <Route path="/menu/:idMenu/restaurant/:id" element={<EditMenu/>}/>
                     <Route path="/restaurantes/:id/reserva" element={<CreateBooking/>}/>
-                    <Route path="/probar" element={<GetBookingUser/>}/>
+                    <Route path="/reservas" element={<GetBookingUser/>}/>
+                    <Route path="/reservas/:id" element={<EditBooking/>}/>
+                    <Route path="/probar-inactivos" element={<GetBookingInactive/>}/>
                 </Routes>
             </div>
             

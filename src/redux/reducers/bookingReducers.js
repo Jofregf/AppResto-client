@@ -1,6 +1,7 @@
 import {ERROR, 
     CREATE_BOOKING,
     GET_BOOKING_USER,
+    DELETE_BOOKING_USER,
 } from "../actions/bookingActions";
 
 const initialState = {
@@ -21,6 +22,9 @@ export default function bookingReducers(state = initialState, action) {
 
         case GET_BOOKING_USER:
             return {...state, bookings: action.payload};
+
+        case DELETE_BOOKING_USER:
+            return {...state, status: action.payload};
 
         default:
             return {...state};
