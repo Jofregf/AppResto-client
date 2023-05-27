@@ -35,6 +35,7 @@ function GetBookingUser(){
                     phone={book.restaurant.restaurantPhone}
                     booking={book}
                     />
+                    
                 ))}
                 {bookings.every((book) => !book.active) && (
                     <p>No hay reservas vigentes</p>

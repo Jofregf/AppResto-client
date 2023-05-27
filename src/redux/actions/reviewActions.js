@@ -4,6 +4,7 @@ import {baseUrl} from "./restaurantActions";
 export const ERROR = "ERROR";
 export const GET_REVIEWS_BY_RESTAURANT_ID = "GET_REVIEWS_BY_RESTAURANT_ID";
 export const CLEAR_REVIEWS = "CLEAR_REVIEWS";
+export const POST_REVIEW = "POST_REVIEW";
 
 export const getReviewsByRestaurantId = (id) => async (dispatch) => {
     
@@ -31,3 +32,30 @@ export const clearReviews = () => ({
     type: "CLEAR_REVIEWS",
 });
 
+export const postReview = ({ratingReview, commentReview, id, token}) => async (dispatch) => {
+
+    await axios.post(`${baseUrl}/api/reviews/restaurant/${id}`, 
+        {
+            ratingReview,
+            commentReview,
+        },
+        {headers: {"Authorization": "Bearer " + token}}
+    )
+    .then(
+        (response) => {
+            dispatch({
+                type: POST_REVIEW,
+                payload: response.data
+            })
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error
+            })
+        }
+    )
+    .catch(error => {
+        console.error("Error en la solicitud", error);
+    });
+};

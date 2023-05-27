@@ -1,4 +1,9 @@
-import {GET_REVIEWS_BY_RESTAURANT_ID, ERROR} from "../actions/reviewActions";
+import  {
+            GET_REVIEWS_BY_RESTAURANT_ID, 
+            ERROR,
+            POST_REVIEW,
+
+        } from "../actions/reviewActions";
 
 const initialState = {
     reviews : [],
@@ -19,6 +24,9 @@ export default function reviewReducers (state = initialState, action) {
         case "CLEAR_REVIEWS":
             return {...state, reviews: []};
 
+        case POST_REVIEW:
+            return { ...state, status: action.payload, review: action.payload };
+            
         default:
             return {...state};
     }

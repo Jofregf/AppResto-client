@@ -66,10 +66,13 @@ function RestoDetails() {
                 <p>No hay restaurantes disponibles</p>
                 </div>
             )}
+            
             <Review id={id}/>
+
             <Link to={`/menus/restaurantes/${id}`}>
                 <button>Ver menú</button>
             </Link>
+
             { cookieRole  === "ROLE_RESTO" ? (
                 <div>
                     <Link to="/resto">
