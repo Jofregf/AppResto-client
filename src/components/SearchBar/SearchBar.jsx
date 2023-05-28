@@ -44,7 +44,7 @@ function SearchBar(){
             <Form onSubmit={(event) => handleRatingSubmit(event)}>
                 <Form.Group controlId="formBasicRange">
                 <Form.Label>Ingrese un rating</Form.Label>
-                <Form.Range value={rating} onChange={(value) => handleInputRatingChange(value)} min={0} max={5} step={0.5} />
+                <Form.Range value={rating} onChange={(value) => handleInputRatingChange(value)} min={0} max={5} step={1} />
                 <Form.Label className="mt-2">Rating actual: {rating}</Form.Label>
                 </Form.Group>
                 <button type="submit">Buscar</button>

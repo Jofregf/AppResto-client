@@ -4,7 +4,7 @@ import {Link, useParams} from "react-router-dom"
 import {getRestaurantDetails} from "../../redux/actions/restaurantActions"
 import Review from "../Reviews/Reviews"
 import Cookie from "universal-cookie"
-
+import CardReview from "../CardReview/CardReview"
 
 
 function RestoDetails() {
@@ -59,6 +59,7 @@ function RestoDetails() {
                         ) : (
                             <div>No hay imagenes disponibles</div>
                         )}
+                        
                     </div>
                 ))
             ) : (
@@ -66,9 +67,10 @@ function RestoDetails() {
                 <p>No hay restaurantes disponibles</p>
                 </div>
             )}
-            
-            <Review id={id}/>
 
+            <Review id={id}/>
+            
+            
             <Link to={`/menus/restaurantes/${id}`}>
                 <button>Ver menú</button>
             </Link>

@@ -26,7 +26,7 @@ export default function reviewReducers (state = initialState, action) {
 
         case POST_REVIEW:
             return { ...state, status: action.payload, review: action.payload };
-            
+
         default:
             return {...state};
     }

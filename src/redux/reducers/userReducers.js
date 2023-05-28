@@ -44,7 +44,6 @@ function userReducer(state = initialState, action) {
             return {...state, user: action.payload};
 
         case EDIT_USER:
-            console.log(state, "REDUCER EDIT")
             return {...state, status: action.payload};
 
         default:

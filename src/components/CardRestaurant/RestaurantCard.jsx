@@ -18,11 +18,11 @@ function RestaurantCard({id, name, image, address, phone, email, rating}) {
                     <p>{email}</p>
                     {
                     rating === 0 ? <><span>Sin reseñas</span> </>:
-                    rating === 1 ? <span className="star"> <AiFillStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/> </span>:
-                    rating === 2 ? <span className="star"> <AiFillStar/><AiFillStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/> </span>:
-                    rating === 3 ? <span className="star"> <AiFillStar/><AiFillStar/><AiFillStar/><AiOutlineStar/><AiOutlineStar/> </span>:
-                    rating === 4 ? <span className="star"> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiOutlineStar/> </span>:
-                    rating === 5 ? <span className="star"> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/> </span>:
+                    rating === 1 ? <span className="starShow"> <AiFillStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/> </span>:
+                    rating === 2 ? <span className="starShow"> <AiFillStar/><AiFillStar/><AiOutlineStar/><AiOutlineStar/><AiOutlineStar/> </span>:
+                    rating === 3 ? <span className="starShow"> <AiFillStar/><AiFillStar/><AiFillStar/><AiOutlineStar/><AiOutlineStar/> </span>:
+                    rating === 4 ? <span className="starShow"> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiOutlineStar/> </span>:
+                    rating === 5 ? <span className="starShow"> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/> </span>:
                     null
                     }
                 </Link>

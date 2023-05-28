@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom";
 import {getReviewsByRestaurantId, clearReviews} from "../../redux/actions/reviewActions";
 import {AiFillStar, AiOutlineStar} from "react-icons/ai"
+import CardReview from "../CardReview/CardReview";
+
 
 function Review(){
 
@@ -30,9 +32,9 @@ function Review(){
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             if (i <= rating) {
-                stars.push(<span className="star" key={i}><AiFillStar size={25}/></span>);
+                stars.push(<span className="starShow" key={i}><AiFillStar size={25}/></span>);
             } else {
-                stars.push(<span className="star" key={i}><AiOutlineStar size={25}/></span>);
+                stars.push(<span className="starShow" key={i}><AiOutlineStar size={25}/></span>);
             }
         }
         return <div>{stars}</div>;
@@ -51,10 +53,8 @@ function Review(){
                 ) : (
                 <div>No hay reseñas</div>
             )}
+            <CardReview idResto={id}/>
         </div>
     )
 }
-
 export default Review;
-
-// Los reviews deberían aparecer para hacer en los bookings de cada usuario, que luego de ir al resto hagan la review!!!!

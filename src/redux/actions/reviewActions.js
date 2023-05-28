@@ -33,7 +33,7 @@ export const clearReviews = () => ({
 });
 
 export const postReview = ({ratingReview, commentReview, id, token}) => async (dispatch) => {
-
+    
     await axios.post(`${baseUrl}/api/reviews/restaurant/${id}`, 
         {
             ratingReview,

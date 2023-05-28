@@ -46,14 +46,15 @@ button {
   background-color: #F15422;
   cursor: pointer;
   transition: border-color 0.25s;
-}
+} 
+
 button:hover {
   border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} 
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -68,6 +69,29 @@ button:focus-visible {
   }
 }
 
+.star-rating {
+  display: inline-block;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
 .star {
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.star-button.on .star,
+.star-button.off .star:hover {
+  color: #F15422;
+
+}
+
+.starShow{
   color: #F15422;
 }
