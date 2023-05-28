@@ -1,22 +1,21 @@
 import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {useParams} from "react-router-dom";
 import {getReviewsByRestaurantId, clearReviews} from "../../redux/actions/reviewActions";
 import {AiFillStar, AiOutlineStar} from "react-icons/ai"
 import CardReview from "../CardReview/CardReview";
 
 
-function Review(){
+function Review({idResto}){
 
-    const { id } = useParams();
     const dispatch = useDispatch();
     
+    console.log(idResto)
 
     useEffect(() => {
         dispatch(clearReviews()),
-        dispatch(getReviewsByRestaurantId(id))
+        dispatch(getReviewsByRestaurantId(idResto))
 
-    }, [dispatch, id]);
+    }, [dispatch, idResto]);
 
     const reviewsState = useSelector((state) => {
         return Array.isArray(state.reviews.reviews)
@@ -53,8 +52,9 @@ function Review(){
                 ) : (
                 <div>No hay reseñas</div>
             )}
-            <CardReview idResto={id}/>
+            <CardReview idResto={idResto}/>
         </div>
     )
+    
 }
 export default Review;

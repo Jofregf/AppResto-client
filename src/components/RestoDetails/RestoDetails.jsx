@@ -4,7 +4,6 @@ import {Link, useParams} from "react-router-dom"
 import {getRestaurantDetails} from "../../redux/actions/restaurantActions"
 import Review from "../Reviews/Reviews"
 import Cookie from "universal-cookie"
-import CardReview from "../CardReview/CardReview"
 
 
 function RestoDetails() {
@@ -68,7 +67,7 @@ function RestoDetails() {
                 </div>
             )}
 
-            <Review id={id}/>
+            <Review idResto={id}/>
             
             
             <Link to={`/menus/restaurantes/${id}`}>
