@@ -12,6 +12,7 @@ import Cookies from "universal-cookie";
 import CreateRestaurant from "../CreateRestaurant/CreateRestaurant";
 import EditRestaurant from "../EditRestaurant/EditRestaurant";
 import RestoGetRestaurants from "../RestoGetRestaurants/RestoGetRestaurants";
+import SearchBookings from '../RestoSearchBookings/SearchBookings';
 
 
 function RestoHome(){
@@ -33,7 +34,7 @@ function RestoHome(){
         setRestoSend(restaurant)
         setState("restos")
     }
-
+    
     const handleHome = () => {
         setState("")
     }

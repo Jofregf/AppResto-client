@@ -5,7 +5,9 @@ export const CREATE_BOOKING = "CREATE_BOOKING";
 export const ERROR = "ERROR";
 export const GET_BOOKING_USER = "GET_BOOKING_USER";
 export const UPDATE_BOOKING_USER = "UPDATE_BOOKING_USER";
-export const DELETE_BOOKING_USER = "DELETE_BOOKING_USER"
+export const DELETE_BOOKING_USER = "DELETE_BOOKING_USER";
+export const FIND_BOOKINGS_BY_RESTAURANT_NAME = "FIND_BOOKING_BY_RESTAURANT_NAME";
+export const FIND_BOOKING_BY_DATE = "FIND_BOOKING_BY_DATE";
 
 export const createBooking = ({bookingDate, bookingTime, bookingPartySize, id, token}) => async (dispatch) => {
     
@@ -104,3 +106,42 @@ export const deleteBooking = ({idBooking, token}) => async (dispatch) => {
         console.error("Error en la solicitud", error)
     })
 }
+
+
+export const findBookingsByRestaurantName = ({ name, token }) => async (dispatch) => {
+    
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings`, {
+            headers: { 'Authorization': 'Bearer ' + token },
+        });
+        
+        dispatch({
+            type: FIND_BOOKINGS_BY_RESTAURANT_NAME,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || 'Error en la solicitud',
+        });
+    }
+};
+
+export const findBookingByDate = ({name, date, token}) => async (dispatch) => {
+    
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings/${date}`, {
+            headers: { 'Authorization': 'Bearer ' + token },
+        });
+
+        dispatch({
+            type: FIND_BOOKING_BY_DATE,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || 'Error en la solicitud',
+        });
+    }
+};

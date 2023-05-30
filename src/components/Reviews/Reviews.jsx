@@ -9,8 +9,6 @@ function Review({idResto}){
 
     const dispatch = useDispatch();
     
-    console.log(idResto)
-
     useEffect(() => {
         dispatch(clearReviews()),
         dispatch(getReviewsByRestaurantId(idResto))

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import RestoCardRestaurants from "../RestoCardRestaurants/RestoCardRestaurants";
 import {getRestoByUser} from "../../redux/actions/restaurantActions";
+import SearchBookings from "../RestoSearchBookings/SearchBookings";
 
 function RestoGetRestaurants({activeDrawer, receiveRestaurant, tokenUser}){
 
@@ -41,23 +42,27 @@ function RestoGetRestaurants({activeDrawer, receiveRestaurant, tokenUser}){
                     ?   <div>
                             {searchRestoview.length 
                                 ?   <div>
-                                        {searchRestoview.reverse()?.map( (resto, i) => 
-                                            <RestoCardRestaurants 
-                                                key = {i}
-                                                name= {resto.restaurantName}
-                                                address= {resto.restaurantAddress}
-                                                phone= {resto.restaurantPhone}
-                                                email= {resto.restaurantEmail}
-                                                description= {resto.restaurantDescription}
-                                                capacity= {resto.restaurantCapacity}
-                                                open = {resto.openingHoursRestaurant}
-                                                close= {resto.closingHoursRestaurant}
-                                                image= {resto.restaurantImages}
-                                                activeDrawer= {activeDrawer}
-                                                id= {resto.restaurantId}
-                                                restaurante= {resto}
-                                                receiveRestaurant= {receiveRestaurant}
-                                            />
+                                        {searchRestoview.reverse()?.map( (resto, i) =>
+                                            <React.Fragment key={i}>
+                                                <SearchBookings name = {resto.restaurantName} tokenUser={tokenUser}/>
+                                                <RestoCardRestaurants 
+                                                    key = {i}
+                                                    name= {resto.restaurantName}
+                                                    address= {resto.restaurantAddress}
+                                                    phone= {resto.restaurantPhone}
+                                                    email= {resto.restaurantEmail}
+                                                    description= {resto.restaurantDescription}
+                                                    capacity= {resto.restaurantCapacity}
+                                                    open = {resto.openingHoursRestaurant}
+                                                    close= {resto.closingHoursRestaurant}
+                                                    image= {resto.restaurantImages}
+                                                    activeDrawer= {activeDrawer}
+                                                    id= {resto.restaurantId}
+                                                    restaurante= {resto}
+                                                    receiveRestaurant= {receiveRestaurant}
+                                                />
+                                            </React.Fragment>
+                                            
                                         )}
                                     </div>
                                 :   <p className="text-no-products">No se encontraron Restaurantes con ese nombre</p>
@@ -67,8 +72,6 @@ function RestoGetRestaurants({activeDrawer, receiveRestaurant, tokenUser}){
                         : <p className="text-no-products">Loading...</p>
                     }
             </div>
-        
-
         </div>
     )
 }

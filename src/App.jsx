@@ -20,6 +20,7 @@ import CreateBooking from "./components/CreateBooking/CreateBooking";
 import GetBookingUser from "./components/BookingUser/GetBookingsUser";
 import EditBooking from "./components/EditBooking/EditBooking";
 import GetBookingInactive from "./components/BookingInactive/GetBookingInactive";
+import BookingResults from "./components/RestoBookingResults/BookingResults";
 
 function App() {
   
@@ -46,6 +47,7 @@ function App() {
                     <Route path="/reservas" element={<GetBookingUser/>}/>
                     <Route path="/reservas/:id" element={<EditBooking/>}/>
                     <Route path="/probar-inactivos" element={<GetBookingInactive/>}/>
+                    <Route path="/restaurante/:name/reservas" element={<BookingResults/>}/>
                 </Routes>
             </div>
             

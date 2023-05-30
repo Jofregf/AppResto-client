@@ -34,6 +34,15 @@ function RestoDetails() {
 
     return (
         <div>
+            { cookieRole  === "ROLE_RESTO" ? (
+                <div>
+                    <Link to="/resto">
+                        <button>RESTO PANEL</button>
+                    </Link>
+                </div>
+            ) : (
+                null
+            )}
             {detailsState && detailsState.length > 0 ? (
                 detailsState.map((detail) => (
                     <div key={detail.restaurantId}>
@@ -74,19 +83,12 @@ function RestoDetails() {
                 <button>Ver menú</button>
             </Link>
 
-            { cookieRole  === "ROLE_RESTO" ? (
-                <div>
-                    <Link to="/resto">
-                        <button>RESTO PANEL</button>
-                    </Link>
-                </div>
-            ) : (
-                <div>
-                    <Link to="/restaurantes">
-                        <button>Inicio</button>
-                    </Link>
-                </div>
-            )}
+            <div>
+                <Link to="/restaurantes">
+                    <button>Inicio</button>
+                </Link>
+            </div>
+
             <Link to={`/restaurantes/${id}/reserva`}>
                 <button>Reservar</button>
             </Link>
