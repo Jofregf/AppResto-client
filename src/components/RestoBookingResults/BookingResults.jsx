@@ -29,7 +29,6 @@ function BookingResults() {
                 </Link>
             </div>
         </div>
-      
     );
 }
 
