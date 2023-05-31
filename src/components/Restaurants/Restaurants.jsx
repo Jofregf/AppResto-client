@@ -26,7 +26,7 @@ function Restaurants(){
         : restaurantState.restaurants[0]?.contents || [];
 
     const status = restaurantState.status;
-    
+
     useEffect(() => {
         dispatch(getRestaurants());
     }, [dispatch]);

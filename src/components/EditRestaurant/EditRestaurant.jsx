@@ -36,6 +36,7 @@ const formSchema = Yup.object().shape({
         .min(10, "Completar campo"),
     restaurantImages: Yup.array()
         .required("Este campo es requerido")
+        .max(250, "Máximo 250 carácteres")
         .of(Yup.string()
             .matches(
                 RegExp(
@@ -56,8 +57,8 @@ const formSchema = Yup.object().shape({
         .matches(RegExp(/^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/), "Ingresar una hora válida en formato HH:mm:ss"),
 });
 
-function EditRestaurant({activeDrawer, handleHome, restaurante }){
-
+function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
+    console.log("ME LLAMO");
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
@@ -71,35 +72,42 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
         restaurantImages: restaurante?.restaurantImages,
         restaurantCapacity: restaurante?.restaurantCapacity,
         openingHoursRestaurant: restaurante?.openingHoursRestaurant,
-        closingHoursRestaurant: restaurante?.closingHoursRestaurant
+        closingHoursRestaurant: restaurante?.closingHoursRestaurant,
     });
-    
-    const [numImageFields, setNumImageFields] = useState(preloadedValues.restaurantImages.length);
-    const [imageUrls, setImageUrls] = useState(preloadedValues.restaurantImages);
 
-    const handleAddField = () => {
-        setNumImageFields(numImageFields + 1);
-        setImageUrls([...imageUrls, ""]);
-    };
+    const [imageUrls, setImageUrls] = useState(
+        preloadedValues.restaurantImages
+    );
+    const [numImageFields, setNumImageFields] = useState(
+        preloadedValues.restaurantImages.length
+    );
 
-    const handleRemoveField = (index) => {
-        setNumImageFields(numImageFields - 1);
-        const newImageUrls = [...imageUrls];
-        newImageUrls.splice(index, 1);
-        setImageUrls(newImageUrls);
-        setPreloadedValues({
-            ...preloadedValues,
-            restaurantImages: newImageUrls,
-            numImages: newImageUrls.length
-        });
+    const formOptions = {
+        resolver: yupResolver(formSchema),
+        defaultValues: preloadedValues,
     };
-    
-    const formOptions = { resolver: yupResolver(formSchema), defaultValues: preloadedValues };
-    const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
-    
-    useEffect(()=>{
-        dispatch(getRestoByUser({token: tokenUser}))
-    },[dispatch, tokenUser])
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm(formOptions);
+
+    useEffect(() => {
+        dispatch(getRestoByUser({ token: tokenUser }));
+    }, [dispatch, tokenUser]);
+
+    const handleSubmitCallback = useCallback(
+        (data) => {
+            dispatch(
+                editRestaurant({
+                    token: tokenUser,
+                    id: restaurante.restaurantId,
+                    data,
+                })
+            );
+        },
+        [dispatch, restaurante, tokenUser]
+    );
 
     useEffect(() => {
         setPreloadedValues({
@@ -111,18 +119,11 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
             restaurantImages: imageUrls,
             restaurantCapacity: restaurante?.restaurantCapacity,
             openingHoursRestaurant: restaurante?.openingHoursRestaurant,
-            closingHoursRestaurant: restaurante?.closingHoursRestaurant
+            closingHoursRestaurant: restaurante?.closingHoursRestaurant,
         });
     }, [restaurante, imageUrls]);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmitCallback = useCallback(
-        (data) => {
-            dispatch(editRestaurant({token: tokenUser, id:restaurante.restaurantId, data}));
-        },
-        [dispatch, restaurante, tokenUser]
-    );
 
     useEffect(() => {
         if (isSubmitting) {
@@ -130,163 +131,282 @@ function EditRestaurant({activeDrawer, handleHome, restaurante }){
             setIsSubmitting(false);
         }
     }, [preloadedValues, handleSubmitCallback, isSubmitting]);
-    
+
     const onSubmit = (data) => {
-        handleSubmitCallback && handleSubmitCallback(data);
-        setIsSubmitting(true);
-        setTimeout(() => {
-            handleHome();
-            activeDrawer();
-        }, 500)
+        handleSubmit((data) => {
+            dispatch(
+                editRestaurant({
+                    token: tokenUser,
+                    id: restaurante.restaurantId,
+                    data,
+                })
+            );
+            setIsSubmitting(true);
+            setTimeout(() => {
+                handleHome();
+                activeDrawer();
+                dispatch(getRestoByUser({ token: tokenUser }));
+            }, 500);
+        })(data);
+    };
+    const handleAddField = () => {
+        setNumImageFields((prevNumFields) => prevNumFields + 1);
+        setImageUrls((prevImageUrls) => [...prevImageUrls, ""]);
     };
 
     return (
         <div className="container-register-form">
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="container-index">
-                <div className="form-container">
-                    <div className="title">Editar restaurante</div>
-                    <div className="form-group-one">
-                        <div className="labelAndInput">
-                            <label className="input-label">*Nombre: </label>
-                            <input
-                                className="input-register"
-                                type="text"
-                                name="restaurantName"
-                                value={restaurante?.restaurantName}
-                                {...register("restaurantName")}
-                            />
-                            {<div className="form-register-errors">{errors.restaurantName?.message}</div>}
-                        </div>
-                        <div className="labelAndInput">
-                            <label className="input-label">*Dirección: </label>
-                            <input
-                                className="input-register"
-                                type="text"
-                                name="restaurantAddress"
-                                {...register("restaurantAddress")}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="container-index">
+                    <div className="form-container">
+                        <div className="title">Editar restaurante</div>
+                        <div className="form-group-one">
+                            <div className="labelAndInput">
+                                <label className="input-label">*Nombre: </label>
+                                <input
+                                    className="input-register"
+                                    type="text"
+                                    name="restaurantName"
+                                    defaultValue={
+                                        preloadedValues.restaurantName
+                                    }
+                                    {...register("restaurantName")}
                                 />
-                            {<div className="form-register-errors">{errors.restaurantAddress?.message}</div>}
-                        </div>
-                        <div className="labelAndInput">
-                            <label className="input-label">*Teléfono: </label>
-                            <input
-                                className="input-register"
-                                type="text"
-                                name="restaurantPhone"
-                                {...register("restaurantPhone")}
-                            />
-                            {<div className="form-register-errors">{errors.restaurantPhone?.message}</div>}
-                        </div>
-                        <div className="input-small">
-                            <div className="labelAndInput-small">
-                                <label className="input-label">*Email: </label>
+                                {
+                                    <div className="form-register-errors">
+                                        {errors.restaurantName?.message}
+                                    </div>
+                                }
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">
+                                    *Dirección:{" "}
+                                </label>
                                 <input
                                     className="input-register"
                                     type="text"
-                                    name="restaurantEmail"
-                                    {...register("restaurantEmail")}
-                                    />
-                                {<div className="form-register-errors">{errors.restaurantEmail?.message}</div>}
-                            </div>
-                        </div>
-                        <div className="labelAndInput">
-                            <label className="input-label">*Descripción: </label>
-                            <input
-                                className="input-register"
-                                type="text"
-                                name="restaurantDescription"
-                                {...register("restaurantDescription")}
-                            />
-                            {<div className="form-register-errors">{errors.restaurantDescription?.message}</div>}
-                        </div>
-                        <div >
-                    <div >
-                        <label >*Imágenes: </label>
-                        {imageUrls && imageUrls.map((image, index) => (
-                            <div key={`restaurantImages[${index}]`}>
-                                <input
-                                    
-                                    type="text"
-                                    name={`restaurantImages[${index}]`}
-                                    {...register(`restaurantImages[${index}]`)}
-                                    value={image}
-                                    onChange={(e) => {
-                                        const newImageUrls = [...imageUrls];
-                                        newImageUrls[index] = e.target.value;
-                                        setImageUrls(newImageUrls);
-                                    }}
+                                    name="restaurantAddress"
+                                    defaultValue={
+                                        preloadedValues.restaurantAddress
+                                    }
+                                    {...register("restaurantAddress")}
                                 />
-                                {index !== 0 && (
-                                    <button type="button" onClick={() => handleRemoveField(index)}><FaMinus /></button>
-                                )}
-                                {errors.restaurantImages?.[index] && (
-                                    <span>{errors.restaurantImages[index].message}</span>
-                                )}
+                                {
+                                    <div className="form-register-errors">
+                                        {errors.restaurantAddress?.message}
+                                    </div>
+                                }
                             </div>
-                        ))}
-                        <button type="button" onClick={handleAddField}><FaPlus /></button>
-                    </div>
-                    </div>
-                        <div className="input-small">
-                            <div className="labelAndInput-small">
-                                <label className="input-label">*Capacidad: </label>
-                                <input
-                                    className="input-register"
-                                    type="number"
-                                    name="restaurantCapacity"
-                                    {...register("restaurantCapacity")}
-                                    />
-                                {<div className="form-register-errors">{errors.restaurantCapacity?.message}</div>}
-                            </div>
-                            
-                        </div>
-                        <div className="input-small">
-                            <div className="labelAndInput-small">
-                                <label className="input-label">*Horario apertura: </label>
+                            <div className="labelAndInput">
+                                <label className="input-label">
+                                    *Teléfono:{" "}
+                                </label>
                                 <input
                                     className="input-register"
                                     type="text"
-                                    name="openingHoursRestaurant"
-                                    {...register("openingHoursRestaurant")}
-                                    />
-                                {<div className="form-register-errors">{errors.openingHoursRestaurant?.message}</div>}
+                                    name="restaurantPhone"
+                                    defaultValue={
+                                        preloadedValues.restaurantPhone
+                                    }
+                                    {...register("restaurantPhone")}
+                                />
+                                {
+                                    <div className="form-register-errors">
+                                        {errors.restaurantPhone?.message}
+                                    </div>
+                                }
                             </div>
-                            
-                        </div>
-                        <div className="input-small">
-                            <div className="labelAndInput-small">
-                                <label className="input-label">*Horario cierre: </label>
+                            <div className="input-small">
+                                <div className="labelAndInput-small">
+                                    <label className="input-label">
+                                        *Email:{" "}
+                                    </label>
+                                    <input
+                                        className="input-register"
+                                        type="text"
+                                        name="restaurantEmail"
+                                        defaultValue={
+                                            preloadedValues.restaurantEmail
+                                        }
+                                        {...register("restaurantEmail")}
+                                    />
+                                    {
+                                        <div className="form-register-errors">
+                                            {errors.restaurantEmail?.message}
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">
+                                    *Descripción:{" "}
+                                </label>
                                 <input
                                     className="input-register"
                                     type="text"
-                                    name="closingHoursRestaurant"
-                                    {...register("closingHoursRestaurant")}
-                                    />
-                                {<div className="form-register-errors">{errors.closingHoursRestaurant?.message}</div>}
+                                    name="restaurantDescription"
+                                    defaultValue={
+                                        preloadedValues.restaurantDescription
+                                    }
+                                    {...register("restaurantDescription")}
+                                />
+                                {
+                                    <div className="form-register-errors">
+                                        {errors.restaurantDescription?.message}
+                                    </div>
+                                }
                             </div>
-                            
+                            <div>
+                                <div>
+                                    <label>*Imágenes: </label>
+                                    {imageUrls &&
+                                        imageUrls.map((image, index) => (
+                                            <div
+                                                key={`restaurantImages[${index}]`}
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name={`restaurantImages[${index}]`}
+                                                    defaultValue={image}
+                                                    {...register(
+                                                        `restaurantImages[${index}]`
+                                                    )}
+                                                    onChange={(e) => {
+                                                        const newImageUrls = [
+                                                            ...imageUrls,
+                                                        ];
+                                                        newImageUrls[index] =
+                                                            e.target.value;
+                                                        setImageUrls(
+                                                            newImageUrls
+                                                        );
+                                                    }}
+                                                />
+                                                {index !== 0 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            setImageUrls(
+                                                                (prevUrls) =>
+                                                                    prevUrls.filter(
+                                                                        (
+                                                                            _,
+                                                                            i
+                                                                        ) =>
+                                                                            i !==
+                                                                            index
+                                                                    )
+                                                            )
+                                                        }
+                                                    >
+                                                        <FaMinus />
+                                                    </button>
+                                                )}
+                                                {errors.restaurantImages?.[
+                                                    index
+                                                ] && (
+                                                    <span>
+                                                        {
+                                                            errors
+                                                                .restaurantImages[
+                                                                index
+                                                            ].message
+                                                        }
+                                                    </span>
+                                                )}
+                                            </div>
+                                        ))}
+                                    <button
+                                        type="button"
+                                        onClick={handleAddField}
+                                    >
+                                        <FaPlus />
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="input-small">
+                                <div className="labelAndInput-small">
+                                    <label className="input-label">
+                                        *Capacidad:{" "}
+                                    </label>
+                                    <input
+                                        className="input-register"
+                                        type="number"
+                                        name="restaurantCapacity"
+                                        defaultValue={
+                                            preloadedValues.restaurantCapacity
+                                        }
+                                        {...register("restaurantCapacity")}
+                                    />
+                                    {
+                                        <div className="form-register-errors">
+                                            {errors.restaurantCapacity?.message}
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="input-small">
+                                <div className="labelAndInput-small">
+                                    <label className="input-label">
+                                        *Horario apertura:{" "}
+                                    </label>
+                                    <input
+                                        className="input-register"
+                                        type="text"
+                                        name="openingHoursRestaurant"
+                                        defaultValue={
+                                            preloadedValues.openingHoursRestaurant
+                                        }
+                                        {...register("openingHoursRestaurant")}
+                                    />
+                                    {
+                                        <div className="form-register-errors">
+                                            {
+                                                errors.openingHoursRestaurant
+                                                    ?.message
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="input-small">
+                                <div className="labelAndInput-small">
+                                    <label className="input-label">
+                                        *Horario cierre:{" "}
+                                    </label>
+                                    <input
+                                        className="input-register"
+                                        type="text"
+                                        name="closingHoursRestaurant"
+                                        defaultValue={
+                                            preloadedValues.closingHoursRestaurant
+                                        }
+                                        {...register("closingHoursRestaurant")}
+                                    />
+                                    {
+                                        <div className="form-register-errors">
+                                            {
+                                                errors.closingHoursRestaurant
+                                                    ?.message
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                                        
-                    <div className="form-submit">
-                        <button
-                            type="submit"
-                            value="EDITAR RESTAURANTE"
-                        >
-                            Editar Restaurante
-                        </button>
-                    </div>
-                    <div>
-                        <button href="/resto">
-                            Cancelar
-                        </button>
+                        <div className="form-submit">
+                            <button type="submit" value="EDITAR RESTAURANTE">
+                                Editar Restaurante
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={handleHome}>Cancelar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
-    )
+            </form>
+        </div>
+    );
 }
 
 export default EditRestaurant;

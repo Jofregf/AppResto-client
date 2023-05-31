@@ -13,6 +13,7 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
+    const [deleted, setDeleted] = useState(false); // Estado para controlar el borrado
 
     const handleEdit = (event) => {
         event.preventDefault();
@@ -38,8 +39,15 @@ function RestoCardRestaurants({name, address, phone, email, description, capacit
   }
 
   const handleConfirmDelete = () => {
-        handleClose();
-        dispatch(deleteRestaurant({token: tokenUser, id:restaurante.restaurantId}));
+    handleClose();
+    dispatch(deleteRestaurant({ token: tokenUser, id: restaurante.restaurantId }))
+      .then(() => {
+        setDeleted(true);
+      });
+  }
+
+  if (deleted) {
+    return null;
   }
 
     return (

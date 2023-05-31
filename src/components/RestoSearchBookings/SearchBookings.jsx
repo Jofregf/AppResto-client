@@ -11,7 +11,6 @@ function SearchBookings({name, tokenUser}){
     const bookings = useSelector((state) => state.bookings.bookings)
     const navigate = useNavigate();
     const [bookingResults, setBookingResults] = useState(null);
-    console.log(bookings, "bookings")
 
     function handleInputDateChange(event) {
         event.preventDefault();

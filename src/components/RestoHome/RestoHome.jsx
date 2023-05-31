@@ -56,7 +56,7 @@ function RestoHome(){
             <div>
                 {
                     state === "" ? <RestoGetRestaurants receiveRestaurant={receiveRestaurant} activeDrawer={activeDrawer} tokenUser={tokenUser}/>
-                    : state === "restos" ? <EditRestaurant restaurante={restoSend} handleHome={handleHome} activeDrawer={activeDrawer} /> 
+                    : state === "restos" ? <EditRestaurant restaurante={restoSend} handleHome={handleHome} activeDrawer={activeDrawer} console={console.log("me renderizo??")} /> 
                     : state === "crear" ? <CreateRestaurant handleHome={handleHome} />
                     // : state === "mi cuenta" ? <AdminDetail />
                     : null

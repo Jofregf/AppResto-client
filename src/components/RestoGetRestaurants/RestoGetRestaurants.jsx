@@ -10,7 +10,6 @@ function RestoGetRestaurants({activeDrawer, receiveRestaurant, tokenUser}){
     const status = useSelector((state) => state.restaurants.status);
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
-
     useEffect(()=>{
         dispatch(getRestoByUser({token: tokenUser}))
     },[dispatch, status, tokenUser]);
