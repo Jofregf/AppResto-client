@@ -96,7 +96,7 @@ export const deleteBooking = ({idBooking, token}) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ERROR,
-            payload: error.response?.data?.message || 'Error en la solicitud',
+            payload: error.response?.data?.message || "Error en la solicitud",
         });
     }
 }
@@ -106,7 +106,7 @@ export const findBookingsByRestaurantName = ({ name, token }) => async (dispatch
     
     try {
         const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings`, 
-            {headers: { 'Authorization': 'Bearer ' + token }}
+            {headers: { "Authorization": "Bearer " + token }}
         );
         
         dispatch({
@@ -116,7 +116,7 @@ export const findBookingsByRestaurantName = ({ name, token }) => async (dispatch
     } catch (error) {
         dispatch({
             type: ERROR,
-            payload: error.response?.data?.message || 'Error en la solicitud',
+            payload: error.response?.data?.message || "Error en la solicitud",
         });
     }
 };
@@ -125,7 +125,7 @@ export const findBookingByDate = ({name, date, token}) => async (dispatch) => {
     
     try {
         const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings/${date}`, {
-            headers: { 'Authorization': 'Bearer ' + token },
+            headers: { "Authorization": "Bearer " + token },
         });
 
         dispatch({
@@ -135,7 +135,7 @@ export const findBookingByDate = ({name, date, token}) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: ERROR,
-            payload: error.response?.data?.message || 'Error en la solicitud',
+            payload: error.response?.data?.message || "Error en la solicitud",
         });
     }
 };

@@ -7,6 +7,8 @@ import {CREATE_USER,
         BAN_USER,
         GET_USER_BY_USERNAME_OR_EMAIL,
         EDIT_USER,
+        UPDATE_PASSWORD,
+        FORGOT_PASSWORD,
 
     } from "../actions/userActions";
 
@@ -44,6 +46,12 @@ function userReducer(state = initialState, action) {
             return {...state, user: action.payload};
 
         case EDIT_USER:
+            return {...state, status: action.payload};
+
+        case UPDATE_PASSWORD:
+            return {...state, status: action.payload};
+
+        case FORGOT_PASSWORD:
             return {...state, status: action.payload};
 
         default:
