@@ -17,223 +17,173 @@ export const baseUrl = "http://localhost:8080";
 
 export const getRestaurants = () => async (dispatch) => {
 
-    await axios.get(`${baseUrl}/api/restaurants`)
-    .then (
-        (response) => {
-            dispatch({
-                type: GET_RESTAURANTS,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud:", error);
-    });
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants`);
+        dispatch({
+            type: GET_RESTAURANTS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        });
+    }
 };
 
 export const getRestaurantDetails = (id) => async (dispatch) => {
 
-    await axios.get(`${baseUrl}/api/restaurants/${id}`)
-    .then(
-        (response) => {
-            dispatch({
-                type: GET_RESTAURANT_DETAILS,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud:", error);
-    });
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants/${id}`);
+        dispatch({
+            type: GET_RESTAURANT_DETAILS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        });
+    }
 };
 
 export const getRestaurantByMenuName = (menuName) => async (dispatch) => {
 
-    await axios.get(`${baseUrl}/api/search/menus/restaurants`,
-        {headers: {menuName : menuName}})
-    .then(
-        (response) => {
-            dispatch({
-                type: GET_RESTAURANT_BY_MENU_NAME,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud:", error);
-    });
+    try {
+        const response = await axios.get(`${baseUrl}/api/search/menus/restaurants`,
+            {headers: {menuName : menuName}}
+        );
+        dispatch({
+            type: GET_RESTAURANT_BY_MENU_NAME,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        });
+    }
 };
 
 export const getRestaurantByAverageRating = (rating) => async (dispatch) => {
 
-    await axios.get(`${baseUrl}/api/restaurants/rating`, 
-        {headers: {rating: rating}})
-    .then(
-        (response) => {
-            dispatch ({
-                type: GET_RESTAURANT_BY_AVERAGE_RATING,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch ({
-                type: ERROR,
-                payload: error.error,
-            });
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error);
-    });
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants/rating`, 
+            {headers: {rating: rating}}
+        );
+        dispatch ({
+            type: GET_RESTAURANT_BY_AVERAGE_RATING,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch ({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud"
+        });
+    }
 };
 
 export const createRestaurant = ({restaurantName, restaurantAddress, restaurantPhone, restaurantEmail, restaurantDescription, openingHoursRestaurant, closingHoursRestaurant , restaurantImages, restaurantCapacity, token}) => async (dispatch) => {
 
-    const images = Array.isArray(restaurantImages) ? restaurantImages : [restaurantImages];
-
-    await axios.post(`${baseUrl}/api/restaurants`, 
-        {
-            restaurantName, 
-            restaurantAddress, 
-            restaurantPhone, 
-            restaurantEmail, 
-            restaurantDescription, 
-            openingHoursRestaurant, 
-            closingHoursRestaurant , 
-            restaurantImages: images, 
-            restaurantCapacity
-        }, 
-        {headers: {"Authorization": "Bearer " + token}}
-    )
-    .then(
-        (response) => {
-            dispatch({
-                type: CREATE_RESTAURANT,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        },
-    )
-    .catch(error => {
-    console.error("Error en la solicitud", error);
-    });
+    try {
+        const images = Array.isArray(restaurantImages) ? restaurantImages : [restaurantImages];
+        const response = await axios.post(`${baseUrl}/api/restaurants`, 
+            {
+                restaurantName, 
+                restaurantAddress, 
+                restaurantPhone, 
+                restaurantEmail, 
+                restaurantDescription, 
+                openingHoursRestaurant, 
+                closingHoursRestaurant , 
+                restaurantImages: images, 
+                restaurantCapacity
+            }, 
+            {headers: {"Authorization": "Bearer " + token}}
+        );
+        dispatch({
+            type: CREATE_RESTAURANT,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud"
+        });
+    }
 };
 
 export const getRestoByUser = ({token}) => async (dispatch) => {
-    
-    await axios.get(`${baseUrl}/api/restaurants/list`, 
-        {headers: {"Authorization": "Bearer " + token}})
-    .then(
-        (response) => {
-            dispatch ({
-                type: GET_RESTAURANT_BY_USER,
-                payload: response.data,
-            })
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        },
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error);
-    });
+    try {
+        const response = await axios.get(`${baseUrl}/api/restaurants/list`, 
+            {headers: {"Authorization": "Bearer " + token}}
+        );
+        dispatch ({
+            type: GET_RESTAURANT_BY_USER,
+            payload: response.data,
+        })
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        })
+    }
 };
 
 export const editRestaurant = ({data, id, token}) => async (dispatch) => {
     
-    await axios.put(`${baseUrl}/api/restaurants/${id}`, 
-        data, 
-        {headers: {"Authorization" : "Bearer " + token}}
-    )
-    .then(
-        (response) => {
-            dispatch ({
-                type: EDIT_RESTAURANT,
-                payload: response.data,
-            });
-        },
-        (error) => {
-            dispatch ({
-                type: ERROR,
-                payload: error.error,
-            });
-        },
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error);
-    });
+    try {
+        const response = await axios.put(`${baseUrl}/api/restaurants/${id}`, 
+            data, 
+            {headers: {"Authorization" : "Bearer " + token}}
+        );
+        dispatch ({
+            type: EDIT_RESTAURANT,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch ({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud"
+        });
+    }
 };
 
 export const deleteRestaurant = ({id, token}) => async (dispatch) => {
 
-    await axios.delete(`${baseUrl}/api/restaurants/${id}`, 
-        {headers: {"Authorization" : "Bearer " + token}})
-    .then(
-        (response) => {
-            dispatch({
-                type: DELETE_RESTAURANT,
-                payload: response.data
-            })
-        },
-        (error) => {
-            dispatch ({
-                type: ERROR,
-                payload: error.error,
-            });
-        },
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error);
-    });
-}
+    try {
+        const response = await axios.delete(`${baseUrl}/api/restaurants/${id}`, 
+            {headers: {"Authorization" : "Bearer " + token}}
+        );
+        dispatch({
+            type: DELETE_RESTAURANT,
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch ({
+            type: ERROR,
+            payload: error.error,
+        });
+    }
+};
 
 export const editEnabledResto = ({id, enabled, token}) => async (dispatch) => {
     
-    const restaurantDTO = { enabled };
-        await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, 
-        restaurantDTO, 
-        {headers: {"Authorization" : "Bearer " + token}}
-    )
-    .then((response) => {
-            dispatch({
-                type: EDIT_ENABLED_RESTAURANT,
-                payload: response.data,
-            })
-        },
-        (error) => {
-            dispatch({
-                type:ERROR,
-                payload: error.error,
-            })
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error);
-    });
-}
+    try {
+        const restaurantDTO = { enabled };
+        const response = await axios.put(`${baseUrl}/api/admin/restaurants/${id}`, 
+            restaurantDTO, 
+            {headers: {"Authorization" : "Bearer " + token}}
+        );
+        dispatch({
+            type: EDIT_ENABLED_RESTAURANT,
+            payload: response.data,
+        })
+    } catch (error) {
+        dispatch({
+            type:ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud"
+        })
+    }
+};
+

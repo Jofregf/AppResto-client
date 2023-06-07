@@ -93,6 +93,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
     } = useForm(formOptions);
 
     useEffect(() => {
+        console.log("dispatch useefect")
         dispatch(getRestoByUser({ token: tokenUser }));
     }, [dispatch, tokenUser]);
 
@@ -108,8 +109,9 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
         },
         [dispatch, restaurante, tokenUser]
     );
-
+    // ver el useeffect
     useEffect(() => {
+        console.log("preloadvalues useefect")
         setPreloadedValues({
             restaurantName: restaurante?.restaurantName,
             restaurantAddress: restaurante?.restaurantAddress,
@@ -126,6 +128,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
+        console.log("if useefect")
         if (isSubmitting) {
             handleSubmitCallback && handleSubmitCallback(preloadedValues);
             setIsSubmitting(false);

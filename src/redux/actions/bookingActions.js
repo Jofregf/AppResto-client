@@ -85,35 +85,29 @@ export const updateBookingUser = ({data, idBooking, token}) => async (dispatch) 
 
 export const deleteBooking = ({idBooking, token}) => async (dispatch) => {
 
-    await axios.delete(`${baseUrl}/api/bookings/${idBooking}`,
+    try {
+        const response = await axios.delete(`${baseUrl}/api/bookings/${idBooking}`,
         {headers: {"Authorization": "Bearer " + token}}
-    )
-    .then(
-        (response) => {
-            dispatch({
-                type: DELETE_BOOKING_USER,
-                payload: response.data,
-            })
-        },
-        (error) => {
-            dispatch({
-                type: ERROR,
-                payload: error.error,
-            });
-        }
-    )
-    .catch(error => {
-        console.error("Error en la solicitud", error)
-    })
+    );
+        dispatch({
+            type: DELETE_BOOKING_USER,
+            payload: response.data,
+        })
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || 'Error en la solicitud',
+        });
+    }
 }
 
 
 export const findBookingsByRestaurantName = ({ name, token }) => async (dispatch) => {
     
     try {
-        const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings`, {
-            headers: { 'Authorization': 'Bearer ' + token },
-        });
+        const response = await axios.get(`${baseUrl}/api/restaurants/${name}/bookings`, 
+            {headers: { 'Authorization': 'Bearer ' + token }}
+        );
         
         dispatch({
             type: FIND_BOOKINGS_BY_RESTAURANT_NAME,
