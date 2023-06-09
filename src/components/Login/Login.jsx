@@ -31,29 +31,23 @@ function Login() {
     const {register, formState: {errors}, handleSubmit } = useForm(formOptions);
 
     const statusState = useSelector((state) => state.users.status);
-    
     const dispatch = useDispatch();
 
-    const [msg, setMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
     const onSubmit = async(data) => {
         dispatch(userLogin(data));
+        setErrorMsg("");
     };
-    
+    console.log(statusState)
     useEffect(() => {
-        if(statusState?.msg === "successful login") {
+        
+        if (statusState?.msg === "successful login") {
             navigate("/restaurantes");
-        } else if(statusState?.msg === "Bad credentials") {
-            setMsg(statusState);
+        } else if (statusState === "Bad credentials"){
+            setErrorMsg("Usuario o contraseña incorrectos");
         }
-    }, [statusState, navigate])
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setMsg("");
-        }, 5000)
-        return () => clearTimeout(timer);
-    }, [msg])
+    }, [statusState, navigate]);
 
     const handleRegister = () => {
         navigate("/auth/registro")
@@ -62,6 +56,14 @@ function Login() {
     const handleRecovery = () => {
         navigate('/usuario/olvidarpassword');
     }
+
+    useEffect(() => {
+        if (errorMsg !== "") {
+            setTimeout(() => {
+                setErrorMsg("");
+            }, 5000);
+        }
+    }, [errorMsg]);
 
     return (
         <>
@@ -85,7 +87,7 @@ function Login() {
                     />
                     {<div className="form-register-errors">{errors.password?.message}</div>}
                 </div>
-                <p>{msg}</p>
+                <p className="error-message">{errorMsg}</p>
                 <button 
                     type="submit"
                     value="Ingresar">

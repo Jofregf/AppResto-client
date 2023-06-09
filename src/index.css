@@ -95,3 +95,8 @@ button:focus-visible {
 .starShow{
   color: #F15422;
 }
+
+.error-message {
+  color: red;
+  font-size: 18px;
+}
