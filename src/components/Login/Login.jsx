@@ -1,9 +1,6 @@
-/* eslint-disable */
-
 import {useEffect, useState} from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,11 +25,8 @@ const formSchema = Yup.object().shape({
 const formOptions = { resolver: yupResolver(formSchema) };
 
 function Login() {
-
-    let cookie = new Cookies();
-    const user = cookie.get("user")?.accessToken
     
-    const nav = useNavigate();
+    const navigate = useNavigate();
 
     const {register, formState: {errors}, handleSubmit } = useForm(formOptions);
 
@@ -48,11 +42,11 @@ function Login() {
     
     useEffect(() => {
         if(statusState?.msg === "successful login") {
-            nav("/restaurantes");
+            navigate("/restaurantes");
         } else if(statusState?.msg === "Bad credentials") {
             setMsg(statusState);
         }
-    }, [statusState, nav])
+    }, [statusState, navigate])
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -62,7 +56,11 @@ function Login() {
     }, [msg])
 
     const handleRegister = () => {
-        nav("/auth/register")
+        navigate("/auth/registro")
+    }
+
+    const handleRecovery = () => {
+        navigate('/usuario/olvidarpassword');
     }
 
     return (
@@ -96,6 +94,11 @@ function Login() {
                 <button onClick={handleRegister}>
                     Registrarse
                 </button>
+                <div className="recover-pwd">
+                    <button className="button-password-recovery" onClick={handleRecovery}>
+                        ¿Olvidaste tu contraseña?
+                    </button>
+                </div>
             </form>
         </>
     )

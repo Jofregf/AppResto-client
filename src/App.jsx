@@ -9,7 +9,7 @@ import AdminHome from "../src/components/AdminHome/AdminHome";
 import UserCard from "../src/components/CardUser/UserCard"
 import AdminGetUsers from "../src/components/AdminGetUser/AdminGetUser"
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import EditUser from "../src/components/EditUser/EditUser";
+import EditUser from "../src/components/EditUser/EditUser";
 import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestaurant";
 // import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
 import RestoHome from "../src/components/RestoHome/RestoHome";
@@ -21,6 +21,10 @@ import GetBookingUser from "./components/BookingUser/GetBookingsUser";
 import EditBooking from "./components/EditBooking/EditBooking";
 import GetBookingInactive from "./components/BookingInactive/GetBookingInactive";
 import BookingResults from "./components/RestoBookingResults/BookingResults";
+import EditPassword from "./components/EditPassword/EditPassword";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import UserDetails from "./components/UserDetails/UserDetails";
+
 
 function App() {
   
@@ -33,7 +37,7 @@ function App() {
                     <Route path="/restaurantes" element={<Restaurants/>}/>
                     <Route path="/restaurantes/:id" element={<RestoDetails/>}/>
                     <Route path="/menus/restaurantes/:id" element={<Menus/>}/>
-                    <Route path="/auth/register" element={<Register/>}/>
+                    <Route path="/auth/registro" element={<Register/>}/>
                     <Route path="/auth/login" element={<Login/>}/>
                     <Route path="/admin" element={<AdminHome/>}/>
                     <Route path="/admin/user/:userName" element={<UserCard/>}/>
@@ -48,6 +52,11 @@ function App() {
                     <Route path="/reservas/:id" element={<EditBooking/>}/>
                     <Route path="/probar-inactivos" element={<GetBookingInactive/>}/>
                     <Route path="/restaurante/:name/reservas" element={<BookingResults/>}/>
+                    <Route path="/usuario/editarpassword" element={<EditPassword/>}/>
+                    <Route path="/usuario/olvidarpassword" element={<ForgotPassword/>}/>
+                    <Route path="/usuario/perfil" element={<UserDetails/>}/>
+                    <Route path="/usuario/editar" element={<EditUser/>}/>
+
                 </Routes>
             </div>
             

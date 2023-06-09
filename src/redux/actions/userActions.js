@@ -43,7 +43,7 @@ export const userLogin =({usernameOrEmail, password}) => async (dispatch) => {
 
     try {
         const cookies = new Cookies();
-        const response = axios.post(`${baseUrl}/api/auth/login`, 
+        const response = await axios.post(`${baseUrl}/api/auth/login`, 
             {usernameOrEmail, password}
         );
         cookies.set("user", response.data, {path: "/", expires: new Date(Date.now() + (3600*100*24))});
@@ -78,7 +78,7 @@ export const getUsers = ({token}) => async (dispatch) => {
 };
 
 export const getUserById = ({token}) => async (dispatch) => {
-    
+
     try {
         const response = await axios.get(`${baseUrl}/api/users`, 
             {headers: {"Authorization": "Bearer " + token}}
@@ -176,10 +176,12 @@ export const editUser = ({userName, firstName, lastName, userPhone, userEmail, t
     }
 };
 
-export const editPassword = ({password, token}) => async (dispatch) => {
-
+export const editPassword = ({userPassword, token}) => async (dispatch) => {
+    console.log(userPassword);
+    console.log(token)
     try {
-        const response = await axios.update(`${baseUrl}/api/users/password/`, password, 
+        const response = await axios.put(`${baseUrl}/api/users/password`,
+            {userPassword}, 
             {headers: {"Authorization": "Bearer " + token}}
         );
         dispatch({
@@ -195,7 +197,7 @@ export const editPassword = ({password, token}) => async (dispatch) => {
 };
 
 export const forgotPassword = ({usernameOrEmail}) => async (dispatch) => {
-
+    
     try {
         const response = await axios.put(`${baseUrl}/api/users/forgotpassword`, usernameOrEmail);
         dispatch({
