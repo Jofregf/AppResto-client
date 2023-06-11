@@ -24,6 +24,7 @@ import BookingResults from "./components/RestoBookingResults/BookingResults";
 import EditPassword from "./components/EditPassword/EditPassword";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import UserDetails from "./components/UserDetails/UserDetails";
+import NavBar from "./components/NavBar/NavBar";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     <>
         <BrowserRouter>
             <div>
+              <NavBar/>
                 <Routes>
                     <Route path="/restaurantes" element={<Restaurants/>}/>
                     <Route path="/restaurantes/:id" element={<RestoDetails/>}/>

@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import { TiArrowBack } from 'react-icons/ti';
 import {Link} from 'react-router-dom'
 import { getUserById, editPassword } from "../../redux/actions/userActions";
-import {Modal} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -101,10 +101,14 @@ function EditPassword() {
                             </div>
                         </div>
                         <div className="form-submit">
-                            <input
-                            type="submit"
-                            value="EDITAR"
-                            />
+                            <Button
+                                variant="outline" 
+                                className="custom-button"
+                                type="submit"
+                                value="EDITAR"
+                            >
+                                Editar
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +126,13 @@ function EditPassword() {
                     {modal}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button onClick={handlemodal} >Continuar</button>
+                    <Button 
+                        variant="outline" 
+                        className="custom-button" 
+                        onClick={handlemodal} 
+                    >
+                        Continuar
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>

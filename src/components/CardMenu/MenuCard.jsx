@@ -5,7 +5,7 @@ import { deleteMenu, getMenusByRestaurantId} from "../../redux/actions/menuActio
 import { useDispatch } from 'react-redux';
 import {useState} from "react";
 import Cookies from "universal-cookie";
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 function MenuCard({idMenu, name, image, description, menu}){
 
@@ -77,16 +77,20 @@ function MenuCard({idMenu, name, image, description, menu}){
                     <div className="buttons-admin-container-slim">
                         <Link to={`/menu/${idMenu}/restaurant/${id}`}>
                                 <div onClick={(e) => {handleEdit(e)}}>
-                                    <button className="button-card-admin-slim" >
-                                    <BsPencilSquare size={25}/>
-                                    </button>
+                                    <Button variant="outline" className="custom-button " >
+                                    <BsPencilSquare/>
+                                    </Button>
                                 </div>
                         </Link>
                     </div>
                     <div className="buttons-admin-container-slim">
-                        <button className="button-card-admin-slim" onClick={(e) => {handleDelete(e)}}>
-                        <AiFillDelete size={25}/>
-                        </button>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button" 
+                            onClick={(e) => {handleDelete(e)}}
+                        >
+                            <AiFillDelete/>
+                        </Button>
                     </div>
                 </div>
             ):(null)}
@@ -101,8 +105,20 @@ function MenuCard({idMenu, name, image, description, menu}){
             </Modal.Header>
             <Modal.Body> {modal} </Modal.Body>
             <Modal.Footer>
-                <button onClick={handleClose} >Cancelar</button>
-                <button onClick={handleConfirmDelete} >Eliminar</button>
+                <Button 
+                    variant="outline" 
+                    className="custom-button"
+                    onClick={handleClose} 
+                >
+                    Cancelar
+                </Button>
+                <Button 
+                    variant="outline" 
+                    className="custom-button" 
+                    onClick={handleConfirmDelete} 
+                >
+                    Eliminar
+                </Button>
             </Modal.Footer>
             </Modal>
         </div>

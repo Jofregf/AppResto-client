@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 import {findBookingsByRestaurantName, findBookingByDate} from "../../redux/actions/bookingActions"
 
 function SearchBookings({name, tokenUser}){
@@ -34,13 +35,15 @@ function SearchBookings({name, tokenUser}){
     return (
         <div>
             <div>
-                <button type="submit"onClick={(event) => handleNameSubmit(event)}>Buscar Reservas</button>
+                <Button variant="outline" className="custom-button" type="submit"onClick={(event) => handleNameSubmit(event)}>Buscar Reservas</Button>
             </div>
             <div>
                 <form onSubmit={(event) => handleDateSubmit(event)}>
-                    <label>Ingrese una fecha</label>
+                
+                        <label>Ingrese una fecha</label>
+                    
                     <input type="date" value={date} onChange={handleInputDateChange} />
-                    <button type="submit">Buscar</button>
+                    <Button variant="outline" className="custom-button" type="submit">Buscar</Button>
                 </form>
             </div>
         </div>

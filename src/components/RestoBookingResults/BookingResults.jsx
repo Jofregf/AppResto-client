@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function BookingResults() {
     const bookingResults = useSelector((state) => state.bookings.bookings);
@@ -23,9 +24,9 @@ function BookingResults() {
         )}
             <div>
                 <Link to={`/resto`} style={{ textDecoration: 'none' }}>
-                    <button className="button-card-admin-slim">
-                    Resto Panel
-                    </button>
+                    <Button variant="outline" className="custom-button">
+                        Resto Panel
+                    </Button>
                 </Link>
             </div>
         </div>

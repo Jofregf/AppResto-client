@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Form from "react-bootstrap/Form"
+import {Form, Button} from "react-bootstrap"
 import {getRestaurantByMenuName, getRestaurantByAverageRating} from "../../redux/actions/restaurantActions"
 
 function SearchBar(){
@@ -38,7 +38,7 @@ function SearchBar(){
                 <Form.Group controlId="formBasicEmail">
                 <Form.Control type="text" placeholder="Ingrese una comida" value={menuName} onChange={(event) => handleInputMenuChange(event)} />
                 </Form.Group>
-                <button type="submit">Buscar</button>
+                <Button variant="outline" className="custom-button" type="submit">Buscar</Button>
             </Form>
 
             <Form onSubmit={(event) => handleRatingSubmit(event)}>
@@ -47,7 +47,7 @@ function SearchBar(){
                 <Form.Range value={rating} onChange={(value) => handleInputRatingChange(value)} min={0} max={5} step={1} />
                 <Form.Label className="mt-2">Rating actual: {rating}</Form.Label>
                 </Form.Group>
-                <button type="submit">Buscar</button>
+                <Button variant="outline" className="custom-button" type="submit">Buscar</Button>
             </Form>
         </div>
     )

@@ -18,7 +18,6 @@ function AdminGetResto({activeDrawer, receiveRestaurant}){
     const [selectName, setSelectName] = useState("");
 
     const restoEnabled = restaurantes?.filter(resto => resto.enabled === true);
-        console.log(restoEnabled, "RESTOENABLED")
     
     const restoViews = selectName === "" 
         ? restoEnabled 

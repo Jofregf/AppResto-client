@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getUsers, getUserByUsernameOrEmail} from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
 import { useNavigate} from 'react-router-dom';
-/* eslint-disable */
+import { Button } from "react-bootstrap";
 
 function GetUserByUserNameOrEmail () {
 
@@ -11,16 +11,6 @@ function GetUserByUserNameOrEmail () {
     const [selectedUser, setSelectedUser] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
     
-    const userState = useSelector((state) => {
-        return {
-            user: Array.isArray(state.users.user)
-                ? state.users.user
-                : [state.users.user]
-        }
-    });
-    
-    const user = userState.user;
-
     const usersState = useSelector((state) => {
         return {
             users: Array.isArray(state.users.users)
@@ -50,7 +40,8 @@ function GetUserByUserNameOrEmail () {
                 email: findUser.userEmail,
                 enabled: findUser.enabled,
                 role: findUser.role
-              }});        }
+            }});        
+        }
     }
     
     useEffect(() => {
@@ -73,20 +64,30 @@ function GetUserByUserNameOrEmail () {
 
     return (
         <div>
-             <input type="text" value={searchTerm} onChange={handleSearch} onKeyPress={handleKeyPress} />
-            <button onClick={handleButtonClick}>Buscar</button>
+            <input type="text" value={searchTerm} onChange={handleSearch} onKeyPress={handleKeyPress} />
+            <Button 
+                variant="outline" 
+                className="custom-button"
+                onClick={handleButtonClick}
+            >
+                Buscar
+            </Button>
             <h2>Lista de usuarios</h2>
             {users && users.length > 0 && (
                 <ul>
                     {users[0].map((user, indice) => {
                         return (
-                        <li key={indice}>
+                        <div key={indice}>
                             <p>{user.userName}</p>
                             <p>{user.userEmail}</p>
-                            <button onClick={() => handleUserDetails(user.userName)}>
-                            Detalles
-                            </button>
-                        </li>
+                            <Button 
+                                variant="outline" 
+                                className="custom-button"
+                                onClick={() => handleUserDetails(user.userName)}
+                            >
+                                Detalles
+                            </Button>
+                        </div>
                         );
                     })}
                 </ul>

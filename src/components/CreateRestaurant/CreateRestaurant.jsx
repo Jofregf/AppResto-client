@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Cookies from "universal-cookie";
 import { createRestaurant } from "../../redux/actions/restaurantActions";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
 
@@ -175,6 +175,7 @@ function CreateRestaurant(){
                                 </div>
                                 {Array.from({ length: numImageFields }).map((_, index) => (
                                 <div key={index}>
+                                    <label className="input-label">*Imagen: </label>
                                     <input
                                     type="text"
                                     {...register(`restaurantImages[${index}]`)}
@@ -186,10 +187,24 @@ function CreateRestaurant(){
                                     }}
                                     />
                                     {index === numImageFields - 1 && (
-                                    <button type="button" onClick={handleAddField}><FaPlus /></button>
+                                        <Button 
+                                            type="button" 
+                                            onClick={handleAddField}
+                                            variant="outline" 
+                                            className="custom-button btn-sm"
+                                        >
+                                            <FaPlus />
+                                        </Button>
                                     )}
                                     {index !== 0 && (
-                                    <button type="button" onClick={() => handleRemoveField(index)}><FaMinus /></button>
+                                        <Button 
+                                            type="button" 
+                                            onClick={() => handleRemoveField(index)}
+                                            variant="outline" 
+                                            className="custom-button btn-sm"
+                                        >
+                                            <FaMinus />
+                                        </Button>
                                     )}
                                     {errors.restaurantImages?.[index] && (
                                     <span>{errors.restaurantImages[index].message}</span>
@@ -230,11 +245,14 @@ function CreateRestaurant(){
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button
+                                <Button
                                     type="submit"
                                     value="CREAR RESTAURANT"
-                                    
-                                >Crear</button>
+                                    variant="outline" 
+                                    className="custom-button"
+                                >
+                                    Crear
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -252,7 +270,13 @@ function CreateRestaurant(){
                         {modal}
                     </Modal.Body>
                     <Modal.Footer>
-                        <button onClick={handleModal}>Continuar</button>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button btn-sm"
+                            onClick={handleModal}
+                        >
+                            Continuar
+                        </Button>
                     </Modal.Footer>
                 </Modal>
             </div>

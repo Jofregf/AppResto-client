@@ -6,6 +6,7 @@ import {editMenu} from "../../redux/actions/menuActions";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Cookies from "universal-cookie";
+import { Button } from "react-bootstrap";
 
 const formSchema = Yup.object().shape({
     menuName: Yup.string()
@@ -14,7 +15,7 @@ const formSchema = Yup.object().shape({
         .min(3, "Mínimo 3 carácteres"),
     menuDescription: Yup.string()
         .required("Este campo es requerido")
-        .max(50, "Máximo 50 carácteres")
+        .max(255, "Máximo 255 carácteres")
         .min(10, "Mínimo 10 carácteres"),
     menuImage: Yup.string()
         .required("Este campo es requerido")
@@ -106,15 +107,26 @@ function EditMenu() {
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button type="submit" value="EDITAR MENU">
+                                <Button 
+                                    type="submit" 
+                                    value="EDITAR MENU"
+                                    variant="outline" 
+                                    className="custom-button"
+                                >
                                     Editar Menú
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>
                 </form>
             <div>
-                    <button onClick={handleCancel}>Cancelar</button>
+                    <Button 
+                        variant="outline" 
+                        className="custom-button"
+                        onClick={handleCancel}
+                    >
+                        Cancelar
+                    </Button>
             </div>
             </div>
         </div>

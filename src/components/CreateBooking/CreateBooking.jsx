@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import Cookies from "universal-cookie";
 import { createBooking } from "../../redux/actions/bookingActions";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 
 const formSchema = Yup.object().shape({
@@ -99,17 +99,23 @@ function CreateBooking(){
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button
+                                <Button
                                     type="submit"
                                     value="RESERVAR"
-                                    
-                                >RESERVAR</button>
+                                    variant="outline" 
+                                    className="custom-button"  
+                                >
+                                    RESERVAR
+                                </Button>
                             </div>
                             <div>
                                 <Link to={`/resto`} style={{ textDecoration: 'none' }}>
-                                    <button className="button-card-admin-slim">
-                                    Cancelar
-                                    </button>
+                                    <Button 
+                                        variant="outline" 
+                                        className="custom-button"
+                                    >
+                                        Cancelar
+                                    </Button>
                                 </Link>
                             </div>
                         </div>

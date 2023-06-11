@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Cookies from "universal-cookie";
 import { createMenu } from "../../redux/actions/menuActions";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 const formSchema = Yup.object().shape({
     menuName: Yup.string()
@@ -102,17 +102,21 @@ function CreateMenu(){
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button
+                                <Button
                                     type="submit"
                                     value="CREAR MENÚ"
-                                    
-                                >Crear</button>
+                                    variant="outline" 
+                                    className="custom-button"
+                                >Crear</Button>
                             </div>
                             <div>
                                 <Link to={`/resto`} style={{ textDecoration: 'none' }}>
-                                    <button className="button-card-admin-slim">
-                                    Cancelar
-                                    </button>
+                                    <Button 
+                                        variant="outline" 
+                                        className="custom-button"
+                                    >
+                                        Cancelar
+                                    </Button>
                                 </Link>
                             </div>
                         </div>
@@ -131,7 +135,13 @@ function CreateMenu(){
                         {modal}
                     </Modal.Body>
                     <Modal.Footer>
-                        <button onClick={handleModal}>Continuar</button>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button"
+                            onClick={handleModal}
+                        >
+                            Continuar
+                        </Button>
                     </Modal.Footer>
                 </Modal>
             </div>

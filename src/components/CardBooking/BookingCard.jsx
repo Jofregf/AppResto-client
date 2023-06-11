@@ -5,7 +5,7 @@ import { getBookingUser, deleteBooking} from "../../redux/actions/bookingActions
 import { useDispatch } from 'react-redux';
 import {useState} from "react";
 import Cookies from "universal-cookie";
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 function BookingCard({id, date, time, partySize, name, address, email, phone, booking}){
 
@@ -83,16 +83,23 @@ function BookingCard({id, date, time, partySize, name, address, email, phone, bo
                     <div className="buttons-admin-container-slim">
                         <Link to={`/reservas/${id}`}>
                                 <div onClick={(e) => {handleEdit(e)}}>
-                                    <button className="button-card-admin-slim" >
-                                    <BsPencilSquare size={25}/>
-                                    </button>
+                                    <Button 
+                                        variant="outline" 
+                                        className="custom-button btn-sm"
+                                    >
+                                        <BsPencilSquare/>
+                                    </Button>
                                 </div>
                         </Link>
                     </div>
                     <div className="buttons-admin-container-slim">
-                        <button className="button-card-admin-slim" onClick={(e) => {handleDelete(e)}}>
-                        <AiFillDelete size={25}/>
-                        </button>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button btn-sm"
+                            onClick={(e) => {handleDelete(e)}}
+                        >
+                            <AiFillDelete/>
+                        </Button>
                     </div>
                 </div>
             
@@ -105,10 +112,22 @@ function BookingCard({id, date, time, partySize, name, address, email, phone, bo
             <Modal.Header closeButton>
                 <Modal.Title>{modalTitle}</Modal.Title>
             </Modal.Header>
-            <Modal.Body> {modal} </Modal.Body>
+            <Modal.Body> La reserva se eliminará permantentemente</Modal.Body>
             <Modal.Footer>
-                <button onClick={handleClose} >Cancelar</button>
-                <button onClick={handleConfirmDelete} >Eliminar</button>
+                <Button
+                    variant="outline" 
+                    className="custom-button"
+                    onClick={handleClose}
+                >
+                    Cancelar
+                </Button>
+                <Button 
+                    variant="outline" 
+                    className="custom-button"
+                    onClick={handleConfirmDelete} 
+                >
+                    Eliminar
+                </Button>
             </Modal.Footer>
             </Modal>
         </div>

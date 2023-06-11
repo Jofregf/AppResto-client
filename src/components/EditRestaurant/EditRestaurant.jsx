@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Cookies from "universal-cookie";
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { Button } from "react-bootstrap";
 
 
 
@@ -109,7 +110,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
         },
         [dispatch, restaurante, tokenUser]
     );
-    // ver el useeffect
+
     useEffect(() => {
         console.log("preloadvalues useefect")
         setPreloadedValues({
@@ -286,8 +287,10 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
                                                     }}
                                                 />
                                                 {index !== 0 && (
-                                                    <button
+                                                    <Button
                                                         type="button"
+                                                        variant="outline" 
+                                                        className="custom-button btn-sm"
                                                         onClick={() =>
                                                             setImageUrls(
                                                                 (prevUrls) =>
@@ -303,7 +306,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
                                                         }
                                                     >
                                                         <FaMinus />
-                                                    </button>
+                                                    </Button>
                                                 )}
                                                 {errors.restaurantImages?.[
                                                     index
@@ -319,12 +322,14 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
                                                 )}
                                             </div>
                                         ))}
-                                    <button
+                                    <Button
                                         type="button"
+                                        variant="outline" 
+                                        className="custom-button btn-sm"
                                         onClick={handleAddField}
                                     >
                                         <FaPlus />
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                             <div className="input-small">
@@ -398,12 +403,23 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
                             </div>
                         </div>
                         <div className="form-submit">
-                            <button type="submit" value="EDITAR RESTAURANTE">
+                            <Button 
+                                type="submit" 
+                                value="EDITAR RESTAURANTE"
+                                variant="outline" 
+                                className="custom-button"
+                            >
                                 Editar Restaurante
-                            </button>
+                            </Button>
                         </div>
                         <div>
-                            <button onClick={handleHome}>Cancelar</button>
+                            <Button 
+                                variant="outline" 
+                                className="custom-button"
+                                onClick={handleHome}
+                            >
+                                Cancelar
+                            </Button>
                         </div>
                     </div>
                 </div>

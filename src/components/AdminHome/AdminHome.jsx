@@ -7,6 +7,7 @@ import AdminBan from "../AdminBan/AdminBan";
 import GetUserByUserNameOrEmail from "../AdminGetUser/AdminGetUser";
 import AdminGetResto from "../AdminGetResto/AdminGetResto";
 import AdminGetBanResto from "../AdminGetBanResto/AdminGetBanResto";
+import { Button } from "react-bootstrap";
 
 function AdminHome() {
 
@@ -41,13 +42,48 @@ function AdminHome() {
         (tokenRole === "ROLE_ADMIN")?
         <div>
             <div>
-                <button className="link-home" onClick={() => handleHome("")}><p>Restaurantes</p></button>
-                <button onClick={() => handleView("role")}><p>Modificar roles</p></button>
-                <button onClick={() => handleView("desactivados")}><p>Desactivados</p></button>
-                <button onClick={() => handleView("banear")}><p>Banear/Desbanear</p></button>
-                <button onClick={() => handleView("usuarios")}><p>Usuarios</p></button>
-                <button  onClick={() => navigate("/restaurants")}><p>Home</p></button>
-                <button onClick={() => window.location.reload()}><p>Panel Admin</p></button>
+                <Button variant="outline" 
+                        className="custom-button" 
+                        onClick={() => handleHome("")}
+                >
+                    Restaurantes
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => handleView("role")}
+                >
+                    Modificar roles
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => handleView("desactivados")}
+                >
+                    Desactivados
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => handleView("banear")}
+                >
+                    Banear/Desbanear
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => handleView("usuarios")}
+                >
+                    Usuarios
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => navigate("/restaurantes")}
+                >
+                    Home
+                </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => window.location.reload()}
+                >
+                    Panel Admin
+                </Button>
             </div>
             <div>
                 {

@@ -4,6 +4,7 @@ import {useParams, Link} from "react-router-dom";
 import {getMenusByRestaurantId} from "../../redux/actions/menuActions"
 import Cookie from "universal-cookie";
 import MenuCard from "../CardMenu/MenuCard";
+import {Button} from "react-bootstrap"
 
 function Menus(){
 
@@ -37,9 +38,9 @@ function Menus(){
             {cookieRole === "ROLE_RESTO" ? (
                 <div className="buttons-admin-container-slim">
                     <Link to={`/crear-menu/${id}`} style={{ textDecoration: 'none' }}>
-                        <button className="button-card-admin-slim">
-                        Crear menú
-                        </button>
+                        <Button variant="outline" className="custom-button">
+                            Crear menú
+                        </Button>
                     </Link>
                     <form>
                             <input
@@ -78,15 +79,17 @@ function Menus(){
             {cookieRole === "ROLE_RESTO" ? (
                 <div className="buttons-admin-container-slim">
                     <Link to={`/resto`} style={{ textDecoration: 'none' }}>
-                        <button className="button-card-admin-slim">
-                        Resto Panel
-                        </button>
+                        <Button variant="outline" className="custom-button">
+                            Resto Panel
+                        </Button>
                     </Link>
                 </div>
             ): (
                 <div>
                     <Link to="/restaurantes">
-                        <button>Inicio</button>
+                        <Button variant="outline" className="custom-button">
+                            Inicio
+                        </Button>
                     </Link>
                 </div>
             )}            

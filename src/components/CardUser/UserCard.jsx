@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-
+import { Button } from "react-bootstrap";
 
 
 function UserCard() {
@@ -33,7 +33,12 @@ function UserCard() {
                     </p>
                     
                     <Link to="/admin">
-                        <button>Panel Admin</button>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button"
+                        >
+                            Panel Admin
+                        </Button>
                     </Link>
             </div>
     )

@@ -4,6 +4,7 @@ import { Link} from "react-router-dom";
 // import './UserDetail.css';
 import Cookies from "universal-cookie";
 import { getUserById } from "../../redux/actions/userActions";
+import {Button} from "react-bootstrap"
 
 
 export default function UserDetail() {
@@ -33,10 +34,20 @@ export default function UserDetail() {
                         { detailUser.user?.userPhone && <div>Telefono: {detailUser.user?.userPhone} </div>}
 
                         <Link to="/usuario/editar">
-                            <button className="loginbtn">Editar mis Datos</button>
+                            <Button 
+                                variant="outline" 
+                                className="custom-button" 
+                            >
+                                Editar mis Datos
+                            </Button>
                         </Link>
                         <Link to="/usuario/editarpassword">
-                            <button className="loginbtn">Cambiar mi Contraseña</button>
+                            <Button 
+                                variant="outline" 
+                                className="custom-button" 
+                            >
+                                Cambiar mi Contraseña
+                            </Button>
                         </Link>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { forgotPassword } from "../../redux/actions/userActions";
+import {Button} from "react-bootstrap"
 
 const formSchema = Yup.object().shape({
     usernameOrEmail: Yup.string()
@@ -47,7 +48,7 @@ function ForgotPassword() {
         const timer = setTimeout(() => {
             setMsg("");
             navigate("/auth/login");
-        }, 5000);
+        }, 10000);
         return () => clearTimeout(timer);
     }, [msg, navigate]);
 
@@ -85,13 +86,14 @@ function ForgotPassword() {
                         </div>
                     </div>
                     <div className="register-btn">
-                        <button
-                            className="input-Login"
+                        <Button
                             type="submit"
                             value="Enviar nueva contraseña"
+                            variant="outline" 
+                            className="custom-button"
                         >
                             Enviar contraseña
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

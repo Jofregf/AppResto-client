@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {getUsers, unbanBanUser} from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
-import {Modal} from "react-bootstrap";
+import {Modal, Button} from "react-bootstrap";
 
 function AdminBan() {
 
@@ -18,7 +18,6 @@ function AdminBan() {
         }
     });
     const users = usersState.users;
-        console.log(users)
     const statusState = useSelector((state) => state.users.status);
 
     let cookie = new Cookies();
@@ -71,7 +70,13 @@ function AdminBan() {
                     <option value="true">Desbanear</option>
                     <option value="false">Banear</option>
                 </select>
-                <button type="submit">Cambiar Estado</button>
+                <Button 
+                    variant="outline" 
+                    className="custom-button" 
+                    type="submit"
+                >
+                    Cambiar Estado
+                </Button>
                 <div>
                     {users && users.length > 0 && (
                         users[0].map((user, indice) => {
@@ -99,7 +104,13 @@ function AdminBan() {
                     {modal}
                 </Modal.Body>
                 <Modal.Footer>
-                    <button onClick={handleClose}>Continuar</button>
+                    <Button 
+                        variant="outline" 
+                        className="custom-button"
+                        onClick={handleClose}
+                    >
+                        Continuar
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>

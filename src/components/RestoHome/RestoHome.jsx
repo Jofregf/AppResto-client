@@ -13,6 +13,7 @@ import CreateRestaurant from "../CreateRestaurant/CreateRestaurant";
 import EditRestaurant from "../EditRestaurant/EditRestaurant";
 import RestoGetRestaurants from "../RestoGetRestaurants/RestoGetRestaurants";
 import SearchBookings from '../RestoSearchBookings/SearchBookings';
+import { Button } from 'react-bootstrap';
 
 
 function RestoHome(){
@@ -48,10 +49,9 @@ function RestoHome(){
         (cookieRole === "ROLE_RESTO")?
             <div>
             <div>
-                <button onClick={() => handleHome("")}><p>Restaurantes</p></button>
+                <Button variant="outline" className="custom-button" onClick={() => handleHome("")}><p>Restaurantes</p></Button>
                 {/* <button onClick={() => handleView("mi cuenta")}><p>Mi cuenta</p></button> */}
-                <button onClick={() => handleView("crear")}><p>Crear Restaurante</p></button>
-
+                <Button variant="outline" className="custom-button" onClick={() => handleView("crear")}><p>Crear Restaurante</p></Button>
             </div>
             <div>
                 {

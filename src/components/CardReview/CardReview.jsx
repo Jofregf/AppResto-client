@@ -1,5 +1,5 @@
 import { useState} from "react"
-import { Accordion, Card, Form, FormControl} from "react-bootstrap"
+import { Accordion, Card, Form, FormControl, Button} from "react-bootstrap"
 import { postReview, getReviewsByRestaurantId} from "../../redux/actions/reviewActions"
 import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
@@ -49,11 +49,11 @@ function CardReview({idResto}){
         setAccordionOpen(!accordionOpen);
     }
 
-        return (
+    return (
         
         <div>
             <Card
-                style={{ "alignItems": "center", color: "#0E1428"}}
+                style={{ "alignItems": "center", color: "#F15422"}}
             >
                 <Card.Footer
                     style={{ width: "250px", padding: "0px"}}
@@ -68,7 +68,7 @@ function CardReview({idResto}){
                             style={{ width: "250px"}}
                         >
                             <Accordion.Header
-                                style={{ color: "#0E1428"}}
+                                style={{ color: "#F15422"}}
                                 onClick={toggleAccordion}
                             >
                                 Desplegar comentarios
@@ -106,7 +106,9 @@ function CardReview({idResto}){
                                         );
                                         })}
                                     </div>
-                                    <button
+                                    <Button
+                                        variant="outline" 
+                                        className="custom-button" 
                                         type="submit"
                                         style={{ margin: "0% 0 0 0", padding: "0px 5px"}}
                                         onClick={() => setInput({
@@ -114,7 +116,7 @@ function CardReview({idResto}){
                                         })}
                                     >
                                         Enviar
-                                    </button>
+                                    </Button>
                                 </Form>
                             </Accordion.Body>
                         </Accordion.Item>
@@ -127,4 +129,4 @@ function CardReview({idResto}){
 }
 
 
-export default CardReview;
+export default CardReview; 

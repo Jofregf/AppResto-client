@@ -4,6 +4,7 @@ import { VscEyeClosed } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { editEnabledResto } from "../../redux/actions/restaurantActions"
 import Cookies from "universal-cookie";
+import { Button } from "react-bootstrap";
 
 function AdminCardResto ({name, enabled, address, phone, email, id}){
 
@@ -31,11 +32,15 @@ function AdminCardResto ({name, enabled, address, phone, email, id}){
                 </div>
                 <div className="card-admin-container-slim-3">
                     <div className="buttons-admin-container-slim">
-                        <button className="button-card-admin-slim" onClick={(e) => {handleDisabled(e)}}>
+                        <Button 
+                            variant="outline" 
+                            className="custom-button" 
+                            onClick={(e) => {handleDisabled(e)}}
+                        >
                             {
                             disabledCard ? <VscEyeClosed size={25}/> :  <VscEye size={25}/>
                             }
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

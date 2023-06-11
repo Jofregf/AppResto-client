@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { editUser, getUserById } from "../../redux/actions/userActions";
 
 function validate(input) {
@@ -224,9 +224,20 @@ function EditUser() {
                             </div>
                         </div>
                         <div>
-                            <button type="submit">Actualizar</button>
+                            <Button 
+                                type="submit" 
+                                variant="outline" 
+                                className="custom-button"
+                            >
+                                Actualizar
+                            </Button>
                             <Link to="/restaurantes">
-                                <button variant="primary">Home</button>
+                                <Button 
+                                    variant="outline" 
+                                    className="custom-button"
+                                >
+                                    Inicio
+                                </Button>
                             </Link>
                         </div>
                     </div>

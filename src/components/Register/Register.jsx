@@ -153,10 +153,14 @@ function Register() {
                     Al crear su cuenta acepta los Términos y Condiciones
                 </div>
                 <div>
-                    <input
+                    <Button
                         type="submit"
                         value="Crear mi cuenta"    
-                    />    
+                        variant="outline" 
+                        className="custom-button"
+                    >
+                        Crear mi cuenta
+                    </Button>    
                 </div>
             </form>
             <Modal
@@ -172,7 +176,13 @@ function Register() {
                     {modal}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleModal}>Continuar</Button>
+                    <Button 
+                        variant="outline" 
+                        className="custom-button"
+                        onClick={handleModal}
+                    >
+                        Continuar
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </div>

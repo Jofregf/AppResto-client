@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import {userLogin} from "../../redux/actions/userActions"
+import {Button} from "react-bootstrap"
 
 
 const formSchema = Yup.object().shape({
@@ -39,9 +40,8 @@ function Login() {
         dispatch(userLogin(data));
         setErrorMsg("");
     };
-    console.log(statusState)
-    useEffect(() => {
-        
+
+    useEffect(() => {        
         if (statusState?.msg === "successful login") {
             navigate("/restaurantes");
         } else if (statusState === "Bad credentials"){
@@ -68,7 +68,6 @@ function Login() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>Inicia sesión aquí</div>
                 <div>
                     <label>Email o usuario</label>
                     <input
@@ -88,18 +87,21 @@ function Login() {
                     {<div className="form-register-errors">{errors.password?.message}</div>}
                 </div>
                 <p className="error-message">{errorMsg}</p>
-                <button 
+                <Button 
                     type="submit"
-                    value="Ingresar">
-                        Ingresar    
-                </button>
-                <button onClick={handleRegister}>
+                    value="Ingresar"
+                    variant="outline" 
+                    className="custom-button"
+                >
+                    Ingresar    
+                </Button>
+                <Button variant="outline" className="custom-button" onClick={handleRegister}>
                     Registrarse
-                </button>
+                </Button>
                 <div className="recover-pwd">
-                    <button className="button-password-recovery" onClick={handleRecovery}>
+                    <Button variant="outline" className="custom-button" onClick={handleRecovery}>
                         ¿Olvidaste tu contraseña?
-                    </button>
+                    </Button>
                 </div>
             </form>
         </>

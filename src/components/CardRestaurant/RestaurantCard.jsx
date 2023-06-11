@@ -13,8 +13,11 @@ function RestaurantCard({id, name, image, address, phone, email, rating}) {
                         height = "200px"
                         width = "200px"
                     />
+                    <p>Dirección</p>
                     <p>{address}</p>
+                    <p>Teléfono</p>
                     <p>{phone}</p>
+                    <p></p>
                     <p>{email}</p>
                     {
                     rating === 0 ? <><span>Sin reseñas</span> </>:

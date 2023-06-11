@@ -6,6 +6,7 @@ import {updateBookingUser} from "../../redux/actions/bookingActions";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Cookies from "universal-cookie";
+import { Button } from "react-bootstrap";
 
 const formSchema = Yup.object().shape({
     bookingDate: Yup.date().required('Ingresa una fecha válida'),
@@ -100,15 +101,26 @@ function EditBooking(){
                                 </div>
                             </div>
                             <div className="form-submit">
-                                <button type="submit" value="EDITAR RESERVA">
+                                <Button 
+                                    variant="outline" 
+                                    className="custom-button"
+                                    type="submit" 
+                                    value="EDITAR RESERVA"
+                                >
                                     Editar Reserva
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>
                 </form>
             <div>
-                    <button onClick={handleCancel}>Cancelar</button>
+                    <Button 
+                        onClick={handleCancel}
+                        variant="outline" 
+                        className="custom-button"
+                    >
+                        Cancelar
+                    </Button>
             </div>
             </div>
         </div>

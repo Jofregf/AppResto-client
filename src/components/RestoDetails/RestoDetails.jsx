@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom"
 import {getRestaurantDetails} from "../../redux/actions/restaurantActions"
 import Review from "../Reviews/Reviews"
 import Cookie from "universal-cookie"
+import {Button} from "react-bootstrap"
 
 
 function RestoDetails() {
@@ -37,7 +38,7 @@ function RestoDetails() {
             { cookieRole  === "ROLE_RESTO" ? (
                 <div>
                     <Link to="/resto">
-                        <button>RESTO PANEL</button>
+                        <Button variant="outline" className="custom-button">RESTO PANEL</Button>
                     </Link>
                 </div>
             ) : (
@@ -80,17 +81,17 @@ function RestoDetails() {
             
             
             <Link to={`/menus/restaurantes/${id}`}>
-                <button>Ver menú</button>
+                <Button variant="outline" className="custom-button">Ver menú</Button>
             </Link>
 
             <div>
                 <Link to="/restaurantes">
-                    <button>Inicio</button>
+                    <Button variant="outline" className="custom-button">Inicio</Button>
                 </Link>
             </div>
 
             <Link to={`/restaurantes/${id}/reserva`}>
-                <button>Reservar</button>
+                <Button variant="outline" className="custom-button">Reservar</Button>
             </Link>
             
             </div>    
