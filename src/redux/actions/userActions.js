@@ -13,6 +13,7 @@ export const GET_USER_BY_USERNAME_OR_EMAIL = "GET_USER_BY_USERNAME_OR_EMA"
 export const EDIT_USER = "EDIT_USER";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const LOGOUT = "LOGOUT";
 
 export const createUser = ({userName, firstName, lastName, userPhone, userEmail, userPassword}) => async (dispatch) => {
 
@@ -213,4 +214,28 @@ export const forgotPassword = ({usernameOrEmail}) => async (dispatch) => {
     }
 }
 
+export const userLogout = (token) => async (dispatch) => {
+    
+    try {
+            const response = await axios.post(
+            `${baseUrl}/api/auth/logout`,
+            {},
+            {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            }
+        );
+            dispatch({
+                type: LOGOUT,
+                payload: response.data,
+            });
+    } 
+    catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        });
+    }
+};
 

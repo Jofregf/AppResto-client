@@ -9,6 +9,7 @@ import {CREATE_USER,
         EDIT_USER,
         UPDATE_PASSWORD,
         FORGOT_PASSWORD,
+        LOGOUT,
 
     } from "../actions/userActions";
 
@@ -53,6 +54,9 @@ function userReducer(state = initialState, action) {
 
         case FORGOT_PASSWORD:
             return {...state, status: action.payload};
+
+        case LOGOUT:
+            return {...state, status: action.payload, user: action.payload || null, token: action.payload || null};
 
         default:
             return{...state};
