@@ -15,10 +15,11 @@ export const EDIT_ENABLED_RESTAURANT = "EDIT_ENABLED_RESTAURANT";
 
 export const baseUrl = "http://localhost:8080";
 
-export const getRestaurants = () => async (dispatch) => {
-
+export const getRestaurants = ({pageNumber}) => async (dispatch) => {
+    const page = pageNumber? pageNumber : 0;
+    
     try {
-        const response = await axios.get(`${baseUrl}/api/restaurants`);
+        const response = await axios.get(`${baseUrl}/api/restaurants?pageNumber=${page}`);
         dispatch({
             type: GET_RESTAURANTS,
             payload: response.data,

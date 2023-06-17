@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import {userLogin} from "../../redux/actions/userActions"
-import {Button} from "react-bootstrap"
-
+import {userLogin} from "../../redux/actions/userActions";
+import {Button} from "react-bootstrap";
+import "./Login.css";
 
 const formSchema = Yup.object().shape({
     
@@ -43,7 +43,7 @@ function Login() {
 
     useEffect(() => {        
         if (statusState?.msg === "successful login") {
-            navigate("/restaurantes");
+            navigate("/inicio");
         } else if (statusState === "Bad credentials"){
             setErrorMsg("Usuario o contraseña incorrectos");
         }
@@ -68,40 +68,52 @@ function Login() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label>Email o usuario</label>
-                    <input
-                        type="text"
-                        name="usernameOrEmail"
-                        {...register("usernameOrEmail")}
-                    />
-                    {<div className="form-register-errors">{errors.usernameOrEmail?.message}</div>}
-                </div>
-                <div>
-                    <label>Contraseña</label>
-                    <input
-                        type="password"
-                        name="password"
-                        {...register("password")}
-                    />
-                    {<div className="form-register-errors">{errors.password?.message}</div>}
-                </div>
-                <p className="error-message">{errorMsg}</p>
-                <Button 
-                    type="submit"
-                    value="Ingresar"
-                    variant="outline" 
-                    className="custom-button"
-                >
-                    Ingresar    
-                </Button>
-                <Button variant="outline" className="custom-button" onClick={handleRegister}>
-                    Registrarse
-                </Button>
-                <div className="recover-pwd">
-                    <Button variant="outline" className="custom-button" onClick={handleRecovery}>
-                        ¿Olvidaste tu contraseña?
-                    </Button>
+                <div className="form-login-container">
+                    <div className="login-container">
+                        <div className="title-login">
+                            Inicia sesión aquí
+                        </div>
+                        <div className="form-group-login">
+                            <div className="login-labelAndInput">
+                                <label className="input-label-login">Email o usuario</label>
+                                <input
+                                    className="input-login"
+                                    type="text"
+                                    name="usernameOrEmail"
+                                    {...register("usernameOrEmail")}
+                                />
+                                {<div className="form-register-errors">{errors.usernameOrEmail?.message}</div>}
+                            </div>
+                            <div className="login-labelAndInput">
+                                <label className="input-label-login">Contraseña</label>
+                                <input
+                                    autoComplete="on"
+                                    className="input-login"
+                                    type="password"
+                                    name="password"
+                                    {...register("password")}
+                                />
+                                {<div className="form-register-errors">{errors.password?.message}</div>}
+                            </div>
+                            <p className="error-message">{errorMsg}</p>
+                        </div>
+                        <Button 
+                            type="submit"
+                            value="Ingresar"
+                            variant="outline" 
+                            className="custom-button"
+                        >
+                            Ingresar    
+                        </Button>
+                        <Button variant="outline" className="custom-button" onClick={handleRegister}>
+                            Registrarse
+                        </Button>
+                        <div className="recover-pwd">
+                            <Button variant="outline" className="custom-button" onClick={handleRecovery}>
+                                ¿Olvidaste tu contraseña?
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </>

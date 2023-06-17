@@ -88,7 +88,7 @@ function EditUser() {
     };
 
     const handlemodal = (data) => {
-        navigate("/restaurantes");
+        navigate("/inicio");
     };
 
     function onSubmit(e) {
@@ -231,7 +231,7 @@ function EditUser() {
                             >
                                 Actualizar
                             </Button>
-                            <Link to="/restaurantes">
+                            <Link to="/inicio">
                                 <Button 
                                     variant="outline" 
                                     className="custom-button"

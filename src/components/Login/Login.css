@@ -1,0 +1,96 @@
+.form-login-container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    background-color: #EBEBEB;
+}
+
+.login-container {
+    background-color: #282c34;
+    color: #D8F3FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120%;
+    height: max-content;
+    max-width: 400px;
+    padding: 25px 30px;
+    border-radius: 3px;
+}
+
+.input-login {
+    border-radius: 3px;
+    border: 1px solid #F15422;
+    height: 32px;
+    width: 100%;
+    padding-left: 15px;
+    font-size: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-label-login {
+    display: flex;
+    padding-bottom: 5px;
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Poppins',
+    sans-serif;
+}
+
+.login-labelAndInput {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-bottom: 5px;
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.title-login {
+    font-size: 25px;
+    font-weight: 800;
+    position: relative;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Poppins',
+    sans-serif;
+}
+
+.form-group-login {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    font-size: 12px;
+}
+
+.recover-pwd {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 10px;
+    
+}
+
+.input-Login {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #0E1428;
+}
+
+@media (max-width: 584px) {
+    .login-labelAndInput {
+        width: 100%;
+    }
+}
+
+@media (max-width: 390px) {}

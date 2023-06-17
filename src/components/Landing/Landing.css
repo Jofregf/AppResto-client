@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,500;0,900;1,700&display=swap");
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.ant-carousel .slick-dots li button {
+    opacity: 0.4;
+    padding: 5px 9px;
+    border-radius: 10%;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    opacity: 1;
+}
+
+.container-carousel {
+    margin: 10px auto;
+    width: 100%;
+}
+
+.d-block {
+    max-width: 50%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.ant-carousel .slick-slide .slick-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.carousel-h3 {
+    font-size: 40px;
+    color: #D8F3FF;
+}
+
+.carousel-p {
+    font-size: 25px;
+    color: #D8F3FF;
+}
+
+@media screen and (max-width: 1099px) {
+    
+    .container-carousel {
+        margin: 10px auto;
+        width: 80%;
+    }
+
+    .carousel-h3 {
+        font-size: 30px; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    }
+
+    .carousel-p {
+        font-size: 20px; /* Ajusta el tamaño del texto para pantallas más pequeñas */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-carousel {
+        margin: 10px auto;
+        width: auto;
+    }
+
+    .carousel-h3 {
+        font-size: 25px; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    }
+
+    .carousel-p {
+        font-size: 15px; /* Ajusta el tamaño del texto para pantallas más pequeñas */
+    }
+}

@@ -1,5 +1,5 @@
 import {Button, Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BiUser, BiCalendar } from "react-icons/bi";
 import {userLogout} from "../../redux/actions/userActions";
@@ -9,9 +9,7 @@ function NavBar() {
 
     const { pathname } = window.location;
     const cookies = new Cookies();
-    const userReducer = useSelector((state) => state.users.user);
     const token = cookies.get("user")?.accessToken;
-    const restaurantes = useSelector((state) => state.restaurants.restaurants);
     const dispatch = useDispatch();
     const nav = useNavigate();
     
@@ -34,7 +32,7 @@ function NavBar() {
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-                            <Nav.Link href="/restaurantes">Inicio</Nav.Link>
+                            <Nav.Link href="/inicio">Inicio</Nav.Link>
                                 {cookies.get("user") ? (
                                     <>
                                         <NavDropdown
@@ -67,12 +65,13 @@ function NavBar() {
                                             </NavDropdown.Item>
                                             <NavDropdown.Divider />
                                         </NavDropdown>
-                                        <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
+                                        <Nav.Link className="input-profile" onClick={logout}>Cerrar sesión</Nav.Link>
                                     </>
                                 ) : (
                                     <Nav.Link
                                         href="/auth/login"
                                         style={{ maxHeight: "100px", color: "#F15422" }}
+                                        className="input-profile"
                                     >
                                         Iniciar sesión
                                     </Nav.Link>

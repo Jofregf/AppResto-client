@@ -74,7 +74,7 @@ function AdminHome() {
                 </Button>
                 <Button variant="outline" 
                         className="custom-button"
-                        onClick={() => navigate("/restaurantes")}
+                        onClick={() => navigate("/inicio")}
                 >
                     Home
                 </Button>

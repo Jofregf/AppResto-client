@@ -85,7 +85,7 @@ function RestoDetails() {
             </Link>
 
             <div>
-                <Link to="/restaurantes">
+                <Link to="/inicio">
                     <Button variant="outline" className="custom-button">Inicio</Button>
                 </Link>
             </div>

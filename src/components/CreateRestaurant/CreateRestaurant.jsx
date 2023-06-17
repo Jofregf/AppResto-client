@@ -80,7 +80,7 @@ function CreateRestaurant(){
     }
 
     const handleModal = () => {
-        navigate("/restaurantes")
+        navigate("/inicio")
     }
 
     let cookie = new Cookies();
