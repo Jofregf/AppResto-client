@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { createUser, userLogin } from "../../redux/actions/userActions";
 import { Modal, Button } from "react-bootstrap";
+import "./Register.css";
 
 const formSchema = Yup.object().shape({
     userName: Yup.string()
@@ -89,85 +90,115 @@ function Register() {
     };
 
     return (
-        <div>
+        <div className="container-register">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div> Registrarme</div>
-                <p>(* campos requeridos)</p>
-                <label>*Nombre de usuario</label>
-                <input 
-                    type="text" 
-                    name="userName" 
-                    {...register("userName")} 
-                />
-                {<div>{errors.userName?.message}</div>}
-                <label>*Nombre</label>
-                <input
-                    type="text"
-                    name="firstName"
-                    {...register("firstName")}
-                />
-                {<div>{errors.firstName?.message}</div>}
-                <label>*Apellido</label>
-                <input 
-                    type="text" 
-                    name="lastName" 
-                    {...register("lastName")} 
-                />
-                {<div>{errors.lastName?.message}</div>}
-                <label>*Teléfono</label>
-                <input
-                    type="text"
-                    name="userPhone"
-                    {...register("userPhone")}
-                />
-                {<div>{errors.userPhone?.message}</div>}
-                <label>*email</label>
-                <input 
-                    type="text" 
-                    name="userEmail" 
-                    {...register("userEmail")} 
-                />
-                {<div>{errors.userEmail?.message}</div>}
-                <label>*Confirmar email</label>
-                <input
-                    type="text"
-                    name="confirmEmail"
-                    {...register("confirmEmail")}
-                />
-                {<div>{errors.confirmEmail?.message}</div>}
-                <label>*Contraseña</label>
-                <input 
-                    type="password" 
-                    name="userPassword" 
-                    {...register("userPassword")} 
-                />
-                {<div>{errors.userPassword?.message}</div>}
-                <label>*Confirmar contraseña</label>
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    {...register("confirmPassword")}
-                />
-                {<div>{errors.confirmPassword?.message}</div>}
-                <div>
-                    Al crear su cuenta acepta los Términos y Condiciones
-                </div>
-                <div>
-                    <Button
-                        type="submit"
-                        value="Crear mi cuenta"    
-                        variant="outline" 
-                        className="custom-button"
-                    >
-                        Crear mi cuenta
-                    </Button>    
+                <div className="container-index">
+                    <div className="form-container">
+                        <div className="title"> Registrarme</div>
+                        <p className="register-subtitle">(* campos requeridos)</p>
+                        <div className="form-group-one">
+                            <div className="labelAndInput">
+                                <label className="input-label">*Nombre de usuario</label>
+                                <input 
+                                    className="input-register"
+                                    type="text" 
+                                    name="userName" 
+                                    {...register("userName")} 
+                                />
+                                {<div className="form-register-errors">{errors.userName?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Nombre</label>
+                                <input
+                                    className="input-register"
+                                    type="text"
+                                    name="firstName"
+                                    {...register("firstName")}
+                                />
+                                {<div className="form-register-errors">{errors.firstName?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Apellido</label>
+                                <input
+                                    className="input-register"
+                                    type="text" 
+                                    name="lastName" 
+                                    {...register("lastName")} 
+                                />
+                                {<div className="form-register-errors">{errors.lastName?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Teléfono</label>
+                                <input
+                                    className="input-register"
+                                    type="text"
+                                    name="userPhone"
+                                    {...register("userPhone")}
+                                />
+                                {<div className="form-register-errors">{errors.userPhone?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*email</label>
+                                <input 
+                                    className="input-register"
+                                    type="text" 
+                                    name="userEmail" 
+                                    {...register("userEmail")} 
+                                />
+                                {<div className="form-register-errors">{errors.userEmail?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Confirmar email</label>
+                                <input
+                                    className="input-register"
+                                    type="text"
+                                    name="confirmEmail"
+                                    {...register("confirmEmail")}
+                                />
+                                {<div className="form-register-errors">{errors.confirmEmail?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Contraseña</label>
+                                <input 
+                                    className="input-register"
+                                    type="password" 
+                                    name="userPassword" 
+                                    {...register("userPassword")} 
+                                />
+                                {<div className="form-register-errors">{errors.userPassword?.message}</div>}
+                            </div>
+                            <div className="labelAndInput">
+                                <label className="input-label">*Confirmar contraseña</label>
+                                <input
+                                    className="input-register"
+                                    type="password"
+                                    name="confirmPassword"
+                                    {...register("confirmPassword")}
+                                />
+                                {<div className="form-register-errors">{errors.confirmPassword?.message}</div>}
+                            </div>
+                        </div>                      
+                        <div className="TyC">
+                            Al crear su cuenta acepta los Términos y Condiciones
+                        </div>
+                        <div className="form-submit">
+                            <Button
+                                type="submit"
+                                value="Crear mi cuenta"    
+                                variant="outline" 
+                                className="custom-button"
+                            >
+                                Crear mi cuenta
+                            </Button>    
+                        </div>
+                    </div>
                 </div>
             </form>
             <Modal
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
-                keyboard="false"
+                keyboard={false}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Registro exitoso!</Modal.Title>
