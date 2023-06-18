@@ -52,7 +52,7 @@ function App() {
                     <Route path="/restaurantes/:id/reserva" element={<CreateBooking />} />
                     <Route path="/reservas" element={<GetBookingUser />} />
                     <Route path="/reservas/:id" element={<EditBooking />} />
-                    <Route path="/probar-inactivos" element={<GetBookingInactive />} />
+                    <Route path="/reservas-inactivos" element={<GetBookingInactive />} />
                     <Route path="/restaurante/:name/reservas" element={<BookingResults />} />
                     <Route path="/usuario/editarpassword" element={<EditPassword />} />
                     <Route path="/usuario/olvidarpassword" element={<ForgotPassword />} />

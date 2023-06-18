@@ -1,10 +1,11 @@
-/* eslint-disable */
 import Cookies from "universal-cookie";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import { editUser, getUserById } from "../../redux/actions/userActions";
+import "./EditUser.css";
+import { TiArrowBack } from 'react-icons/ti';
 
 function validate(input) {
     let errors = {};
@@ -43,10 +44,9 @@ function validate(input) {
 }
 
 function EditUser() {
+
     let cookie = new Cookies();
     const userEdit = useSelector((state) => state.users.user);
-    console.log("reducer", userEdit);
-    const user = cookie.get("user");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
@@ -61,7 +61,7 @@ function EditUser() {
 
     useEffect(() => {
         dispatch(getUserById({ token: tokenUser }));
-    }, []);
+    }, [dispatch, tokenUser]);
 
     function handlerOnChange(e) {
         setInput({
@@ -87,7 +87,7 @@ function EditUser() {
         handleShow();
     };
 
-    const handlemodal = (data) => {
+    const handlemodal = () => {
         navigate("/inicio");
     };
 
@@ -126,6 +126,11 @@ function EditUser() {
             <form onSubmit={onSubmit}>
                 <div className="container-user-edit">
                     <div className="form-container-edit">
+                        <div>
+                            <Link to='/usuario/perfil' style={{ color: "#D8F3FF", fontSize: '20px' }}>
+                            <TiArrowBack/>
+                            </Link>
+                        </div>
                         <div>
                             <p className="register-subtitle">
                                 (* Tiene los datos para ayudarlo a cambiarlos si desea, y si no desea debe sobreescribirlos)
@@ -223,7 +228,7 @@ function EditUser() {
                                 )}
                             </div>
                         </div>
-                        <div>
+                        <div className="form-submit">
                             <Button 
                                 type="submit" 
                                 variant="outline" 

@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container-user-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebebeb;
+    height: 100vh;
+}
+
+.profile-container {
+    background-color: #282c34;
+    color: #D8F3FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120%;
+    height: max-content;
+    max-width: 400px;
+    padding: 25px 30px;
+    border-radius: 3px;
+}
+

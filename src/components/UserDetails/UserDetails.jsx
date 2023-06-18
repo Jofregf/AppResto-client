@@ -1,21 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link} from "react-router-dom";
-// import './UserDetail.css';
 import Cookies from "universal-cookie";
 import { getUserById } from "../../redux/actions/userActions";
 import {Button} from "react-bootstrap"
+import './UserDetails.css';
 
 
 export default function UserDetail() {
 
     const dispatch = useDispatch();
     let cookie = new Cookies();
-    const user = cookie.get("user")
-    console.log(user)
+    const user = cookie.get("user");
     const detailUser = useSelector(state => state.users)
     const tokenUser = cookie.get("user")?.accessToken;
-    console.log(detailUser)
 
     useEffect(() => {
         dispatch(getUserById({ token: tokenUser}))

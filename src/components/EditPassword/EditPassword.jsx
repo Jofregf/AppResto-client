@@ -1,7 +1,6 @@
 import {useState, useEffect }  from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-// import './index.css';
 import Cookies from "universal-cookie";
 import { TiArrowBack } from 'react-icons/ti';
 import {Link} from 'react-router-dom'
@@ -11,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+import "./EditPassword.css";
 
 const formSchema = Yup.object().shape({
     userPassword: Yup.string()
@@ -77,7 +77,7 @@ function EditPassword() {
                 <div className="container-pass-edit">
                     <div className="form-container-pass">
                         <div>
-                            <Link to='/user/profile' style={{ color: 'white', fontSize: '20px' }}>
+                            <Link to='/usuario/perfil' style={{ color: "#D8F3FF", fontSize: '20px' }}>
                             <TiArrowBack/>
                             </Link>
                         </div>
@@ -85,19 +85,25 @@ function EditPassword() {
                         <p className="register-subtitle">(* campos requeridos)</p>
                         <div className="form-group-one">
                             <div className="labelAndInput">
-                                <label className="input-label">*Password: </label>
-                                <label>*Contraseña</label>
-                                <input 
-                                    type={showPassword ? "text" : "password"}
-                                    name="userPassword" 
-                                    {...register("userPassword")} 
-                                />
-                                {showPassword ? (
-                                    <RiEyeOffFill onClick={togglePasswordVisibility} />
-                                ) : (
-                                    <RiEyeFill onClick={togglePasswordVisibility} />
-                                )}
-                                {<div>{errors.userPassword?.message}</div>}
+                                <label className="input-label">*Contraseña: </label>
+                                <div className="show-password">
+                                    
+                                        <input 
+                                            className="input-register"
+                                            type={showPassword ? "text" : "password"}
+                                            name="userPassword" 
+                                            {...register("userPassword")} 
+                                        />
+                                    
+                                    <div className="eyes">
+                                        {showPassword ? (
+                                            <RiEyeOffFill onClick={togglePasswordVisibility} style={{ color: "#D8F3FF"}}/>
+                                        ) : (
+                                            <RiEyeFill onClick={togglePasswordVisibility} style={{ color: "#D8F3FF"}}/>
+                                        )}
+                                    </div>
+                                </div>
+                                {<div className="form-register-errors">{errors.userPassword?.message}</div>}
                             </div>
                         </div>
                         <div className="form-submit">
