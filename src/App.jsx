@@ -8,7 +8,6 @@ import Login from "../src/components/Login/Login";
 import AdminHome from "../src/components/AdminHome/AdminHome";
 import UserCard from "../src/components/CardUser/UserCard";
 import AdminGetUsers from "../src/components/AdminGetUser/AdminGetUser";
-import "bootstrap/dist/css/bootstrap.min.css";
 import EditUser from "../src/components/EditUser/EditUser";
 import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestaurant";
 // import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";

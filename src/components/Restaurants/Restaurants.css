@@ -1,0 +1,61 @@
+.containerCardsHome  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+    gap: 2%;
+    margin: 5% auto;
+    background-color: #ebebeb;
+}
+
+.containerResto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PagedHome {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+
+.card-resto {
+    width: 20rem; 
+    margin-bottom: 2%;
+    height: 30rem;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+}
+
+.link-resto{
+    text-decoration: none; 
+    color: #D8F3FF;
+}
+
+.img-resto {
+    height: 250px; 
+    border: 1px solid #F15422;
+}
+
+.title-resto {
+    height: 30px; 
+    margin-top: 5%; 
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.info-resto {
+    position: relative;
+    text-align: center;
+}
+
+.alert-resto {
+    display: flex;
+    color: #F15422;
+    font-weight: bold;
+    font-size: 1.1rem;
+}

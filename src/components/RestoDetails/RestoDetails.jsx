@@ -48,11 +48,17 @@ function RestoDetails() {
                 detailsState.map((detail) => (
                     <div key={detail.restaurantId}>
                         <h2>{detail.restaurantName}</h2>
+                        <p>Dirección</p>
                         <p>{detail.restaurantAddress}</p>
-                        <p>{detail.restaurantDescription}</p>
+                        <p>Teléfono</p>
                         <p>{detail.restaurantPhone}</p>
+                        <p>e-mail</p>
                         <p>{detail.restaurantEmail}</p>
+                        <p>Descripción</p>
+                        <p>{detail.restaurantDescription}</p>
+                        <p>Apertura</p>
                         <p>{detail.openingHoursRestaurant}</p>
+                        <p>Cierre</p>
                         <p>{detail.closingHoursRestaurant}</p>
                         {detail.restaurantImages && detail.restaurantImages.length > 0 ? (
                             detail.restaurantImages.map((img, i) => (

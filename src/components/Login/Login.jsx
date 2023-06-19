@@ -122,6 +122,4 @@ function Login() {
 
 export default Login
 
-// TODO: Debo ver estilo de olvidar contraseña y registrarse 
-
 
