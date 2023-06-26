@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -8,13 +7,13 @@ import GetUserByUserNameOrEmail from "../AdminGetUser/AdminGetUser";
 import AdminGetResto from "../AdminGetResto/AdminGetResto";
 import AdminGetBanResto from "../AdminGetBanResto/AdminGetBanResto";
 import { Button } from "react-bootstrap";
+import "./AdminHome.css"
 
 function AdminHome() {
 
     const navigate = useNavigate();
     const [drawActive, setDrawActive] = useState(false);
     const [state, setState] = useState("");
-    const [user, setUser] = useState(null);
     const [restaurantSend, setRestaurantSend] = useState(null)
 
     const activeDrawer = () => {
@@ -22,7 +21,6 @@ function AdminHome() {
     }
 
     let cookies = new Cookies();
-    const tokenUser = cookies.get("user").accessToken;
     const tokenRole = cookies.get("user").role
     
     const handleHome = () => {
@@ -41,7 +39,7 @@ function AdminHome() {
     return (
         (tokenRole === "ROLE_ADMIN")?
         <div>
-            <div>
+            <div className="admin-panel">
                 <Button variant="outline" 
                         className="custom-button" 
                         onClick={() => handleHome("")}
@@ -84,6 +82,12 @@ function AdminHome() {
                 >
                     Panel Admin
                 </Button>
+                <Button variant="outline" 
+                        className="custom-button"
+                        onClick={() => navigate("/usuario/perfil")}
+                >
+                    Mi Perfil
+                </Button>
             </div>
             <div>
                 {
@@ -101,3 +105,4 @@ function AdminHome() {
 }
 
 export default AdminHome;
+

@@ -36,7 +36,7 @@ function ForgotPassword() {
     const [msg, setMsg] = useState("");
 
     const onSubmit = async (usernameOrEmail) => {
-        console.log(usernameOrEmail);
+        
         dispatch(forgotPassword({ usernameOrEmail }));
         setMsg(
             "Te recomendamos que al usar la contraseña, la cambies para mayor seguridad!"

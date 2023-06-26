@@ -1,0 +1,116 @@
+.resto-booking-container{
+    display: flex;
+    width: 100%;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+    margin: 2% auto;
+}
+
+.resto-book-container-slim-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    width: 100%;
+    color: #D8F3FF;
+}
+
+.resto-book-information {
+    display: flex;
+    text-align: center;
+    width: 790%;
+    margin-right: 5%;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.admin-book-info-class{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-book-slim-info {
+    display: flex;
+}
+
+.admin-book-slim-name {
+    font-weight: bold;
+}
+
+.admin-book-container-slim-3 {
+    display: flex;
+    width: 100%;
+}
+
+.card-admin-container-slim-info {
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.buttons-admin {
+    display: flex;
+}
+
+.admin-book-buttons-container-slim {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    
+    .resto-booking-container {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        height: 150px;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: auto;
+    }
+
+    .resto-book-container-slim-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #D8F3FF;
+        margin: 2%;
+    }
+
+    .resto-book-information {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        width: 790%;
+        margin-right: 5%;
+    }
+
+    .admin-book-container-slim-3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .buttons-admin {
+        display: flex;
+    }
+
+    .button-resto-card {
+        size: 14px;
+    }
+
+    .card-book-container-slim-1 {
+        display: flex;
+        margin: 10px;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}

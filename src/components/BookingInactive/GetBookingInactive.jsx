@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import {getBookingUser} from "../../redux/actions/bookingActions";
 import Cookie from "universal-cookie";
 import BookingCard from "../CardBooking/BookingCard"
+import { Button } from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function GetBookingInactive(){
 
@@ -19,6 +21,8 @@ function GetBookingInactive(){
     return (
         <div>
             {status === "error" && <div>Ha ocurrido un error...</div>}
+            <h3 style= {{color: "#F15422"}}>Reservas pasadas</h3>
+            <p style= {{color: "#F15422"}}>Estás se borrarán pasados los 30 días de su fecha</p>
             {bookings && bookings.length > 0 ? (
             <>
                 {bookings.some((book) => !book.active) ? (
@@ -45,6 +49,14 @@ function GetBookingInactive(){
             ) : (
             <p>No hay reservas vigentes</p>
             )}
+            <Link to="/reservas">
+                    <Button 
+                            variant="outline" 
+                            className="custom-button btn-sm"
+                    >
+                        Reservas vigentes
+                    </Button>
+                </Link>
         </div>
         );
 }

@@ -10,16 +10,34 @@ export const GET_RESTAURANT_BY_USER = "GET_RESTAURANT_BY_USER";
 export const EDIT_RESTAURANT = "EDIT_RESTAURANT";
 export const DELETE_RESTAURANT = "DELETE_RESTAURANT";
 export const EDIT_ENABLED_RESTAURANT = "EDIT_ENABLED_RESTAURANT";
-
+export const GET_RESTAURANTS_ADMIN = "GET_RESTAURANTS_ADMIN";
 
 
 export const baseUrl = "http://localhost:8080";
 
+export const getRestaurantsAdmin = () => async (dispatch) => {
+
+    try {
+        const response = await axios.get(`${baseUrl}/api/admin/restaurants`);
+        dispatch({
+            type: GET_RESTAURANTS_ADMIN,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: ERROR,
+            payload: error.response?.data?.message || "Error en la solicitud",
+        });
+    }
+};
+
 export const getRestaurants = ({pageNumber}) => async (dispatch) => {
-    const page = pageNumber? pageNumber : 0;
+    
+    const page = pageNumber === -1? 0 : pageNumber;
+    const sendPage = page? pageNumber : 0;
     
     try {
-        const response = await axios.get(`${baseUrl}/api/restaurants?pageNumber=${page}`);
+        const response = await axios.get(`${baseUrl}/api/restaurants?pageNumber=${sendPage}`);
         dispatch({
             type: GET_RESTAURANTS,
             payload: response.data,
@@ -31,6 +49,7 @@ export const getRestaurants = ({pageNumber}) => async (dispatch) => {
         });
     }
 };
+
 
 export const getRestaurantDetails = (id) => async (dispatch) => {
 

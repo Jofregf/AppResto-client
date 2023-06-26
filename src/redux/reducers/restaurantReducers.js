@@ -6,6 +6,7 @@ import {ERROR,
         CREATE_RESTAURANT,
         GET_RESTAURANT_BY_USER,
         DELETE_RESTAURANT,
+        GET_RESTAURANTS_ADMIN,
     } from "../actions/restaurantActions";
 
 const initialState = {
@@ -44,6 +45,9 @@ export default function restaurantReducers(state = initialState, action) {
         case ERROR:
             return {...state, status: action.payload};
 
+        case GET_RESTAURANTS_ADMIN:
+            return {...state, restaurants: action.payload};
+            
         default:
             return {...state};
     }

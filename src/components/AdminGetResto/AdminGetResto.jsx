@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurants } from "../../redux/actions/restaurantActions";
+import { getRestaurantsAdmin } from "../../redux/actions/restaurantActions";
 import AdminRestoCard from "../AdminRestoCard/AdminRestoCard";
+import "./AdminGetResto.css"
 
 function AdminGetResto({activeDrawer, receiveRestaurant}){
 
     const dispatch = useDispatch();
 
     const restaurantes =  useSelector((state) => state.restaurants.restaurants.contents);
-
+    
     const status = useSelector((state) => state.status);
 
     const [search, setSearch] = useState("");
@@ -30,7 +31,7 @@ function AdminGetResto({activeDrawer, receiveRestaurant}){
     const arrayNames = [...names]
 
     useEffect(()=>{
-        dispatch(getRestaurants())
+        dispatch(getRestaurantsAdmin())
     },[dispatch, status]);
 
     const handleInputChange = (e) => {
@@ -47,9 +48,9 @@ function AdminGetResto({activeDrawer, receiveRestaurant}){
     return (
         <div className="container-get-products"> 
 
-            <div className="title-search">
-                <h1>Restaurantes</h1>
-                <select className="select-get-product" onChange={(e)=> handleSelect(e)}>
+            <div className="search-container">
+                <h3 style= {{color: "#F15422"}}>Restaurantes</h3>
+                <select className="admin-input-search" onChange={(e)=> handleSelect(e)}>
                     <option value="">Todos</option>
                 {arrayNames?.map( (name, i) => 
                         {
@@ -63,7 +64,7 @@ function AdminGetResto({activeDrawer, receiveRestaurant}){
                         id="form"
                         type="text"
                         placeholder="Buscar Restaurante"
-                        className="input-get-product"
+                        className="input-login"
                         value={search}
                         onChange ={(e) => {handleInputChange(e)}}
                     />

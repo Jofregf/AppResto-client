@@ -1,0 +1,111 @@
+.admin-resto-container{
+    display: flex;
+    width: 100%;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+    margin: 2% auto;
+}
+
+.admin-card-container-slim-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 10px;
+    width: 100%;
+    color: #D8F3FF;
+}
+
+.admin-card-information {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 790%;
+    margin-right: 5%;
+}
+
+.admin-card-info-class{
+    display: flex;
+    flex-direction: column
+}
+
+.admin-card-slim-name {
+    font-weight: bold;
+}
+
+.admin-card-container-slim-3 {
+    display: flex;
+    width: 100%;
+}
+
+.card-admin-container-slim-info {
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.buttons-admin {
+    display: flex;
+}
+
+.admin-buttons-container-slim {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    
+    .admin-resto-container {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        height: 400px;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: auto;
+    }
+
+    .admin-card-container-slim-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #D8F3FF;
+        margin: 2%;
+    }
+
+    .admin-card-information {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        width: 790%;
+        margin-right: 5%;
+    }
+
+    .admin-card-container-slim-3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .buttons-admin {
+        display: flex;
+    }
+
+    .button-resto-card {
+        size: 14px;
+    }
+
+    .card-admin-container-slim-1 {
+        display: flex;
+        margin: 10px;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}

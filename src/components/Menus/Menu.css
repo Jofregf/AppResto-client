@@ -1,0 +1,88 @@
+.bar-menu-resto{
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+.containerMenuCards  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+    gap: 2%;
+    margin: 2% auto;
+    background-color: #ebebeb;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.containerMenuRestoCards  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+    gap: 2%;
+    margin: 2% auto 2% auto;
+    background-color: #ebebeb;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-menu {
+    width: 20rem; 
+    margin-bottom: 2%;
+    height: 27rem;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+}
+
+.card-menu-resto {
+    width: 20rem; 
+    margin-bottom: 2%;
+    height: 100%;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+}
+
+.img-menu {
+    height: 250px; 
+    border: 1px solid #F15422;
+}
+
+.title-menu {
+    height: 30px; 
+    margin-top: 5%; 
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #D8F3FF;
+}
+
+.info-menu-container{
+    display: flex;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.info-menu {
+    position: relative;
+    text-align: center;
+    color: #D8F3FF;
+}
+
+.alert-menu {
+    display: flex;
+    color: #F15422;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.button-menu-resto{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.buton-booking{
+    margin-bottom: 2%
+}

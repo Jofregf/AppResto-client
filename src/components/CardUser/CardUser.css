@@ -1,4 +1,4 @@
-.containerCardsHome  {
+.container-users  {
     display: flex;
     flex-direction: row;
      flex-wrap: wrap; 
@@ -9,48 +9,31 @@
     background-color: #ebebeb;
 }
 
-.containerResto{
+.containerUsers{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.card-resto {
+.card-users {
     width: 20rem; 
     margin-bottom: 2%;
-    height: 30rem;
+    height: 27rem;
     background-color: #282c34; 
     border: 2px solid #F15422;
 }
 
-.link-resto{
-    text-decoration: none; 
-    color: #D8F3FF;
-}
-
-.img-resto {
-    height: 250px; 
-    border: 1px solid #F15422;
-}
-
-.title-resto {
+.title-users {
     height: 30px; 
     margin-top: 5%; 
     margin-bottom: 0;
     font-weight: bold;
     font-size: 1.1rem;
+    color: #D8F3FF;
 }
 
-.info-resto {
+.info-users {
     position: relative;
     text-align: center;
+    color: #D8F3FF;
 }
-
-.alert-resto {
-    display: flex;
-    color: #F15422;
-    font-weight: bold;
-    font-size: 1.1rem;
-    justify-content: center;
-}
-

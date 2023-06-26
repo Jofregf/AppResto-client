@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getUsers, unbanBanUser} from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
 import {Modal, Button} from "react-bootstrap";
+import "./AdminBan.css";
 
 function AdminBan() {
 
@@ -44,7 +45,7 @@ function AdminBan() {
     const handleSubmit= (event) => {
         event.preventDefault();
         if(enabled !== "") {
-            console.log(enabled)
+            
             if (findUser) {
                 dispatch(unbanBanUser({usernameOrUserEmail: usernameOrUserEmail, enabled: enabled, token: tokenUser}));
                 modalDelete("El cambio de permiso se ha producido con éxito")
@@ -61,30 +62,39 @@ function AdminBan() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div>Banear/Desbanear usuario</div>
-                <label>Username o email del usuario: </label>
-                <input type="text" onChange={event => setUsernameOrUserEmail(event.target.value)}/>
-                <label>Nuevo estado:</label>
-                <select onChange={event => setEnabled(event.target.value)}>
-                    <option value="">--Seleccione--</option>
-                    <option value="true">Desbanear</option>
-                    <option value="false">Banear</option>
-                </select>
-                <Button 
-                    variant="outline" 
-                    className="custom-button" 
-                    type="submit"
-                >
-                    Cambiar Estado
-                </Button>
+                <h3 style= {{color: "#F15422"}}>Banear/Desbanear usuario</h3>
+                <div className="search-ban-container">
+                    <label className="label-ban">Username o email del usuario: </label>
+                    <input type="text" onChange={event => setUsernameOrUserEmail(event.target.value)} className="input-state"/>
+                    <label className="label-ban">Nuevo estado:</label>
+                    <select onChange={event => setEnabled(event.target.value)} className="admin-input-search">
+                        <option value="">--Seleccione--</option>
+                        <option value="true">Desbanear</option>
+                        <option value="false">Banear</option>
+                    </select>
+                    <Button 
+                        variant="outline" 
+                        className="custom-button" 
+                        type="submit"
+                    >
+                        Cambiar Estado
+                    </Button>
+                </div>
                 <div>
                     {users && users.length > 0 && (
                         users[0].map((user, indice) => {
                             return (
-                                <div key={indice}>
-                                    <p>Nombre de usuario: {user.userName}</p>
-                                    <p>Correo electrónico: {user.userEmail}</p>
-                                    <p>Permiso: {user.enabled? 'Habilitado' : 'Baneado'}</p>
+                                <div  className="admin-ban-container" key={indice}>
+                                    <div className="admin-card-container-slim-2">
+                                        <p className="admin-card-slim-name">Nombre de usuario</p>
+                                        <p className="admin-card-slim-info">{user.userName}</p>
+                                        <p className="admin-card-slim-name">Correo electrónico</p>
+                                        <p className="admin-card-slim-info">{user.userEmail}</p>
+                                        <p className="admin-card-slim-name">Permiso</p>
+                                        <p className="admin-card-slim-info" style={{ color: user.enabled ? "#8CD881" : "#FC526D" }}>
+                                            {user.enabled ? 'Habilitado' : 'Baneado'}
+                                        </p>
+                                    </div>
                                 </div>
                             );
                         })

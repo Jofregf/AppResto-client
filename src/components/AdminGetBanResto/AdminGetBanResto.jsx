@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getRestaurants } from "../../redux/actions/restaurantActions";
+import { getRestaurantsAdmin } from "../../redux/actions/restaurantActions";
 import AdminRestoCard from "../../components/AdminRestoCard/AdminRestoCard";
 
 function AdminGetBanResto({activeDrawer, receiveRestaurant}){    
@@ -19,7 +19,6 @@ function AdminGetBanResto({activeDrawer, receiveRestaurant}){
     const [selectName, setSelectName] = useState("");
 
     const restoEnabled = restaurantes?.filter(resto => resto.enabled === false);
-        console.log(restoEnabled, "RESTOENABLED")
     
     const restoViews = selectName === "" 
         ? restoEnabled 
@@ -32,7 +31,7 @@ function AdminGetBanResto({activeDrawer, receiveRestaurant}){
     const arrayNames = [...names]
 
     useEffect(()=>{
-        dispatch(getRestaurants())
+        dispatch(getRestaurantsAdmin())
     },[dispatch, status])
 
     const handleInputChange = (e) => {
@@ -49,9 +48,9 @@ function AdminGetBanResto({activeDrawer, receiveRestaurant}){
     return (
         <div className="container-get-products"> 
 
-            <div className="title-search">
-                <h1>Restaurantes</h1>
-                <select className="select-get-product" onChange={(e)=> handleSelect(e)}>
+            <div className="search-container">
+                <h3 style= {{color: "#F15422"}}>Restaurantes</h3>
+                <select className="admin-input-search" onChange={(e)=> handleSelect(e)}>
                     <option value="">Todos</option>
                 {arrayNames?.map( (name, i) => 
                         {
@@ -65,7 +64,7 @@ function AdminGetBanResto({activeDrawer, receiveRestaurant}){
                         id="form"
                         type="text"
                         placeholder="Buscar Restaurante"
-                        className="input-get-product"
+                        className="input-login"
                         value={search}
                         onChange ={(e) => {handleInputChange(e)}}
                     />
@@ -91,7 +90,9 @@ function AdminGetBanResto({activeDrawer, receiveRestaurant}){
                                             />
                                         )}
                                     </div>
-                                :   <p className="text-no-products">No se encontraron artículos con ese nombre</p>
+                                :   <div className= "alert-resto">
+                                        <p> No se encontraron restaurantes desactivados</p>
+                                    </div>
                             }
                         </div>
                         

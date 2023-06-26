@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getUsers, updateRole} from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
 import {Modal, Button} from "react-bootstrap";
+import "./AdminRole.css";
 
 function AdminRole(){
 
@@ -62,11 +63,11 @@ function AdminRole(){
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div>Cambio de roles de los usuarios</div>
-                <label>Username o email del usuario: </label>
-                <input type="text" onChange={event => setUsernameOrUserEmail(event.target.value)}/>
+                <h3 style= {{color: "#F15422"}}>Cambio de roles de los usuarios</h3>
+                <label className="label-ban">Username o email del usuario: </label>
+                <input className="input-state" type="text" onChange={event => setUsernameOrUserEmail(event.target.value)}/>
                 <label>Nuevo rol:</label>
-                <select onChange={event => setRole(event.target.value)}>
+                <select className="admin-input-search" onChange={event => setRole(event.target.value)}>
                     <option value="">--Seleccione--</option>
                     <option value="user">Usuario</option>
                     <option value="resto">Restaurante</option>
@@ -83,18 +84,20 @@ function AdminRole(){
                     {users && users.length > 0 && (
                         users[0].map((user, indice) => {
                             return (
-                                <div key={indice}>
-                                <p>Nombre de usuario: {user.userName}</p>
-                                <p>Correo electrónico: {user.userEmail}</p>
-                                <p>Rol:
-                                    {
-                                        user.role.roleName === "ROLE_ADMIN"? " Administrador"
-                                        : user.role.roleName === "ROLE_RESTO"? " Restaurante"
-                                        : user.role.roleName === "ROLE_USER"? " Usuario"
-                                        : "Desconocido"
-                                    }
-                                </p>
-                            </div>
+                                <div className="admin-ban-container" key={indice}>
+                                    <div className="admin-role-container-slim-2">
+                                        <p>Nombre de usuario: {user.userName}</p>
+                                        <p>Correo electrónico: {user.userEmail}</p>
+                                        <p>Rol:
+                                            {
+                                                user.role.roleName === "ROLE_ADMIN"? " Administrador"
+                                                : user.role.roleName === "ROLE_RESTO"? " Restaurante"
+                                                : user.role.roleName === "ROLE_USER"? " Usuario"
+                                                : "Desconocido"
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
                             );
                         })
                     )}

@@ -10,7 +10,6 @@ import UserCard from "../src/components/CardUser/UserCard";
 import AdminGetUsers from "../src/components/AdminGetUser/AdminGetUser";
 import EditUser from "../src/components/EditUser/EditUser";
 import CreateRestaurant from "../src/components/CreateRestaurant/CreateRestaurant";
-// import EditRestaurant from "../src/components/EditRestaurant/EditRestaurant";
 import RestoHome from "../src/components/RestoHome/RestoHome";
 import AdminCardResto from "../src/components/AdminRestoCard/AdminRestoCard";
 import CreateMenu from "../src/components/RestoCreateMenu/CreateMenu";

@@ -179,8 +179,7 @@ export const editUser = ({userName, firstName, lastName, userPhone, userEmail, t
 };
 
 export const editPassword = ({userPassword, token}) => async (dispatch) => {
-    console.log(userPassword);
-    console.log(token)
+    
     try {
         const response = await axios.put(`${baseUrl}/api/users/password`,
             {userPassword}, 

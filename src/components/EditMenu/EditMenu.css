@@ -1,0 +1,18 @@
+.input-register-desc {
+    border-radius: 3px;
+    border: 1px solid #F15422;
+    height: 150%;
+    width: 100%;
+    padding-left: 15px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    color: black;
+    resize: none;
+    overflow: hidden;
+}
+
+.input-register-desc:focus {
+    outline: 0;
+    border-color: #D8F3FF;
+}

@@ -1,9 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import {Link} from "react-router-dom";
 import BookingCard from "../CardBooking/BookingCard";
 import {getBookingUser} from "../../redux/actions/bookingActions";
 import Cookie from "universal-cookie";
 import bookingReducers from "../../redux/reducers/bookingReducers";
+import { Button } from "react-bootstrap";
 
 function GetBookingUser(){
 
@@ -18,7 +20,8 @@ function GetBookingUser(){
     },[dispatch, tokenUser]);
     
     return (
-        <div>
+        <div className="container-get-products">
+            <h3 style= {{color: "#F15422"}}>Reservas</h3>
             {status === "error" && <div>Ha ocurrido un error...</div>}
             {bookings && bookings.length > 0 ? (
                 <>
@@ -44,6 +47,14 @@ function GetBookingUser(){
             ) : (
                 <p>No hay reservas vigentes</p>
             )}
+            <Link to="/reservas-inactivos">
+                <Button 
+                        variant="outline" 
+                        className="custom-button btn-sm"
+                >
+                    Reservas pasadas
+                </Button>
+            </Link>
         </div>
     )
     

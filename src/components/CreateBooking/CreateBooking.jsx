@@ -107,9 +107,7 @@ function CreateBooking(){
                                 >
                                     RESERVAR
                                 </Button>
-                            </div>
-                            <div>
-                                <Link to={`/resto`} style={{ textDecoration: 'none' }}>
+                                <Link to={`/inicio`} style={{ textDecoration: 'none' }}>
                                     <Button 
                                         variant="outline" 
                                         className="custom-button"

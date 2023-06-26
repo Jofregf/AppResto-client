@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import {useState} from "react";
 import Cookies from "universal-cookie";
 import { Modal, Button } from 'react-bootstrap';
+import "./BookingCard.css";
 
 function BookingCard({id, date, time, partySize, name, address, email, phone, booking}){
 
@@ -66,43 +67,64 @@ function BookingCard({id, date, time, partySize, name, address, email, phone, bo
     const formattedTime = time.slice(0, 5);
     return (
         
-        <div className="card-admin-container-slim">
-            <div className="card-admin-container-slim-2">
-                <div className="card-admin-information">
-                    <p className="card-admin-slim-name">{formattedDate}</p>
-                    <p className="price-slim-card-price">{formattedTime}</p>
-                    <p className="price-slim-card-price">{partySize}</p>
-                    <p className="price-slim-card-price">{name}</p>
-                    <p className="price-slim-card-price">{address}</p>
-                    <p className="price-slim-card-price">{email}</p>
-                    <p className="price-slim-card-price">{phone}</p>
+        <div className="admin-booking-container">
+            <div className="admin-book-container-slim-2">
+                <div className="admin-book-information">
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Fecha</p>
+                        <p className="admin-book-slim-info">{formattedDate}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Hora</p>
+                        <p className="admin-book-slim-info">{formattedTime}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Personas</p>
+                        <p className="admin-book-slim-info">{partySize}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Restaurante</p>
+                        <p className="admin-book-slim-info">{name}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Dirección</p>
+                        <p className="admin-book-slim-info">{address}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">e-mail</p>
+                        <p className="admin-book-slim-info">{email}</p>
+                    </div>
+                    <div className="admin-book-info-class">
+                        <p className="admin-book-slim-name">Teléfono</p>
+                        <p className="admin-book-slim-info">{phone}</p>
+                    </div>
                 </div>
-            </div>
             
-                <div className="card-admin-container-slim-3">
-                    <div className="buttons-admin-container-slim">
+                <div className="admin-book-container-slim-3">
+                    <div className="admin-book-buttons-container-slim">
                         <Link to={`/reservas/${id}`}>
                                 <div onClick={(e) => {handleEdit(e)}}>
                                     <Button 
                                         variant="outline" 
                                         className="custom-button btn-sm"
-                                    >
+                                        >
                                         <BsPencilSquare/>
                                     </Button>
                                 </div>
                         </Link>
                     </div>
-                    <div className="buttons-admin-container-slim">
+                    <div className="admin-buttons-container-slim">
                         <Button 
                             variant="outline" 
                             className="custom-button btn-sm"
                             onClick={(e) => {handleDelete(e)}}
-                        >
+                            >
                             <AiFillDelete/>
                         </Button>
                     </div>
                 </div>
-            
+            </div>
+                
             <Modal
                 show={show}
                 onHide={handleClose}

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback} from "react"
+import { useState, useCallback} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {useParams, useNavigate} from "react-router-dom"
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Cookies from "universal-cookie";
 import { Button } from "react-bootstrap";
+import "./EditMenu.css";
 
 const formSchema = Yup.object().shape({
     menuName: Yup.string()
@@ -40,7 +41,6 @@ function EditMenu() {
         menuImage: menu[0]?.menuImage || "",
     });
 
-    const [formData, setFormData] = useState({});
     const formOptions = { resolver: yupResolver(formSchema), defaultValues: preloadedValues };
     const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
     
@@ -64,6 +64,7 @@ function EditMenu() {
         navigate("/resto");
     }
 
+
     return (
         <div>
             <div className="container-register-form">
@@ -85,8 +86,8 @@ function EditMenu() {
                                 </div>
                                 <div className="labelAndInput">
                                     <label className="input-label">*Descripción: </label>
-                                    <input
-                                        className="input-register"
+                                    <textarea
+                                        className="input-register-desc"
                                         type="text"
                                         name="menuDescription"
                                         defaultValue={preloadedValues.menuDescription}
@@ -115,19 +116,19 @@ function EditMenu() {
                                 >
                                     Editar Menú
                                 </Button>
+                                <div>
+                                        <Button 
+                                            variant="outline" 
+                                            className="custom-button"
+                                            onClick={handleCancel}
+                                        >
+                                            Cancelar
+                                        </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
-            <div>
-                    <Button 
-                        variant="outline" 
-                        className="custom-button"
-                        onClick={handleCancel}
-                    >
-                        Cancelar
-                    </Button>
-            </div>
             </div>
         </div>
     );

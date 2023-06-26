@@ -52,19 +52,13 @@ function GetUserByUserNameOrEmail () {
         setSearchTerm(event.target.value);
     };
 
-    const handleKeyPress = (event) => {
-        if (event.key === "Enter") {
-            handleUserDetails(searchTerm);
-        }
-    };
-
     const handleButtonClick = () => {
         handleUserDetails(searchTerm);
     };
 
     return (
         <div>
-            <input type="text" value={searchTerm} onChange={handleSearch} onKeyPress={handleKeyPress} />
+            <input type="text" value={searchTerm} onChange={handleSearch} className="input-state"/>
             <Button 
                 variant="outline" 
                 className="custom-button"
@@ -72,14 +66,21 @@ function GetUserByUserNameOrEmail () {
             >
                 Buscar
             </Button>
-            <h2>Lista de usuarios</h2>
+            <h3 style= {{color: "#F15422"}}>Lista de usuarios</h3>
             {users && users.length > 0 && (
                 <ul>
                     {users[0].map((user, indice) => {
                         return (
-                        <div key={indice}>
-                            <p>{user.userName}</p>
-                            <p>{user.userEmail}</p>
+                        <div className="admin-ban-container" key={indice}>
+                            <div className="admin-card-container-slim-2">
+                            <div className="admin-card-info-class">
+                            <p className="admin-card-slim-name">Nombre de usuario</p>
+                            <p className="admin-card-slim-info">{user.userName}</p>
+                            </div>
+                            <div className="admin-card-info-class">
+                            <p className="admin-card-slim-name">e-mail</p>
+                            <p className="admin-card-slim-info">{user.userEmail}</p>
+                            </div>
                             <Button 
                                 variant="outline" 
                                 className="custom-button"
@@ -87,6 +88,7 @@ function GetUserByUserNameOrEmail () {
                             >
                                 Detalles
                             </Button>
+                            </div>
                         </div>
                         );
                     })}

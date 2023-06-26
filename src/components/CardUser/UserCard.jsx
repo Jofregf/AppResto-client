@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import "./CardUser.css"
 
 
 function UserCard() {
@@ -13,16 +14,22 @@ function UserCard() {
     }
     
     return (
-            <div>
-
-                    <h3>Usuario: {userName} </h3>
-                    <p>Nombre: {firstName}</p>
-                    <p>Apellido: {lastName}</p>
-                    <p>Teléfono: {phone}</p>
-                    <p>Email: {email}</p>
-                    <p>Permiso: {enabled === true ? 'Habilitado' : 'Baneado'}</p>
-                    <p>Rol:
-                    {role && role.roleName ? 
+        <div className="containerUsers">
+            <div className="container-users">
+                <Card className="card-users">
+                <Card.Body>
+                    <Card.Title className="title-users">
+                    {userName}
+                    </Card.Title>
+                    <div className="info-users">
+                        <Card.Text>{firstName}</Card.Text>
+                        <Card.Text>{lastName}</Card.Text>
+                        <Card.Text>{phone}</Card.Text>
+                        <Card.Text>{email}</Card.Text>
+                        <Card.Text>{enabled === true ? 'Habilitado' : 'Baneado'}</Card.Text>
+                        <Card.Text>{lastName}</Card.Text>
+                        <Card.Text>{phone}</Card.Text>
+                        {role && role.roleName ? 
                         (
                         role.roleName === "ROLE_ADMIN"? " Administrador"
                         : role.roleName === "ROLE_RESTO"? " Restaurante"
@@ -30,8 +37,8 @@ function UserCard() {
                         : "Desconocido"
                         ):null
                     }
-                    </p>
-                    
+                        </div>
+                </Card.Body>
                     <Link to="/admin">
                         <Button 
                             variant="outline" 
@@ -40,7 +47,9 @@ function UserCard() {
                             Panel Admin
                         </Button>
                     </Link>
+                </Card>
             </div>
+        </div>
     )
 }
 

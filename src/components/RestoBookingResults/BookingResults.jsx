@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import "./BookingResults.css";
 
 function BookingResults() {
     const bookingResults = useSelector((state) => state.bookings.bookings);
@@ -8,19 +9,24 @@ function BookingResults() {
     
     return (
         <div>
-        <h1>Resultados de búsqueda</h1>
+        <h3 style= {{color: "#F15422"}}>Reservas</h3>
         {!error && bookingResults && bookingResults.length > 0 ? (
             bookingResults.map((booking) => (
-            <div key={booking.bookingId}>
-                <p>Nombre del restaurante: {booking.restaurant.restaurantName}</p>
-
-                <p>Fecha: {new Date(booking.bookingDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</p>
-                <p>Hora: {booking.bookingTime}</p>
-                <p>Personas: {booking.bookingPartySize}</p>
+            <div key={booking.bookingId} className="resto-booking-container">
+                <div className="resto-book-container-slim-2">
+                    <div className="resto-book-information">
+                        <p>Nombre del restaurante: {booking.restaurant.restaurantName}</p>
+                        <p>Fecha: {new Date(booking.bookingDate).toLocaleDateString('es-ES', { timeZone: 'UTC' })}</p>
+                        <p>Hora: {booking.bookingTime}</p>
+                        <p>Personas: {booking.bookingPartySize}</p>
+                    </div>
+                </div>
             </div>
             ))
         ) : (
-            <p>No se encontraron reservas</p>
+            <div className= "alert-resto">
+                <p>No se encontraron reservas</p>
+            </div>
         )}
             <div>
                 <Link to={`/resto`} style={{ textDecoration: 'none' }}>
@@ -34,5 +40,3 @@ function BookingResults() {
 }
 
 export default BookingResults;
-
-// user update pass y forgot pass

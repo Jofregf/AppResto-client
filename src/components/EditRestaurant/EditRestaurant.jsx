@@ -59,7 +59,7 @@ const formSchema = Yup.object().shape({
 });
 
 function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
-    console.log("ME LLAMO");
+    
     const dispatch = useDispatch();
     let cookie = new Cookies();
     let tokenUser = cookie.get("user")?.accessToken;
@@ -94,7 +94,6 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
     } = useForm(formOptions);
 
     useEffect(() => {
-        console.log("dispatch useefect")
         dispatch(getRestoByUser({ token: tokenUser }));
     }, [dispatch, tokenUser]);
 
@@ -112,7 +111,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
     );
 
     useEffect(() => {
-        console.log("preloadvalues useefect")
+        
         setPreloadedValues({
             restaurantName: restaurante?.restaurantName,
             restaurantAddress: restaurante?.restaurantAddress,
@@ -129,7 +128,7 @@ function EditRestaurant({ activeDrawer, handleHome, restaurante }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        console.log("if useefect")
+        
         if (isSubmitting) {
             handleSubmitCallback && handleSubmitCallback(preloadedValues);
             setIsSubmitting(false);

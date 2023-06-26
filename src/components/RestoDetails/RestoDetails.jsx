@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getRestaurantDetails } from "../../redux/actions/restaurantActions";
 import Review from "../Reviews/Reviews";
-import Cookie from "universal-cookie";
-import { Button } from "react-bootstrap";
 import { TiArrowBack } from "react-icons/ti";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import { GiRuleBook } from "react-icons/gi";
@@ -29,25 +27,13 @@ function RestoDetails() {
         return <div>Loading...</div>;
     }
 
-    const cookie = new Cookie();
-    const cookieRole = cookie.get("user")?.role;
-
     return (
-        <>
+        
             <div className="principal-container">
-                {cookieRole === "ROLE_RESTO" ? (
-                    <div>
-                        <Link to="/resto">
-                            <Button variant="outline" className="custom-button">
-                                RESTO PANEL
-                            </Button>
-                        </Link>
-                    </div>
-                ) : null}
                 {detailsState && detailsState.length > 0 ? (
                     detailsState.map((detail) => (
-                        <>
-                            <div className="main-container">
+                        
+                            <div className="main-container"  key={detail.restaurantId}>
                                 <div className="detailProduct-container">
                                     <div className="title-category">
                                         <Link
@@ -60,7 +46,7 @@ function RestoDetails() {
                                             <TiArrowBack />
                                         </Link>
                                     </div>
-                                    <div className="detail-one">
+                                    <div className="detail-one" key={detail.restaurantId}>
                                             <div key={detail.restaurantId} className="detail-one-right">
                                                 <h2 className="detail-one-name">
                                                     {detail.restaurantName}
@@ -197,7 +183,7 @@ function RestoDetails() {
                                     </div>
                                 </div>
                             </div>
-                        </>
+                        
                     ))
                 ) : (
                     <div>
@@ -207,7 +193,7 @@ function RestoDetails() {
 
                 <Review idResto={id} />
             </div>
-        </>
+        
     );
 }
 export default RestoDetails;

@@ -1,0 +1,84 @@
+.input-state {
+    margin: 1%;
+    border: 1px solid #F15422;
+}
+
+.input-state:focus {
+    outline: 0;
+    border-color: #D8F3FF;
+}
+
+.label-ban {
+    color: #F15422;
+}
+
+.search-ban-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.admin-ban-container{
+    display: flex;
+    width: 100%;
+    background-color: #282c34; 
+    border: 2px solid #F15422;
+    margin: 2% auto;
+    color: #D8F3FF;
+}
+
+.admin-ban-container-slim-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #D8F3FF;
+    margin: 2%;
+}
+
+@media (max-width: 768px) {
+    
+    .admin-ban-container {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        height: 250px;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: auto;
+    }
+
+    .admin-card-information {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        width: 790%;
+        margin-right: 5%;
+    }
+
+    .admin-card-container-slim-3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .buttons-admin {
+        display: flex;
+    }
+
+    .button-resto-card {
+        size: 14px;
+    }
+
+    .card-admin-container-slim-1 {
+        display: flex;
+        margin: 10px;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
