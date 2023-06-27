@@ -43,11 +43,15 @@ function GetBookingInactive(){
                     />
                     ))
                 ) : (
-                <p>Las reservas antiguas se eliminan pasados los 30 días</p>
+                    <div className= "alert-resto">
+                        <p>No hay reservas antiguas</p>
+                    </div>
                 )}
             </>
             ) : (
-            <p>No hay reservas vigentes</p>
+                <div className= "alert-resto">
+                    <p>No hay reservas vigentes</p>
+                </div>
             )}
             <Link to="/reservas">
                     <Button 

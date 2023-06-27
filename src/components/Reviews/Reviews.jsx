@@ -72,7 +72,9 @@ function Review({idResto}){
                     </div>
                 ))
                 ) : (
-                <div>No hay reseñas</div>
+                    <div className= "alert-resto">
+                        <p>No hay reseñas</p>
+                    </div>
             )}
             <CardReview idResto={idResto}/>
         </div>
