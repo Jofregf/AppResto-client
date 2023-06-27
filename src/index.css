@@ -52,6 +52,7 @@ code {
   color: red;
   font-size: 18px;
 }
+
 .custom-button {
   border-color: #F15422;
   color: #F15422;
@@ -59,6 +60,18 @@ code {
 }
 
 .custom-button:hover {
+  background-color: #F15422;
+  color: #D8F3FF;
+}
+
+.custom-review-button {
+  border-color: #F15422;
+  color: #F15422;
+  margin: 2px;
+  padding: 3px 8px;
+}
+
+.custom-review-button:hover {
   background-color: #F15422;
   color: #D8F3FF;
 }

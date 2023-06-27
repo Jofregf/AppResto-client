@@ -2,6 +2,7 @@ import  {
             GET_REVIEWS_BY_RESTAURANT_ID, 
             ERROR,
             POST_REVIEW,
+            DELETE_REVIEW,
 
         } from "../actions/reviewActions";
 
@@ -26,6 +27,9 @@ export default function reviewReducers (state = initialState, action) {
 
         case POST_REVIEW:
             return { ...state, status: action.payload, review: action.payload };
+
+        case DELETE_REVIEW:
+            return {...state, status: action.payload};
 
         default:
             return {...state};

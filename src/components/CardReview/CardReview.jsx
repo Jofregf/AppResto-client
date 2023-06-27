@@ -1,8 +1,9 @@
-import { useState} from "react"
+import { useState, useEffect } from "react"
 import { Accordion, Card, Form, FormControl, Button} from "react-bootstrap"
 import { postReview, getReviewsByRestaurantId} from "../../redux/actions/reviewActions"
+import { getUserById } from "../../redux/actions/userActions";
 import Cookies from "universal-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 function CardReview({idResto}){
@@ -10,8 +11,8 @@ function CardReview({idResto}){
     const dispatch = useDispatch()
 
     const cookie = new Cookies();
-    const tokenUser = cookie.get("user")?.accessToken
-
+    const tokenUser = cookie.get("user")?.accessToken;
+    const user = useSelector(state => state.users.user)
 
     const [rating, setRating] = useState(0);
 
@@ -21,7 +22,11 @@ function CardReview({idResto}){
 
         commentReview:"",
     });
-
+    
+    useEffect(() => {
+        dispatch(getUserById({ token: tokenUser}))
+    },[dispatch, tokenUser])
+    
     const [accordionOpen, setAccordionOpen] = useState(false);
 
     function handleSubmit(event) {
@@ -36,6 +41,7 @@ function CardReview({idResto}){
         setTimeout(() => {
             dispatch(getReviewsByRestaurantId(idResto));
         }, 100);
+        
     }
 
     function handleChange(event) {
@@ -50,81 +56,86 @@ function CardReview({idResto}){
     }
 
     return (
-        
-        <div>
-            <Card
-                style={{ "alignItems": "center", color: "#F15422"}}
-            >
-                <Card.Footer
-                    style={{ width: "250px", padding: "0px"}}
-                >
-                    <small className="text-muted">
-                    <Accordion
-                        style={{ width: "250px", display: "flex"}}
-                        activeKey={accordionOpen ? "0" : null} 
+        user.enabled === false ? (
+                <div className= "alert-resto">
+                    <p>No puedes hacer comentarios por estar baneado</p>
+                </div>
+            ) : (
+                <div>
+                    <Card
+                        style={{ "alignItems": "center", color: "#F15422"}}
                     >
-                        <Accordion.Item 
-                            eventKey="0"
-                            style={{ width: "250px"}}
+                        <Card.Footer
+                            style={{ width: "250px", padding: "0px"}}
                         >
-                            <Accordion.Header
-                                style={{ color: "#F15422"}}
-                                onClick={toggleAccordion}
+                            <small className="text-muted">
+                            <Accordion
+                                style={{ width: "250px", display: "flex"}}
+                                activeKey={accordionOpen ? "0" : null} 
                             >
-                                Desplegar comentarios
-                            </Accordion.Header>
-                            <Accordion.Body
-                                style={{padding: "0px"}}
-                            >
-                                <Form onSubmit={ (event) => handleSubmit(event)}>
-                                    <FormControl
-                                        style={{ width: "248px"}}
-                                        as="textarea"
-                                        aria-label="With textarea"
-                                        placeholder="Escribe tu comentario"
-                                        name="commentReview"
-                                        value={input.commentReview}
-                                        onChange={(event) => handleChange(event)}
-                                    />
-                                    <div className="star-rating">
-                                        {[...Array(5)].map((star, index) => {
-                                        index += 1;
-                                        return (
-                                            <button
-                                                type="button"
-                                                key={index}
-                                                className={`star-button ${index <= (hover || rating) ? "on" : "off"}`}
-                                                value={input.rating}
-                                                name="rating"
-                                                onChange={(event) => handleChange(event, setRating(index))}
-                                                onClick={() => setRating(index)}
-                                                onMouseEnter={() => setHover(index)}
-                                                onMouseLeave={() => setHover(rating)}
-                                            >
-                                            <span className="star">&#9733;</span>
-                                            </button>
-                                        );
-                                        })}
-                                    </div>
-                                    <Button
-                                        variant="outline" 
-                                        className="custom-button" 
-                                        type="submit"
-                                        style={{ margin: "0% 0 0 0", padding: "0px 5px"}}
-                                        onClick={() => setInput({
-                                        ...input,
-                                        })}
+                                <Accordion.Item 
+                                    eventKey="0"
+                                    style={{ width: "250px"}}
+                                >
+                                    <Accordion.Header
+                                        style={{ color: "#F15422"}}
+                                        onClick={toggleAccordion}
                                     >
-                                        Enviar
-                                    </Button>
-                                </Form>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
-                    </small>
-                </Card.Footer>
-            </Card>
-        </div>
+                                        Desplegar comentarios
+                                    </Accordion.Header>
+                                    <Accordion.Body
+                                        style={{padding: "0px"}}
+                                    >
+                                        <Form onSubmit={ (event) => handleSubmit(event)}>
+                                            <FormControl
+                                                style={{ width: "248px"}}
+                                                as="textarea"
+                                                aria-label="With textarea"
+                                                placeholder="Escribe tu comentario"
+                                                name="commentReview"
+                                                value={input.commentReview}
+                                                onChange={(event) => handleChange(event)}
+                                            />
+                                            <div className="star-rating">
+                                                {[...Array(5)].map((star, index) => {
+                                                index += 1;
+                                                return (
+                                                    <button
+                                                        type="button"
+                                                        key={index}
+                                                        className={`star-button ${index <= (hover || rating) ? "on" : "off"}`}
+                                                        value={input.rating}
+                                                        name="rating"
+                                                        onChange={(event) => handleChange(event, setRating(index))}
+                                                        onClick={() => setRating(index)}
+                                                        onMouseEnter={() => setHover(index)}
+                                                        onMouseLeave={() => setHover(rating)}
+                                                    >
+                                                    <span className="star">&#9733;</span>
+                                                    </button>
+                                                );
+                                                })}
+                                            </div>
+                                            <Button
+                                                variant="outline" 
+                                                className="custom-button" 
+                                                type="submit"
+                                                style={{ margin: "0% 0 0 0", padding: "0px 5px"}}
+                                                onClick={() => setInput({
+                                                ...input,
+                                                })}
+                                            >
+                                                Enviar
+                                            </Button>
+                                        </Form>
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            </Accordion>
+                            </small>
+                        </Card.Footer>
+                    </Card>
+                </div>
+        )
     )
 }
 

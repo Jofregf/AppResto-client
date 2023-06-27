@@ -5,6 +5,7 @@ export const ERROR = "ERROR";
 export const GET_REVIEWS_BY_RESTAURANT_ID = "GET_REVIEWS_BY_RESTAURANT_ID";
 export const CLEAR_REVIEWS = "CLEAR_REVIEWS";
 export const POST_REVIEW = "POST_REVIEW";
+export const DELETE_REVIEW = "DELETE_REVIEW";
 
 export const getReviewsByRestaurantId = (id) => async (dispatch) => {
     
@@ -47,6 +48,33 @@ export const postReview = ({ratingReview, commentReview, id, token}) => async (d
                 type: POST_REVIEW,
                 payload: response.data
             })
+        },
+        (error) => {
+            dispatch({
+                type: ERROR,
+                payload: error.error
+            })
+        }
+    )
+    .catch(error => {
+        console.error("Error en la solicitud", error);
+    });
+};
+
+export const deleteReview = ({id, token}) => async (dispatch) => {
+    console.log(token)
+    console.log(id)
+    await axios.delete(`${baseUrl}/api/reviews/${id}`, 
+        
+        {headers: {"Authorization": "Bearer " + token}}
+    )
+    .then(
+        (response) => {
+            dispatch({
+                type: DELETE_REVIEW,
+                payload: response.data
+            })
+            console.log(response.data)
         },
         (error) => {
             dispatch({
