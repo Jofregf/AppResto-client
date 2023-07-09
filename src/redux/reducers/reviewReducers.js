@@ -3,7 +3,7 @@ import  {
             ERROR,
             POST_REVIEW,
             DELETE_REVIEW,
-
+            EDIT_REVIEW
         } from "../actions/reviewActions";
 
 const initialState = {
@@ -30,6 +30,9 @@ export default function reviewReducers (state = initialState, action) {
 
         case DELETE_REVIEW:
             return {...state, status: action.payload};
+
+        case EDIT_REVIEW:
+            return {...state, status: action.payload};    
 
         default:
             return {...state};

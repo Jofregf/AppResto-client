@@ -58,7 +58,7 @@ function CardReview({idResto}){
     return (
         user.enabled === false ? (
                 <div className= "alert-resto">
-                    <p>No puedes hacer comentarios por estar baneado</p>
+                    <p>No puedes hacer nuevos comentarios por estar baneado</p>
                 </div>
             ) : (
                 <div>
