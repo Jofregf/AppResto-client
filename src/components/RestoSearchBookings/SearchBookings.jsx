@@ -40,9 +40,9 @@ function SearchBookings({name, tokenUser}){
             <div>
                 <form onSubmit={(event) => handleDateSubmit(event)}>
                 
-                        <label>Ingrese una fecha</label>
+                        <label style={{marginRight: "12px"}}>Ingrese una fecha</label>
                     
-                    <input type="date" value={date} onChange={handleInputDateChange} />
+                    <input style={{border: "1px solid #F15422"}} type="date" value={date} onChange={handleInputDateChange} />
                     <Button variant="outline" className="custom-button" type="submit">Buscar</Button>
                 </form>
             </div>

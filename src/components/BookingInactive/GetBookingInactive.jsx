@@ -22,7 +22,6 @@ function GetBookingInactive(){
         <div>
             {status === "error" && <div>Ha ocurrido un error...</div>}
             <h3 style= {{color: "#F15422"}}>Reservas pasadas</h3>
-            <p style= {{color: "#F15422"}}>Estás se borrarán pasados los 30 días de su fecha</p>
             {bookings && bookings.length > 0 ? (
             <>
                 {bookings.some((book) => !book.active) ? (
