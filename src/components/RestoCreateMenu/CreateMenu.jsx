@@ -15,7 +15,7 @@ const formSchema = Yup.object().shape({
         .min(3, "Mínimo 3 carácteres"),
     menuDescription: Yup.string()
         .required("Este campo es requerido")
-        .max(50, "Máximo 50 carácteres")
+        .max(255, "Máximo 255 carácteres")
         .min(10, "Mínimo 10 carácteres"),
     menuImage: Yup.string()
         .required("Este campo es requerido")
